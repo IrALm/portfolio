@@ -1,1 +1,63 @@
+.fond-profile{
+    background-color: #0b344e
+}
+.ecriture-profile{
+    color: white
+}
+.btn-custom {
+    background-color: #9fb2db; /* Couleur de fond personnalisée */
+    color: white; /* Texte en blanc */
+    font-size: 18px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    padding: 12px 20px; /* Espace intérieur */
+    border-radius: 8px; /* Coins arrondis */
+    text-transform: uppercase; /* Mettre le texte en majuscules */
+    transition: 0.3s ease-in-out; /* Animation fluide */
+    text-decoration: none; /* Enlever le soulignement */
+    display: inline-block; /* Garder le bouton en ligne */
+}
+
+.btn-custom:hover {
+    background-color: #061433; /* Changer la couleur au survol */
+    transform: scale(1.05); /* Légère augmentation de la taille */
+}
+.tech{
+    background-color: #dadce0
+}
+.btn-github {
+    background-color: black; /* Fond noir */
+    color: white; /* Texte blanc */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px; /* Coins arrondis */
+    text-transform: uppercase;
+    text-decoration: none; /* Pas de soulignement */
+    transition: 0.3s ease-in-out; /* Animation fluide */
+    display: inline-block;
+}
+
+.btn-github:hover {
+    background-color: #071b41; /* Gris foncé au survol */
+    transform: scale(1.05); /* Légère augmentation de la taille */
+}
+.btn-navig {
+    background-color: #00a6ff; /* Fond blanc */
+    color: black; /* Texte noir */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px; /* Coins arrondis */
+    text-transform: uppercase;
+    text-decoration: none; /* Pas de soulignement */
+    border: 2px solid black; /* Bordure noire pour un bon contraste */
+    transition: 0.3s ease-in-out; /* Animation fluide */
+    display: inline-block;
+}
+
+.btn-navig:hover {
+    background-color: #dadce0; /* Gris clair au survol */
+    transform: scale(1.05); /* Légère augmentation de la taille */
+}
+
 
