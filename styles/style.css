@@ -1,12 +1,46 @@
+body{
+   background-color: #0b344e;
+   font-family: 'Inter', sans-serif;
+}
+
+.profile-pic{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* pour un effet rond*/
+    object-fit:cover;
+    border: 2px solid white;
+}
+
 .fond-profile{
+    background-color: #0b344e
+}
+.java{
+    background-color: #dadce0
+}
+.python{
+    background-color: #dadce0
+}
+.description{
+    background-color: #0b344e
+}
+.cpp{
+    background-color: #dadce0
+}
+.tech{
     background-color: #0b344e
 }
 .ecriture-profile{
     color: white
 }
+.techecrit{
+    color: white
+}
+.ecrit{
+    color: white
+}
 .btn-custom {
-    background-color: #9fb2db; /* Couleur de fond personnalisée */
-    color: white; /* Texte en blanc */
+    background-color: #f5f6f7; /* Couleur de fond personnalisée */
+    color: #0b344e; /* Texte en blanc */
     font-size: 18px; /* Taille du texte */
     font-weight: bold; /* Texte en gras */
     padding: 12px 20px; /* Espace intérieur */
@@ -18,14 +52,14 @@
 }
 
 .btn-custom:hover {
-    background-color: #061433; /* Changer la couleur au survol */
+    background-color: #0b344e; /* Changer la couleur au survol */
     transform: scale(1.05); /* Légère augmentation de la taille */
 }
-.tech{
-    background-color: #dadce0
+.competences{
+    background-color: #0b344e
 }
 .btn-github {
-    background-color: black; /* Fond noir */
+    background-color: #0b344e; /* Fond noir */
     color: white; /* Texte blanc */
     font-size: 18px;
     font-weight: bold;
@@ -38,11 +72,11 @@
 }
 
 .btn-github:hover {
-    background-color: #071b41; /* Gris foncé au survol */
+    background-color: #f5f6f7; /* Gris foncé au survol */
     transform: scale(1.05); /* Légère augmentation de la taille */
 }
 .btn-navig {
-    background-color: #00a6ff; /* Fond blanc */
+    background-color: #0b344e; /* Fond blanc */
     color: black; /* Texte noir */
     font-size: 18px;
     font-weight: bold;
@@ -56,7 +90,7 @@
 }
 
 .btn-navig:hover {
-    background-color: #dadce0; /* Gris clair au survol */
+    background-color: #05213e; /* Gris clair au survol */
     transform: scale(1.05); /* Légère augmentation de la taille */
 }
 
