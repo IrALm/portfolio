@@ -4,8 +4,8 @@ body{
 }
 
 .profile-pic{
-    width: 40px;
-    height: 40px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%; /* pour un effet rond*/
     object-fit:cover;
     border: 2px solid white;
