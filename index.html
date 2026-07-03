@@ -1,482 +1,374 @@
 <!doctype html>
-<html lang="fr">
-  <head>
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Moïse AGANZE LWABOSHI</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles\style.css">
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <script src="https://kit.fontawesome.com/e5d5a6a181.js" crossorigin="anonymous"></script>
-    <title>Portfolio Moïse AGANZE LWABOSHI</title>
-  </head>
-  <body>
-    <!-- En tete-->
-     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark fond-profile">
-            <div class="container-fluid">
-              <img src="images\photoprofessionnelle.jpg" alt="Photo de profil" class="profile-pic">
-              <a class="navbar-brand fw-bold text-light " href="#">Moïse AGANZE LWABOSHI</a>
-              <button class="navbar-toggler btn-navig" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link fw-bold text-light" href="index.html">ACCUEIL</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link fw-bold text-light" href="#a-propos">A PROPOS</a>
-                  </li>
-                  <li class="nav-item"></li>
-                    <a class="nav-link fw-bold text-light" href="#projets">PROJETS</a>
-                  </li>
-                  <li class="nav-item"></li>
-                    <a class="nav-link fw-bold text-light" href="#contacts">CONTACTS</a>
-                  </li>
-                </ul>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <script src="https://kit.fontawesome.com/e5d5a6a181.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- ============================= NAV ============================= -->
+  <nav class="nav-1c">
+    <div class="container d-flex align-items-center justify-content-between py-3">
+
+      <a href="#" class="d-flex align-items-center gap-2">
+        <img src="images/photoCV.png" alt="Moïse Aganze" class="nav-photo">
+        <span class="fw-bold display-font" style="font-size:15px;color:var(--fg)">Moïse Aganze</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-3">
+        <!-- Liens desktop -->
+        <div class="d-none d-md-flex gap-4">
+          <a href="#projets"  class="nav-link-1c">Projets</a>
+          <a href="#stack"    class="nav-link-1c">Stack</a>
+          <a href="#parcours" class="nav-link-1c">Parcours</a>
+          <a href="#contacts" class="nav-link-1c">Contact</a>
+        </div>
+        <!-- Toggle thème -->
+        <button class="theme-btn" id="themeToggle" aria-label="Basculer thème clair/sombre">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+        <!-- Hamburger mobile -->
+        <button class="hamburger d-grid d-md-none" id="mobileMenuToggle" aria-label="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+    <!-- Menu mobile -->
+    <div class="mobile-menu d-md-none" id="mobileMenu">
+      <div class="container py-3 d-flex flex-column gap-3">
+        <a href="#projets"  class="nav-link-1c" onclick="closeMobileMenu()">Projets</a>
+        <a href="#stack"    class="nav-link-1c" onclick="closeMobileMenu()">Stack</a>
+        <a href="#parcours" class="nav-link-1c" onclick="closeMobileMenu()">Parcours</a>
+        <a href="#contacts" class="nav-link-1c" onclick="closeMobileMenu()">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- ============================= HERO ============================= -->
+  <section class="position-relative py-5" id="accueil">
+    <div class="hero-glow"></div>
+    <div class="container position-relative py-4">
+
+      <div class="hero-badge anim mb-4">
+        <span class="mono-label" style="color:var(--muted)">SOFTWARE ENGINEER</span>
+      </div>
+
+      <h1 class="hero-title anim d1 mb-4">
+        Back-End Engineer <span class="grad-text">orienté architecture.</span>
+      </h1>
+
+      <p class="anim d2 mb-4" style="max-width:660px;font-size:16.5px;line-height:1.7;color:var(--muted)">
+        Systèmes back-end robustes et scalables avec Java &amp; Spring Boot.
+        Microservices, Clean Architecture, hexagonale, DDD.
+        DevOps &amp; qualité : Docker, CI/CD, JUnit, Mockito ; sécurité JWT / OAuth2.
+      </p>
+
+      <div class="anim d3 d-flex gap-3 flex-wrap">
+        <a href="#projets" class="btn-grad grad-bg">
+          Voir mes projets <i class="fa-solid fa-arrow-right" style="font-size:12px"></i>
+        </a>
+        <a href="https://github.com/IrALm" target="_blank" class="btn-ghost">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================= PROJET PHARE ============================= -->
+  <section class="py-4" id="projets">
+    <div class="container">
+      <div class="featured">
+        <div class="row g-0">
+
+          <!-- Infos -->
+          <div class="col-12 col-lg-6 p-4 p-md-5">
+            <span class="badge-featured mb-3 d-inline-block">★ PROJET PHARE</span>
+            <h3 class="display-font fw-bold mb-1" style="font-size:clamp(30px,5vw,44px);line-height:1.05">Kupanga</h3>
+            <p class="fw-bold mb-3" style="font-size:13.5px;color:var(--accent)">
+              Plateforme SaaS de gestion locative — solo, en production
+            </p>
+            <p class="mb-3" style="font-size:14.5px;line-height:1.65;color:var(--muted)">
+              Conception et développement complet d'une API SaaS de gestion locative,
+              de l'architecture à la mise en production.
+            </p>
+            <div class="d-flex flex-column gap-2 mb-3" id="kupangaDetails" style="font-size:12.5px;color:var(--muted)"></div>
+            <div class="d-flex flex-wrap gap-2 mb-4" id="kupangaTags"></div>
+            <a href="https://kupanga.lespacelibellule.com/" target="_blank" class="btn-grad grad-bg" style="padding:12px 22px;font-size:13px">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Voir en ligne
+            </a>
+          </div>
+
+          <!-- Vidéo -->
+          <div class="col-12 col-lg-6">
+            <div class="kupanga-video-wrap">
+              <iframe
+                class="kupanga-video"
+                src="https://www.youtube.com/embed/1R9kjwI1Cyg"
+                title="Démo Kupanga"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= AUTRES PROJETS ============================= -->
+  <section class="py-4">
+    <div class="container">
+      <h2 class="display-font fw-bold mb-4" style="font-size:30px">Projets</h2>
+      <div id="projectGroups"></div>
+    </div>
+  </section>
+
+  <!-- ============================= STACK ============================= -->
+  <section class="py-4" id="stack">
+    <div class="container">
+      <div class="surface p-4 p-md-5" style="border-radius:20px">
+        <h2 class="display-font fw-bold mb-4" style="font-size:28px">Stack technique</h2>
+        <div class="row g-4" id="stackGroups"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= PARCOURS ============================= -->
+  <section class="py-4" id="parcours">
+    <div class="container">
+      <h2 class="display-font fw-bold mb-4" style="font-size:28px">Parcours</h2>
+      <div class="row g-3">
+
+        <div class="col-12 col-md-6">
+          <div class="surface p-4 h-100">
+            <p class="mono-label mb-3" style="color:var(--accent)">Expérience</p>
+            <span style="font:600 12px 'Manrope';color:var(--faint)">Sept. 2025 — Présent</span>
+            <h6 class="display-font fw-bold mt-2 mb-1" style="font-size:16.5px">Développeur Back-end Java</h6>
+            <p class="fw-bold mb-2" style="font-size:13px;color:var(--accent)">
+              Crédit Agricole Technologies et Services · Paris
+            </p>
+            <p class="mb-0" style="font-size:13px;line-height:1.6;color:var(--muted)">
+              Solution bancaire de gestion budgétaire — Java 25, Spring Boot, Spring Batch, MySQL, GitLab CI, Argo CD.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="surface p-4 h-100">
+            <p class="mono-label mb-3" style="color:var(--accent)">Formation</p>
+            <div class="mb-4">
+              <span style="font:600 12px 'Manrope';color:var(--faint)">2025 — 2027</span>
+              <h6 class="display-font fw-bold mt-2 mb-1" style="font-size:16.5px">Mastère Architecture des Logiciels</h6>
+              <p class="mb-0" style="font-size:13px;color:var(--muted)">ESGI · Nantes</p>
+            </div>
+            <div>
+              <span style="font:600 12px 'Manrope';color:var(--faint)">2022 — 2025</span>
+              <h6 class="display-font fw-bold mt-2 mb-1" style="font-size:16.5px">Licence Informatique — Math-Informatique</h6>
+              <p class="mb-0" style="font-size:13px;color:var(--muted)">Nantes Université</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ============================= CONTACT ============================= -->
+  <footer class="contact-band mt-5" id="contacts">
+    <div class="container py-5">
+      <h2 class="display-font fw-bold mb-2" style="font-size:clamp(28px,5vw,42px);color:#07161f">
+        Travaillons ensemble.
+      </h2>
+      <p class="mb-4" style="font-size:14.5px;color:rgba(7,22,31,.85)">
+        Architecture, back-end, systèmes distribués.
+      </p>
+      <div class="d-flex gap-2 flex-wrap" id="contactList"></div>
+      <p class="mt-4 mb-0" style="font:600 11.5px 'Manrope';color:rgba(7,22,31,.6)">
+        © 2025 Moïse Aganze Lwaboshi
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+  /* ── Theme toggle ── */
+  (function () {
+    const root = document.documentElement;
+    const btn  = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    function sync() {
+      const dark = root.getAttribute('data-theme') === 'dark';
+      btn.querySelector('i').className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    }
+    sync();
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('portfolio-theme', next);
+      sync();
+    });
+  })();
+
+  /* ── Mobile menu ── */
+  const mobileMenu = document.getElementById('mobileMenu');
+  document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+
+  /* ── Data ── */
+  const DEV = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/';
+  const IC = {
+    aws:      DEV + 'amazonwebservices/amazonwebservices-original-wordmark.svg',
+    spring:   DEV + 'spring/spring-original-wordmark.svg',
+    java:     DEV + 'java/java-original-wordmark.svg',
+    node:     DEV + 'nodejs/nodejs-original-wordmark.svg',
+    react:    DEV + 'react/react-original-wordmark.svg',
+    julia:    DEV + 'julia/julia-original-wordmark.svg',
+    python:   DEV + 'python/python-original-wordmark.svg',
+    ts:       DEV + 'typescript/typescript-original.svg',
+    js:       DEV + 'javascript/javascript-original.svg',
+    angular:  DEV + 'angularjs/angularjs-original-wordmark.svg',
+    postgres: DEV + 'postgresql/postgresql-original-wordmark.svg',
+    mysql:    DEV + 'mysql/mysql-original-wordmark.svg',
+    redis:    DEV + 'redis/redis-original-wordmark.svg',
+    docker:   DEV + 'docker/docker-original-wordmark.svg',
+    git:      DEV + 'git/git-original-wordmark.svg',
+    github:   DEV + 'github/github-original-wordmark.svg',
+    intellij: DEV + 'intellij/intellij-original.svg',
+    vscode:   DEV + 'vscode/vscode-original-wordmark.svg'
+  };
+
+  const kupangaDetails = [
+    'Spring Boot / Java 21 · PostgreSQL + PostGIS · Redis · MinIO / S3',
+    'Sécurité : JWT + Google OAuth2 · double chaîne Spring Security · RBAC',
+    'WebSocket temps réel · génération & signature PDF (Thymeleaf + Flying Saucer)',
+    'Recherche géospatiale · CI/CD GitHub Actions · Render / Neon / Upstash',
+    'TDD · JUnit · Mockito · Testcontainers · Cucumber (BDD) · JaCoCo',
+    'Observabilité : Sentry · Spring Actuator · Swagger / OpenAPI'
+  ];
+  const kupangaTags = ['Java 21','Spring Boot','PostgreSQL + PostGIS','Redis','JWT / OAuth2','WebSocket','Docker','GitHub Actions','Sentry'];
+
+  const categories = [
+    { name: 'Cloud & Serverless', projects: [
+      { icon: IC.aws,    title: 'url-shortener',
+        desc: 'API serverless de raccourcissement d\'URL sur architecture Event-Driven AWS. Traitement via Lambda, persistance DynamoDB.',
+        tags: ['AWS Lambda','DynamoDB','Node.js'], repo: 'https://github.com/IrALm/url-shortener' },
+      { icon: IC.aws,    title: 'voicefaker',
+        desc: 'API serverless de synthèse vocale — 5 langues, 6 effets de voix. Architecture SAM, stockage audio MinIO, déploiement AWS.',
+        tags: ['AWS Lambda','SAM','FastAPI','DynamoDB','MinIO','React'], repo: 'https://github.com/IrALm/voicefaker' }
+    ]},
+    { name: 'Java / Spring Boot', projects: [
+      { icon: IC.spring, title: 'CampusRoomAPI',
+        desc: 'API de réservation de salles universitaires. Architecture en couches, patterns Factory & Strategy, gestion des conflits de planification et règles métier avancées.',
+        tags: ['Java 21','Spring Boot','H2','JUnit 5','Mockito','Swagger'], repo: 'https://github.com/IrALm/CampusRoomAPI' },
+      { icon: IC.java,   title: 'Proof of Concept — Hackathon',
+        desc: 'POC développé en conditions de hackathon. API Java conteneurisée Docker, pipeline CI/CD GitHub Actions, documentation Postman. Livraison sous contrainte de temps.',
+        tags: ['Java','Spring Boot','Docker','GitHub Actions','Postman'], repo: 'https://github.com/IrALm/Proof-of-Concept-Hackaton' }
+    ]},
+    { name: 'Full Stack', projects: [
+      { icon: IC.node,   title: 'DevSprint',
+        desc: 'Alternative Jira simplifiée pour sprints agiles. Kanban drag-and-drop, burndown charts, story points, export JSON. Typage strict TypeScript end-to-end.',
+        tags: ['React 18','TypeScript','Node.js','Express','PostgreSQL','Prisma','Tailwind'], repo: 'https://github.com/IrALm/devsprint' },
+      { icon: IC.react,  title: 'ChatBoot',
+        desc: 'Interface web de chatbot construite avec React et Vite. Architecture composants modulaire, HMR pour un cycle de développement rapide.',
+        tags: ['React','Vite','JavaScript'], repo: 'https://github.com/IrALm/ChatBoot' }
+    ]},
+    { name: 'Algorithmique', projects: [
+      { icon: IC.julia,  title: 'PathFinding',
+        desc: 'Implémentation de BFS, GBFS, Dijkstra et A* pour la recherche du plus court chemin dans des graphes pondérés ou non. Applications : jeux, robotique, navigation.',
+        tags: ['Julia','Graphes','BFS / Dijkstra / A*'], repo: 'https://github.com/IrALm/PathFinding.git' }
+    ]}
+  ];
+
+  const stackGroups = [
+    { name: 'LANGAGES',            icons: [IC.java, IC.python, IC.ts, IC.js, IC.julia] },
+    { name: 'FRAMEWORKS & BDD',    icons: [IC.spring, IC.react, IC.angular, IC.postgres, IC.mysql, IC.redis, IC.node] },
+    { name: 'OUTILS & CLOUD',      icons: [IC.docker, IC.aws, IC.git, IC.github, IC.intellij, IC.vscode] }
+  ];
+
+  const contacts = [
+    { icon: 'fa-solid fa-phone',          label: 'Téléphone', href: 'tel:+33618665461' },
+    { icon: 'fa-solid fa-envelope',       label: 'Email',     href: 'mailto:moiseaganze76@gmail.com' },
+    { icon: 'fa-brands fa-linkedin',      label: 'LinkedIn',  href: 'https://www.linkedin.com/in/mo%C3%AFse-aganze-lwaboshi-657302254/' },
+    { icon: 'fa-brands fa-github',        label: 'GitHub',    href: 'https://github.com/IrALm' },
+    { icon: 'fa-solid fa-file-arrow-down',label: 'CV',        href: 'CV_Moise_Aganze_Lwaboshi_M1.pdf' }
+  ];
+
+  /* ── Render ── */
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  document.getElementById('kupangaDetails').innerHTML = kupangaDetails.map(d =>
+    `<div class="d-flex gap-2">
+       <i class="fa-solid fa-check" style="color:var(--accent);font-size:11px;margin-top:3px;flex-shrink:0"></i>
+       <span>${esc(d)}</span>
+     </div>`
+  ).join('');
+
+  document.getElementById('kupangaTags').innerHTML = kupangaTags.map(t =>
+    `<span class="chip">${esc(t)}</span>`
+  ).join('');
+
+  document.getElementById('projectGroups').innerHTML = categories.map(cat => `
+    <div class="mb-5">
+      <p class="mono-label mb-3" style="color:var(--accent)">${esc(cat.name)}</p>
+      <div class="row g-3">
+        ${cat.projects.map(p => `
+          <div class="col-12 col-md-6">
+            <div class="project-card">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <span class="icon-tile">
+                  <img src="${p.icon}" alt="" style="height:20px;max-width:34px;object-fit:contain">
+                </span>
+                <h5 class="display-font fw-bold mb-0" style="font-size:16.5px">${esc(p.title)}</h5>
               </div>
+              <p class="mb-3" style="font-size:13.5px;line-height:1.6;color:var(--muted)">${esc(p.desc)}</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                ${p.tags.map(t => `<span class="chip-pill">${esc(t)}</span>`).join('')}
+              </div>
+              <a href="${p.repo}" target="_blank" class="link-repo">
+                <i class="fa-brands fa-github"></i> Code source
+                <i class="fa-solid fa-arrow-right" style="font-size:10px"></i>
+              </a>
             </div>
-          </nav>
-     </header>
+          </div>`).join('')}
+      </div>
+    </div>`
+  ).join('');
 
-     <main>
-        <!-- Accueil et photo de profil -->
-        <section class= "my-5"  id="accueil">
-            <div class="container description">
-                <div class="row gy-4 gy-md-0 ecriture-profile">
-                        <h1 class="mt-5"> SOFTWARE ENGENEER  </h1>
-                        <p class="my-5"> 🎓 Étudiant en informatique passionné, 
-                            je suis titulaire d’une Licence en Informatique (parcours Mathématiques-Informatique), 
-                            et je poursuis dès septembre 2025 un Mastère en Architecture des Logiciels en alternance.<br> 
-                            Mon parcours universitaire m’a permis d’acquérir une solide base théorique en informatique 
-                            et mathématiques appliquées, avec une vraie rigueur en algorithmique, modélisation, 
-                            compilation, et structures de données.<br> En parallèle, j’ai développé mes compétences 
-                            en développement logiciel orienté objet et fonctionnel, tout en maîtrisant 
-                            la conception de bases de données et les langages de programmation comme Java, C++, ou Julia.<br>
-                            💻 Curieux et autonome, j’ai élargi mes 
-                            compétences techniques en me formant au développement web full-stack.<br> 
-                            J’ai ainsi appris à concevoir des applications web complètes, de l’API back-end 
-                            (Java Spring Boot) à l’interface front-end (HTML, CSS, JavaScript, TypeScript). 
-                            Cet apprentissage m’a permis de transformer des idées abstraites en solutions concrètes, 
-                            fonctionnelles et déployables.<br>
-                            🚀 Mon objectif est de devenir un ingénieur logiciel complet, 
-                            capable de concevoir, développer et maintenir des applications complexes, 
-                            performantes et sécurisées. À travers mon Mastère, je vais approfondir 
-                            mes compétences sur des architectures modernes (microservices, DDD, Clean Architecture),
-                             des technologies cloud et DevOps (CI/CD, containers, serverless), ainsi que sur des domaines 
-                             clés comme l’intelligence artificielle, la cybersécurité ou le développement mobile. 
-                             Je souhaite garder une vision systémique, en intégrant les enjeux actuels du numérique : 
-                             performance, maintenabilité, éthique, durabilité. 
-                        </p>
-                </div>
-            </div>
-        </section>
-        <!-- Présentation des compétences techniques -->
-         
-        <section class= "my-5" id="a-propos">
-            <div class="container competences">
-                <div class="row gy-4 gy-md-0 ecrit">
-                    <div class="col-12 col-md-6">
-                        <h3 class="my-5" >COMPLEXITÉ ALGORITHMIQUE</h3>
-                        <ul>
-                            <li>Analyse de complexité temporelle des algorithmes</li>
-                            <li> Analyse de complexité spatiale pour un algorithme</li>
-                            <li>Optimisation des algorithmes pour reduire le temps de calcul et la consommation mémoire </li>
-                            <li> Parfaite compréhension des algorithmes de tri et de recherche</li>
-                        </ul>
-                        <h3 class="my-5">PARFAITE COMPRÉHENSION DES STRUCTURES DE DONNÉES</h3>
-                        <ul>
-                            <li>Listes,tableaux,chaînes : pour manipuler les collections linéaires</li>
-                            <li>Piles et files : pour gérer des données avec des principes d'accès spécifiques : LIFO et FIFO</li>
-                            <li>Table de hachage : pour l'accès et la manipulation rapide des données</li>
-                            <li>Tas : pour gérer des priorités, par exemple pour gérer des files de priorité</li>
-                            <li>Arbres : arbres binaires , arbres de recherche , arbres AVL , etc.</li>
-                        </ul>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <h3 class="my-5" >SOFT SKILLS</h3>
-                        <ul>
-                            <li>Capacité à travailler en équipe: participation à des projets de groupe pour le developpement d'un mini-logiciel en assurant la communication entre les membres de l'équipe</li>
-                            <li>Résolution de problèmes </li>
-                            <li>Apprentissage autonome : Autodidacte en HTML/CSS et JavaScript grâce aux cours en libre accès d'Openclassroom ainsi que des tutoriels en ligne</li>
-                            <li>Gestion simultanéé de projets académiques, des contôles de connaissance ainsi que de mes obligations professionnelles dans le cadre de l'alternance</li>
-                            <li>Adaptation rapide aux méthodologies de développemnt agile dans le cadre de mon alternance</li>
-                            <li>Communication efficace </li>
-                            <li>Adaptabilité et apprentissage continu</li>
-                            <li>Créativité</li>
-                            <li>Attention aux détails</li>
-                            <li>Capacité à recevoir et à donner des feedbacks</li>
-                            <li>Empathie et écoute active</li>
-                            <li>Esprit critique</li>
-                        </ul>
-                           
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="container my-5 tech">
-                    <div class="row gy-4 gy-md-0 techecrit">
-                        <div class="col-12 col-md-6">
-                            <div class="container">
-                                <h2>OUTILS DE DÉVELOPPEMENT</h2>
-                                <div class="row mt-5">
-                                    <div class="col-4 col-md-4 col-sm-4 mt-4">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-4">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-4">
-                                        <div class="w-50">
-                                           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-5">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-5">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="container">
-                                <h2> TÉCHNOLOGIES</h2>
-                                <div class="row mt-5">
-                                    <div class="col-4 col-md-4 col-sm-4">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original-wordmark.svg" class="img-fluid" alt="Image" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4  col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4  col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-md-4 col-sm-4 mt-3">
-                                        <div class="w-50">
-                                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/julia/julia-original-wordmark.svg" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </section>
-        <section class= "my-5 projet " id="projets">
-            <div class="container java">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">                    
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original-wordmark.svg" />
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p>  
-                            <i class="fa-brands fa-java fs-1"></i>
-                            Développement d'une API RESTfull avec SpringBoot : API E-Commerce <br>
-                            utilise Spring Web,
-                            Spring Data JPA, Lombok et H2 Database pour offrir une gestion complète des produits
-                            d'une boutique en ligne, avec une architecture MVC et des tests unitaires et d'intégration
-                            pour garantir sa fiabilité."
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/API-E-Commerce.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                    
-                </div>
-                
-                <div class="row mt-5">
-                    
-                    <div class="col-12 col-md-6">
-                        <p>  
-                            <i class="fa-brands fa-java fs-1"></i>
-                            RH Manager : Application
-                            web complète de gestion des employés, basée sur le pattern MVC. Développée en backend
-                            avec Spring Boot (Spring Web, Security, Data JPA, Validation), MySQL et Lombok, et en
-                            frontend avec Thymeleaf. Intègre des fonctionnalités CRUD, une authentification sécurisée et
-                            une validation des données.
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/RHManager.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <img src="images\RHmanager.png" alt="demo du projet" class="w-100"/>
-                    </div>
-                    
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 col-md-6">
-                        <p><i class="fa-brands fa-java fs-1"></i>
-                            Développement d'un logiciel de génération d'image : CreaPix <br>
-                            Le but de ce projet est de générer des images. J'utilise 
-                            principalement des quadtrees pour répresenter différentes regions de l'image et ainsi 
-                            gérer la nuance des couleurs. Ce projet est implementé en Java 
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/Projet-CreaPix.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <img src="images\creapix.png" alt="demo du projet" class="w-100"/>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">                    
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original-wordmark.svg" />
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p> <i class="fa-brands fa-java fs-1"></i> 
-                            Développement d'un jeu : A Monster's Slayer <br>
-                            conçu pour exploiter pleinement les principes de la Programmation Orientée Objet (POO), 
-                            en mettant l'accent sur la modularité, l'héritage, le polymorphisme et l'encapsulation. 
-                            L'objectif principal de ce projet est de démontrer 
-                            une gestion efficace des objets tout en créant une expérience de jeu progressive et immersive.
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/A-MONSTER-S-SLAYER.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">                    
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original-wordmark.svg" />
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p><i class="fa-brands fa-java fs-1"></i>
-                            Développement d'un logiciel de Gestion d'une bibliothèque : BookCollectJDBC<br>
-                            BooKCollect est une application de type CRUD qui permet de gérer le fonctionnement d'une bibliothèque. 
-                            Dans ce projet, j'utilise Maven pour la gestion des dépendances, 
-                            une BD relationnelle et la JDBC pour l'interaction avec la BD 
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/BookCollectJDBC.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6"></div>
-                </div>
-            </div>
-            <div class="container cpp">
-                <div class="row mt-5">
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">                    
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" />
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <p>
-                            <span class="fs-3 fw-bold">C++</span>Développement d'un logiciel de simulation de vote en temps réel.<br>
-                            Ce logiciel vise à réproduire fidèlement l'organisation d'une élection, 
-                            tout en respectant la confidentialité des votes et la précision du dépouillement. 
-                            Son but est de pouvoir utilser les structures des données adaptées pour chaque problématique dans le but d'Optimiser 
-                            le Coût temporel ainsi que la Complexité Spatiale.
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/Simulation-Bureau-de-Vote.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">                    
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" />
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <span class="fs-3 fw-bold">C++</span>Développement d'un jeu de morpion.<br>
-                        Dans ce projet, j'implémente le jeu de morpion suivant une logique qui est definie. 
-                        L'enjeu est d'utiliser les structures de données adaptées pour modéliser une grille infinie. 
-                        Dans ce programme , je simule 3 manches différentes : 
-                        pour sauvegarder les informations de chaque manche , 
-                        j'enregistre ses informations dans un fichier .txt 
-                        ensuite le programme démarre la manche suivante et à la fin enregistre 
-                        ses informations dans un fichier .txt , ainsi de suite Tout au long de l'éxecution du programme , 
-                        le programme calcule le temps d'éxecution de chaque sous programme , 
-                        le but étant de tester son efficacité générale.
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/Morpion.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="container python">
-                <div class="row mt-5">
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original-wordmark.svg" />
-                        </div>
-                        <p>
-                            
-                          
-                            Développement d'une calculatrice PyCalc.<br>
-                            Ce projet a pour objectif de fournir une interface intuitive pour 
-                            effectuer des calculs de base (addition, soustraction, multiplication, 
-                            division) et quelques opérations avancées (comme les racines carrées ou 
-                            les pourcentages , calcul du sinus , cosinus , tangente). 
-                            Le projet met en avant l'utilisation de la bibliothèque Tkinter pour 
-                            créer une interface utilisateur fluide et 
-                            responsive tout en offrant une implémentation claire des fonctions arithmétiques en Python."
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/PyCalcTK.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <img src="images\calculatrice.png" alt="demo du projet" class="w-100"/>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    
-                    <div class="col-12 col-md-6">
-                        <div class="w-25">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/julia/julia-original-wordmark.svg" />
-                        </div>
-                        <p>
+  document.getElementById('stackGroups').innerHTML = stackGroups.map(g => `
+    <div class="col-12 col-md-4">
+      <p class="mono-label mb-3" style="color:var(--accent)">${esc(g.name)}</p>
+      <div class="d-flex flex-wrap gap-3">
+        ${g.icons.map(i => `<span class="stack-tile"><img src="${i}" alt=""></span>`).join('')}
+      </div>
+    </div>`
+  ).join('');
 
-                            Implémentation des algorithmes BFS, GBFS, Dijkstra et A* en Julia 
-                            pour la recherche du chemin le plus court dans des graphes pondérés ou non pondérés. 
-                            Ce projet permet de résoudre efficacement des problèmes de pathfinding 
-                            pour des applications comme les jeux, la robotique et la navigation. 
-                        </p>
-                        <p>
-                            <i class="fa-brands fa-github fs-1"></i>
-                            <a href="https://github.com/IrALm/PathFinding.git" class="btn-github">Voir le code source et le Readme</a>
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <img src="images\path.png" alt="demo du projet" class="w-100"/>
-                    </div>
-                </div>
-            </div>
-        </section>
-     </main>
+  document.getElementById('contactList').innerHTML = contacts.map(c =>
+    `<a href="${c.href}" class="contact-btn"><i class="${c.icon}"></i> ${esc(c.label)}</a>`
+  ).join('');
+  </script>
 
-     <footer>
-        <section class= "my-5 " id="contacts">
-            <div class="container description ecriture-profile">
-                <h2 class="my-5"> <br> CONTACTS <br></h2>
-                <div class="container">
-                    <div class="row text-center">
-                        <div class="col-4 col-md-4 col-sm-4">
-                            <div class="w-50">
-                                <a href="tel:+33618665461">
-                                    <img src="images/centre-dappel.png" alt="Appel" class="img-fluid w-25"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-4 col-md-4 col-sm-4">
-                            <div class="w-50">
-                                <a href="mailto:moiseaganze76@gmail.com">
-                                    <img src="images/gmail.png" alt="Email" class="img-fluid w-25"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-4 col-md-4 col-sm-4">
-                            <div class="w-50">
-                                <a href="https://www.linkedin.com/in/mo%C3%AFse-aganze-lwaboshi-657302254/">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original-wordmark.svg" alt="LinkedIn" class="img-fluid w-75"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-4 col-md-4 col-sm-4">
-                            <div class="w-50">
-                                <a href="https://github.com/IrALm">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original-wordmark.svg" alt="GitHub" class="img-fluid w-50"/>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-4 col-md-4 col-sm-4">
-                            <div class="w-50">
-                                <a href="Cv_developpement.pdf">
-                                    <img src="images/telecharger.png" alt="CV" class="img-fluid w-50"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="text-center mt-4">
-                    <br><br><p>&copy;2024 Moïse AGANZE LWABOSHI.</p>
-                </div>
-
-            </div>
-        </section>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        
-    </footer>
-  </body>
+</body>
 </html>
