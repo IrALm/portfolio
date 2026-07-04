@@ -272,27 +272,39 @@
   const categories = [
     { name: 'Cloud & Serverless', projects: [
       { icon: IC.aws,    title: 'url-shortener',
-        desc: 'API serverless de raccourcissement d\'URL sur architecture Event-Driven AWS. Traitement via Lambda, persistance DynamoDB.',
-        tags: ['AWS Lambda','DynamoDB','Node.js'], repo: 'https://github.com/IrALm/url-shortener' },
+        desc: 'Service de raccourcissement d\'URL Event-Driven et 100% serverless (AWS Lambda, Node.js 20). DynamoDB Streams déclenche les jobs asynchrones (stats, favicons), IaC via AWS SAM. Reproductible en local à fidélité de production avec Docker et un simulateur de streams maison.',
+        tags: ['AWS Lambda','DynamoDB','DynamoDB Streams','AWS SAM','Docker','MinIO','Node.js'], repo: 'https://github.com/IrALm/url-shortener',
+        arch: `
+          <div class="arch-tier"><span class="arch-box">Client</span></div>
+          <i class="fa-solid fa-arrow-down arch-arrow"></i>
+          <div class="arch-tier"><span class="arch-box arch-box-accent">Lambda API<br><small>Shorten · Redirect · Stats · List</small></span></div>
+          <i class="fa-solid fa-arrow-down arch-arrow"></i>
+          <div class="arch-row">
+            <span class="arch-box">DynamoDB<br><small>urls · click_events · daily_stats</small></span>
+            <span class="arch-box">S3 / MinIO<br><small>favicons</small></span>
+          </div>
+          <i class="fa-solid fa-arrow-down arch-arrow"></i>
+          <div class="arch-tier"><span class="arch-box arch-box-dashed">DynamoDB Streams → Lambda async<br><small>stats &amp; favicon jobs</small></span></div>
+        ` },
       { icon: IC.aws,    title: 'voicefaker',
         desc: 'API serverless de synthèse vocale — 5 langues, 6 effets de voix. Architecture SAM, stockage audio MinIO, déploiement AWS.',
-        tags: ['AWS Lambda','SAM','FastAPI','DynamoDB','MinIO','React'], repo: 'https://github.com/IrALm/voicefaker' }
+        tags: ['AWS Lambda','SAM','FastAPI','DynamoDB','MinIO','React'], repo: 'https://github.com/IrALm/voicefaker', demo: 'https://youtu.be/aDLdIkbKqy8' }
     ]},
     { name: 'Java / Spring Boot', projects: [
       { icon: IC.spring, title: 'CampusRoomAPI',
         desc: 'API de réservation de salles universitaires. Architecture en couches, patterns Factory & Strategy, gestion des conflits de planification et règles métier avancées.',
         tags: ['Java 21','Spring Boot','H2','JUnit 5','Mockito','Swagger'], repo: 'https://github.com/IrALm/CampusRoomAPI' },
-      { icon: IC.java,   title: 'Proof of Concept — Hackathon',
-        desc: 'POC développé en conditions de hackathon. API Java conteneurisée Docker, pipeline CI/CD GitHub Actions, documentation Postman. Livraison sous contrainte de temps.',
-        tags: ['Java','Spring Boot','Docker','GitHub Actions','Postman'], repo: 'https://github.com/IrALm/Proof-of-Concept-Hackaton' }
+      { icon: IC.spring, title: 'Michelin Guide — API Backend (Hackathon)',
+        desc: 'Backend Spring Boot d\'une plateforme de réservation d\'hôtels et restaurants façon guide Michelin. Recherche géolocalisée avec scoring (PostGIS), assistants conversationnels IA (Groq) pour la recherche et la réservation, back-office admin. Livré en conditions de hackathon sous contrainte de temps.',
+        tags: ['Java 21','Spring Boot','Spring AI / Groq','PostgreSQL + PostGIS','Supabase Auth (JWT)','Docker','GitHub Actions'], repo: 'https://github.com/IrALm/Proof-of-Concept-Hackaton' }
     ]},
     { name: 'Full Stack', projects: [
       { icon: IC.node,   title: 'DevSprint',
         desc: 'Alternative Jira simplifiée pour sprints agiles. Kanban drag-and-drop, burndown charts, story points, export JSON. Typage strict TypeScript end-to-end.',
-        tags: ['React 18','TypeScript','Node.js','Express','PostgreSQL','Prisma','Tailwind'], repo: 'https://github.com/IrALm/devsprint' },
+        tags: ['React 18','TypeScript','Node.js','Express','PostgreSQL','Prisma','Tailwind'], repo: 'https://github.com/IrALm/devsprint', demo: 'https://youtu.be/BQs2P0S4FuE' },
       { icon: IC.react,  title: 'ChatBoot',
-        desc: 'Interface web de chatbot construite avec React et Vite. Architecture composants modulaire, HMR pour un cycle de développement rapide.',
-        tags: ['React','Vite','JavaScript'], repo: 'https://github.com/IrALm/ChatBoot' }
+        desc: 'Interface web de chatbot construite avec React et Vite, connectée à une API Spring Boot (Michelin Guide) pour la recherche et la réservation conversationnelle d\'hôtels et restaurants via des assistants IA (Groq). Architecture composants modulaire, HMR pour un cycle de développement rapide.',
+        tags: ['React','Vite','JavaScript','IA conversationnelle'], repo: 'https://github.com/IrALm/ChatBoot', demo: 'https://youtu.be/mgax3GmW33M' }
     ]},
     { name: 'Algorithmique', projects: [
       { icon: IC.julia,  title: 'PathFinding',
@@ -317,6 +329,10 @@
 
   /* ── Render ── */
   const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const ytEmbed = url => {
+    const m = url.match(/(?:youtu\.be\/|[?&]v=)([\w-]+)/);
+    return m ? `https://www.youtube.com/embed/${m[1]}` : url;
+  };
 
   document.getElementById('kupangaDetails').innerHTML = kupangaDetails.map(d =>
     `<div class="d-flex gap-2">
@@ -343,10 +359,22 @@
                 <h5 class="display-font fw-bold mb-0" style="font-size:16.5px">${esc(p.title)}</h5>
               </div>
               <p class="mb-3" style="font-size:13.5px;line-height:1.6;color:var(--muted)">${esc(p.desc)}</p>
+              ${p.demo ? `
+              <div class="project-video-wrap mb-3">
+                <iframe
+                  src="${ytEmbed(p.demo)}"
+                  title="Démo ${esc(p.title)}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen>
+                </iframe>
+              </div>` : p.arch ? `
+              <div class="project-arch-wrap mb-3">${p.arch}</div>` : ''}
               <div class="d-flex flex-wrap gap-2 mb-3">
                 ${p.tags.map(t => `<span class="chip-pill">${esc(t)}</span>`).join('')}
               </div>
-              <a href="${p.repo}" target="_blank" class="link-repo">
+              <a href="${p.repo}" target="_blank" class="link-repo mt-auto">
                 <i class="fa-brands fa-github"></i> Code source
                 <i class="fa-solid fa-arrow-right" style="font-size:10px"></i>
               </a>
