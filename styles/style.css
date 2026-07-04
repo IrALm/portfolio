@@ -126,6 +126,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; letter-spacin
   background: var(--panel2); border-radius: 100px; color: var(--muted);
 }
 .project-card {
+  display: flex; flex-direction: column;
   padding: 24px; border: 1px solid var(--line); border-radius: 16px;
   background: var(--panel); height: 100%;
   transition: transform .25s, box-shadow .25s, border-color .25s;
@@ -154,6 +155,33 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; letter-spacin
   position: absolute; inset: 0;
   width: 100%; height: 100%; border: 0; display: block;
 }
+
+/* ── Vidéo démo (cartes projet) ── */
+.project-video-wrap {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border-radius: 12px; overflow: hidden; background: var(--panel2);
+}
+.project-video-wrap iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block;
+}
+
+/* ── Schéma d'archi (cartes projet back-only) ── */
+.project-arch-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 16px 12px; border: 1px solid var(--line); border-radius: 12px;
+  background: var(--panel2);
+}
+.arch-tier { display: flex; justify-content: center; width: 100%; }
+.arch-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
+.arch-box {
+  font: 700 11.5px 'Manrope'; color: var(--fg); text-align: center;
+  padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--panel); line-height: 1.4;
+}
+.arch-box small { font: 600 10px 'Manrope'; color: var(--muted); display: block; margin-top: 2px; }
+.arch-box-accent { border-color: var(--accent); color: var(--accent); }
+.arch-box-dashed { border-style: dashed; color: var(--muted); }
+.arch-arrow { color: var(--faint); font-size: 12px; }
 
 /* ── Stack ── */
 .stack-tile {
