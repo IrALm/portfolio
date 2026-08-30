@@ -1,402 +1,611 @@
 <!doctype html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio Moïse AGANZE LWABOSHI</title>
+  <title>Moïse Aganze Lwaboshi — Back-End Engineer</title>
+  <meta name="description" content="Développeur Back-end Java et concepteur d'architectures applicatives. Clean Architecture, DDD, microservices.">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="styles/style.css">
-  <script src="https://kit.fontawesome.com/e5d5a6a181.js" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('portfolio-theme'); } catch (e) {}
+      var theme = saved === 'dark' || saved === 'light'
+        ? saved
+        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
-
 <body>
 
-  <!-- ============================= NAV ============================= -->
-  <nav class="nav-1c">
-    <div class="container d-flex align-items-center justify-content-between py-3">
+  <div class="shell">
+    <div class="shell-inner">
 
-      <a href="#" class="d-flex align-items-center gap-2">
-        <img src="images/photoCV.png" alt="Moïse Aganze" class="nav-photo">
-        <span class="fw-bold display-font" style="font-size:15px;color:var(--fg)">Moïse Aganze</span>
-      </a>
+      <!-- ══════════════ SIDEBAR ══════════════ -->
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="brand">
+            <img src="images/photoCV.jpg" alt="Moïse Aganze" class="brand-photo">
+            <div class="brand-text">
+              <div class="brand-name">Moïse Aganze</div>
+              <div class="brand-surname">Lwaboshi</div>
+            </div>
+            <button type="button" id="burger" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
 
-      <div class="d-flex align-items-center gap-3">
-        <!-- Liens desktop -->
-        <div class="d-none d-md-flex gap-4">
-          <a href="#projets"  class="nav-link-1c">Projets</a>
-          <a href="#stack"    class="nav-link-1c">Stack</a>
-          <a href="#parcours" class="nav-link-1c">Parcours</a>
-          <a href="#contacts" class="nav-link-1c">Contact</a>
+          <nav class="main-nav" id="mainNav">
+            <a href="#accueil" class="nav-link" data-page="accueil">Accueil</a>
+            <a href="#parcours" class="nav-link" data-page="parcours">Parcours</a>
+            <a href="#projets" class="nav-link" data-page="projets">Projets</a>
+            <a href="#stack" class="nav-link" data-page="stack">Stack &amp; Concepts</a>
+            <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+          </nav>
         </div>
-        <!-- Toggle thème -->
-        <button class="theme-btn" id="themeToggle" aria-label="Basculer thème clair/sombre">
-          <i class="fa-solid fa-sun"></i>
-        </button>
-        <!-- Hamburger mobile -->
-        <button class="hamburger d-grid d-md-none" id="mobileMenuToggle" aria-label="Menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
 
-    </div>
-    <!-- Menu mobile -->
-    <div class="mobile-menu d-md-none" id="mobileMenu">
-      <div class="container py-3 d-flex flex-column gap-3">
-        <a href="#projets"  class="nav-link-1c" onclick="closeMobileMenu()">Projets</a>
-        <a href="#stack"    class="nav-link-1c" onclick="closeMobileMenu()">Stack</a>
-        <a href="#parcours" class="nav-link-1c" onclick="closeMobileMenu()">Parcours</a>
-        <a href="#contacts" class="nav-link-1c" onclick="closeMobileMenu()">Contact</a>
-      </div>
-    </div>
-  </nav>
+        <div class="sidebar-bottom" id="sidebarBottom">
+          <button type="button" id="themeToggle" class="theme-toggle">
+            <span class="theme-dot"></span>
+            <span id="themeLabel">Mode sombre</span>
+          </button>
+          <div class="location">
+            <div>Nantes · Paris</div>
+            <div>Disponible</div>
+          </div>
+        </div>
+      </aside>
 
-  <main>
+      <!-- ══════════════ CONTENU ══════════════ -->
+      <main class="content">
 
-  <!-- ============================= HERO ============================= -->
-  <section class="position-relative py-5" id="accueil">
-    <div class="hero-glow"></div>
-    <div class="container position-relative py-4">
+        <!-- ─────── ACCUEIL ─────── -->
+        <section data-view="accueil" class="view view-accueil">
+          <div class="eyebrow">BACK-END ENGINEER · ARCHITECTURE APPLICATIVE</div>
 
-      <div class="hero-badge anim mb-4">
-        <span class="mono-label" style="color:var(--muted)">SOFTWARE ENGINEER</span>
-      </div>
+          <h1 class="hero-title" id="typedTitle"><span class="typed-text"></span><span class="caret"></span></h1>
 
-      <h1 class="hero-title anim d1 mb-4">
-        Back-End Engineer <span class="grad-text">orienté architecture.</span>
-      </h1>
+          <p class="hero-lead" id="typedPara"><span class="typed-text"></span><span class="caret"></span></p>
 
-      <p class="anim d2 mb-4" style="max-width:660px;font-size:16.5px;line-height:1.7;color:var(--muted)">
-        Systèmes back-end robustes et scalables avec Java &amp; Spring Boot.
-        Microservices, Clean Architecture, hexagonale, DDD.
-        DevOps &amp; qualité : Docker, CI/CD, JUnit, Mockito ; sécurité JWT / OAuth2.
-      </p>
+          <div class="hero-cta">
+            <a href="#projets" class="btn btn-primary" data-page="projets">Voir les projets</a>
+            <a href="#contact" class="btn btn-ghost" data-page="contact">Me contacter</a>
+          </div>
 
-      <div class="anim d3 d-flex gap-3 flex-wrap">
-        <a href="#projets" class="btn-grad grad-bg">
-          Voir mes projets <i class="fa-solid fa-arrow-right" style="font-size:12px"></i>
-        </a>
-        <a href="https://github.com/IrALm" target="_blank" class="btn-ghost">
-          <i class="fa-brands fa-github"></i> GitHub
-        </a>
-      </div>
+          <div class="philosophy">
+            <div class="label">LE CODE DURABLE</div>
+            <p class="philosophy-lead">Passionné par le <em>Software Craftsmanship</em>, je ne me contente pas d'écrire du code qui fonctionne : je crée des systèmes conçus pour durer et évoluer. Mon approche repose sur trois piliers fondamentaux.</p>
 
-    </div>
-  </section>
+            <div class="pillars">
+              <div class="pillar">
+                <div class="pillar-num">01</div>
+                <h3>Découplage maximum</h3>
+                <p>Clean Architecture et architecture hexagonale pour isoler la logique métier des contraintes techniques.</p>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">02</div>
+                <h3>Orientation métier</h3>
+                <p>Alignement du code sur les besoins réels de l'entreprise grâce aux principes du Domain-Driven Design.</p>
+              </div>
+              <div class="pillar">
+                <div class="pillar-num">03</div>
+                <h3>Fiabilité</h3>
+                <p>Architectures microservices résilientes, hautement disponibles et prêtes pour la production à grande échelle.</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-  <!-- ============================= PROJET PHARE ============================= -->
-  <section class="py-4" id="projets">
-    <div class="container">
-      <div class="featured">
-        <div class="row g-0">
+        <!-- ─────── PARCOURS ─────── -->
+        <section data-view="parcours" class="view view-parcours">
+          <div class="label">PARCOURS</div>
+          <h1 class="page-title with-photo">
+            <img src="images/photoCV.jpg" alt="Moïse Aganze" class="page-title-photo">
+            Expérience &amp; formation
+          </h1>
 
-          <!-- Infos -->
-          <div class="col-12 col-lg-6 p-4 p-md-5">
-            <span class="badge-featured mb-3 d-inline-block">★ PROJET PHARE</span>
-            <h3 class="display-font fw-bold mb-1" style="font-size:clamp(30px,5vw,44px);line-height:1.05">Kupanga</h3>
-            <p class="fw-bold mb-3" style="font-size:13.5px;color:var(--accent)">
-              Plateforme SaaS de gestion locative — solo, en production
-            </p>
-            <p class="mb-3" style="font-size:14.5px;line-height:1.65;color:var(--muted)">
-              Conception et développement complet d'une API SaaS de gestion locative,
-              de l'architecture à la mise en production.
-            </p>
-            <div class="d-flex flex-column gap-2 mb-3" id="kupangaDetails" style="font-size:12.5px;color:var(--muted)"></div>
-            <div class="d-flex flex-wrap gap-2 mb-4" id="kupangaTags"></div>
-            <a href="https://kupanga.lespacelibellule.com/" target="_blank" class="btn-grad grad-bg" style="padding:12px 22px;font-size:13px">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Voir en ligne
+          <div class="section-block">
+            <div class="section-head">EXPÉRIENCE</div>
+
+            <div class="entry-row">
+              <div class="entry-date">Sept. 2025 —<br>Présent</div>
+              <div>
+                <h3 class="entry-title">Développeur Back-end Java</h3>
+                <div class="entry-subtitle">Crédit Agricole Technologies et Services · Paris — Alternance</div>
+                <p class="entry-text">Conception, développement et optimisation des services applicatifs pour l'un des plus grands groupes bancaires français. Solution bancaire de gestion budgétaire.</p>
+                <p class="entry-text">Application des patrons d'architecture modernes et sécurisés dans un écosystème à forte contrainte réglementaire, de sécurité et de volumétrie — batchs industriels, microservices.</p>
+                <div class="tags">
+                  <span class="tag">Java 25</span>
+                  <span class="tag">Spring Boot</span>
+                  <span class="tag">Spring Batch</span>
+                  <span class="tag">MySQL</span>
+                  <span class="tag">GitLab CI</span>
+                  <span class="tag">Argo CD</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry-row entry-row-separated">
+              <div class="entry-date">En parallèle</div>
+              <div>
+                <h3 class="entry-title">Software Engineer indépendant</h3>
+                <div class="entry-subtitle">Missions clients — conception et réalisation de solutions sur mesure</div>
+                <p class="entry-text">J'interviens auprès de différents clients dans la conception et la réalisation de solutions logicielles sur mesure.</p>
+                <p class="entry-text">De l'analyse du besoin métier à la mise en production, je prends en charge les différentes étapes du projet : cadrage fonctionnel, rédaction des spécifications, conception de l'architecture, développement Full Stack et multiplateforme, déploiement, monitoring et maintenance.</p>
+                <p class="entry-text">J'assure également l'accompagnement des clients après la mise en production afin de faciliter la prise en main de la solution, recueillir les retours et faire évoluer le produit en fonction des besoins.</p>
+                <p class="entry-text">Cette activité me permet d'intervenir sur l'ensemble du cycle de vie d'un logiciel et de développer une vision à la fois <strong>technique, produit et métier</strong>.</p>
+                <div class="tags">
+                  <span class="tag">Analyse métier</span>
+                  <span class="tag">Cahier des charges</span>
+                  <span class="tag">Architecture</span>
+                  <span class="tag">Full Stack</span>
+                  <span class="tag">Flutter</span>
+                  <span class="tag">Déploiement</span>
+                  <span class="tag">Monitoring</span>
+                  <span class="tag">Accompagnement client</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <div class="section-head">FORMATION</div>
+
+            <div class="entry-row entry-row-compact">
+              <div class="entry-date">2025 — 2027</div>
+              <div>
+                <h3 class="entry-title entry-title-sm">Mastère Architecture des Logiciels</h3>
+                <div class="entry-subtitle">ESGI · Nantes — Diplôme attendu septembre 2027</div>
+              </div>
+            </div>
+
+            <div class="entry-row">
+              <div class="entry-date">2022 — 2025</div>
+              <div>
+                <h3 class="entry-title entry-title-sm">Licence Informatique</h3>
+                <div class="entry-subtitle">Nantes Université — Spécialisation Mathématiques-Informatique</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─────── PROJETS ─────── -->
+        <section data-view="projets" class="view view-projets">
+          <div class="label">PROJETS</div>
+          <h1 class="page-title">Réalisations</h1>
+          <p class="page-lead">Du SaaS en production aux architectures serverless event-driven, en passant par les API Spring Boot et l'algorithmique.</p>
+
+          <!-- Kupanga -->
+          <div class="featured">
+            <div class="featured-head">
+              <h2 class="featured-title">Kupanga</h2>
+              <span class="badge">EN PRODUCTION</span>
+            </div>
+            <div class="featured-sub">Plateforme SaaS de gestion locative — conception et développement solo, de l'architecture à la mise en production.</div>
+
+            <div class="featured-grid">
+              <div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">SOCLE</span>
+                    <span class="spec-value">Spring Boot / Java 21 · PostgreSQL + PostGIS · Redis · MinIO / S3</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SÉCURITÉ</span>
+                    <span class="spec-value">JWT + Google OAuth2 · double chaîne Spring Security · RBAC</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">TEMPS RÉEL</span>
+                    <span class="spec-value">WebSocket · génération &amp; signature PDF (Thymeleaf + Flying Saucer)</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">INFRA</span>
+                    <span class="spec-value">Recherche géospatiale · CI/CD GitHub Actions · Render / Neon / Upstash</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">QUALITÉ</span>
+                    <span class="spec-value">TDD · JUnit · Mockito · Testcontainers · Cucumber (BDD) · JaCoCo</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">OBSERVABILITÉ</span>
+                    <span class="spec-value">Sentry · Spring Actuator · Swagger / OpenAPI</span>
+                  </div>
+                </div>
+                <a href="https://kupanga.lespacelibellule.com/" target="_blank" rel="noopener" class="btn btn-primary">Voir en ligne ↗</a>
+              </div>
+
+              <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/1R9kjwI1Cyg" title="Démo Kupanga" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cloud & Serverless -->
+          <div class="category">
+            <div class="section-head">CLOUD &amp; SERVERLESS</div>
+            <div class="project-grid">
+              <div class="project-card">
+                <h3 class="project-title">url-shortener</h3>
+                <p class="project-desc">Service de raccourcissement d'URL event-driven et 100% serverless. DynamoDB Streams déclenche les jobs asynchrones (stats, favicons), IaC via AWS SAM. Reproductible en local à fidélité de production avec Docker et un simulateur de streams maison.</p>
+                <div class="tags">
+                  <span class="tag">AWS Lambda</span>
+                  <span class="tag">DynamoDB Streams</span>
+                  <span class="tag">AWS SAM</span>
+                  <span class="tag">Node.js 20</span>
+                  <span class="tag">MinIO</span>
+                </div>
+                <a href="https://github.com/IrALm/url-shortener" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+
+              <div class="project-card">
+                <h3 class="project-title">voicefaker</h3>
+                <p class="project-desc">API serverless de synthèse vocale — 5 langues, 6 effets de voix. Architecture SAM, stockage audio MinIO, déploiement AWS.</p>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/aDLdIkbKqy8" title="Démo voicefaker" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="tags">
+                  <span class="tag">AWS Lambda</span>
+                  <span class="tag">FastAPI</span>
+                  <span class="tag">DynamoDB</span>
+                  <span class="tag">React</span>
+                </div>
+                <a href="https://github.com/IrALm/voicefaker" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Java / Spring Boot -->
+          <div class="category">
+            <div class="section-head">JAVA / SPRING BOOT</div>
+            <div class="project-grid">
+              <div class="project-card">
+                <h3 class="project-title">CampusRoomAPI</h3>
+                <p class="project-desc">API de réservation de salles universitaires. Architecture en couches, patterns Factory &amp; Strategy, gestion des conflits de planification et règles métier avancées.</p>
+                <div class="tags">
+                  <span class="tag">Java 21</span>
+                  <span class="tag">Spring Boot</span>
+                  <span class="tag">JUnit 5</span>
+                  <span class="tag">Mockito</span>
+                  <span class="tag">Swagger</span>
+                </div>
+                <a href="https://github.com/IrALm/CampusRoomAPI" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+
+              <div class="project-card">
+                <h3 class="project-title">Michelin Guide — API Backend</h3>
+                <div class="project-badge">HACKATHON</div>
+                <p class="project-desc">Backend Spring Boot d'une plateforme de réservation d'hôtels et restaurants. Recherche géolocalisée avec scoring (PostGIS), assistants conversationnels IA (Groq) pour la recherche et la réservation, back-office admin. Livré sous contrainte de temps.</p>
+                <div class="tags">
+                  <span class="tag">Spring AI / Groq</span>
+                  <span class="tag">PostgreSQL + PostGIS</span>
+                  <span class="tag">Supabase Auth</span>
+                  <span class="tag">Docker</span>
+                </div>
+                <a href="https://github.com/IrALm/Proof-of-Concept-Hackaton" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full Stack -->
+          <div class="category">
+            <div class="section-head">FULL STACK</div>
+            <div class="project-grid">
+              <div class="project-card">
+                <h3 class="project-title">DevSprint</h3>
+                <p class="project-desc">Alternative Jira simplifiée pour sprints agiles. Kanban drag-and-drop, burndown charts, story points, export JSON. Typage strict TypeScript end-to-end.</p>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/BQs2P0S4FuE" title="Démo DevSprint" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="tags">
+                  <span class="tag">React 18</span>
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">Prisma</span>
+                  <span class="tag">PostgreSQL</span>
+                </div>
+                <a href="https://github.com/IrALm/devsprint" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+
+              <div class="project-card">
+                <h3 class="project-title">ChatBoot</h3>
+                <p class="project-desc">Interface web de chatbot construite avec React et Vite, connectée à l'API Spring Boot Michelin Guide pour la recherche et la réservation conversationnelle via des assistants IA (Groq). Architecture composants modulaire.</p>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/mgax3GmW33M" title="Démo ChatBoot" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Vite</span>
+                  <span class="tag">IA conversationnelle</span>
+                </div>
+                <a href="https://github.com/IrALm/ChatBoot" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Algorithmique -->
+          <div class="category">
+            <div class="section-head">ALGORITHMIQUE</div>
+            <div class="project-single">
+              <h3 class="project-title">PathFinding</h3>
+              <p class="project-desc">Implémentation de BFS, GBFS, Dijkstra et A* pour la recherche du plus court chemin dans des graphes pondérés ou non. Applications : jeux, robotique, navigation.</p>
+              <div class="tags">
+                <span class="tag">Julia</span>
+                <span class="tag">Graphes</span>
+                <span class="tag">BFS / Dijkstra / A*</span>
+              </div>
+              <a href="https://github.com/IrALm/PathFinding.git" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─────── STACK & CONCEPTS ─────── -->
+        <section data-view="stack" class="view view-stack">
+          <div class="label">STACK &amp; CONCEPTS</div>
+          <h1 class="page-title">Compétences techniques</h1>
+
+          <div class="stack-intro">
+            <p>Un socle Java / Spring maîtrisé en profondeur, prolongé par le cloud serverless, le front et le mobile. Les technologies ci-dessous sont celles que j'utilise en production ou sur mes projets personnels.</p>
+            <img src="images/profilGithub.jpg" alt="Moïse Aganze — La Défense" class="stack-photo">
+          </div>
+
+          <!-- Core & Spring -->
+          <div class="stack-section">
+            <div class="section-head">CORE &amp; ÉCOSYSTÈME SPRING</div>
+
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Java</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java" title="Java" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">Langage de prédilection, maîtrise des fonctionnalités modernes</div>
+            </div>
+
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Spring Boot &amp; Framework</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="Spring" title="Spring Boot" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/hibernate/hibernate-original.svg" alt="Hibernate" title="Hibernate / JPA" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original.svg" alt="Swagger" title="Swagger / OpenAPI" class="logo">
+                </div>
+              </div>
+              <div class="sub-rows">
+                <div class="sub-row"><span class="sub-row-key">Spring Data</span><span class="sub-row-val">JPA / Hibernate</span></div>
+                <div class="sub-row"><span class="sub-row-key">Spring Security</span><span class="sub-row-val sub-row-val-icon"><img src="https://cdn.simpleicons.org/keycloak/1c1b19" alt="Keycloak" title="Keycloak" class="logo-mono logo-sm">OAuth2, JWT, RBAC · Keycloak</span></div>
+                <div class="sub-row"><span class="sub-row-key">Spring Cloud</span><span class="sub-row-val">Gateway, Eureka, Config Server</span></div>
+                <div class="sub-row"><span class="sub-row-key">Spring Batch</span><span class="sub-row-val">Traitement de gros volumes de données et flux asynchrones</span></div>
+                <div class="sub-row"><span class="sub-row-key">AOP · Integration · WebFlux</span><span class="sub-row-val">Réactivité et découplage</span></div>
+                <div class="sub-row"><span class="sub-row-key">Swagger / OpenAPI</span><span class="sub-row-val">Documentation et contrat d'API · Spring Actuator</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Design Patterns -->
+          <div class="stack-section">
+            <div class="section-head">LES 3 GRANDES FAMILLES DE DESIGN PATTERNS (GoF)</div>
+            <div class="gof-grid">
+              <div class="gof-card">
+                <h3>Création</h3>
+                <div class="gof-list">Singleton · Factory · Builder</div>
+                <p>Gestion optimisée de l'instanciation des objets.</p>
+              </div>
+              <div class="gof-card">
+                <h3>Structure</h3>
+                <div class="gof-list">Adapter · Proxy · Decorator · Facade</div>
+                <p>Assemblage de classes et d'objets pour des structures flexibles.</p>
+              </div>
+              <div class="gof-card">
+                <h3>Comportement</h3>
+                <div class="gof-list">Strategy · Observer · Command · State</div>
+                <p>Distribution efficace des responsabilités et algorithmes entre les objets.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Architectures -->
+          <div class="stack-section">
+            <div class="section-head">ARCHITECTURES &amp; PRATIQUES</div>
+
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Architectures systèmes</div>
+              <div class="stack-row-text">Microservices · Hexagonale · Clean Architecture · Domain-Driven Design (DDD) · Event-Driven Architecture</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Software Craftsmanship</div>
+              <div class="stack-row-text">Clean Code · Principes SOLID · KISS · DRY · YAGNI</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Tests</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" alt="JUnit" title="JUnit 5" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cucumber/cucumber-plain.svg" alt="Cucumber" title="Cucumber (BDD)" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">TDD (Test-Driven Development) · JUnit 5 · Mockito · Testcontainers · Cucumber (BDD) · JaCoCo</div>
+            </div>
+          </div>
+
+          <!-- AI-Augmented -->
+          <div class="stack-section">
+            <div class="section-head">AI-AUGMENTED SOFTWARE ENGINEERING</div>
+            <p class="stack-ai-lead">Intégration d'agents IA (Claude, Codex, Cursor, GitHub Copilot) dans le cycle de développement logiciel selon une approche <strong>Spec-Driven Development</strong>, de la spécification et conception jusqu'à l'implémentation, aux tests, à la revue de code et à la documentation.</p>
+
+            <div class="stack-row stack-row-agents">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Agents</div>
+                <div class="logo-row">
+                  <img src="https://cdn.simpleicons.org/claude/D97757" alt="Claude" title="Claude" class="logo-sm">
+                  <img src="https://cdn.jsdelivr.net/npm/simple-icons@13/icons/openai.svg" alt="Codex (OpenAI)" title="Codex — OpenAI" class="logo-mono logo-sm">
+                  <img src="https://cdn.simpleicons.org/cursor/1c1b19" alt="Cursor" title="Cursor" class="logo-mono logo-sm">
+                  <img src="https://cdn.simpleicons.org/githubcopilot/1c1b19" alt="GitHub Copilot" title="GitHub Copilot" class="logo-mono logo-sm">
+                </div>
+              </div>
+              <div class="stack-row-text">Claude · Codex · Cursor · GitHub Copilot</div>
+            </div>
+            <div class="stack-row stack-row-simple stack-row-last">
+              <div class="stack-row-title">Périmètre</div>
+              <div class="stack-row-text">Spécification · Conception · Implémentation · Tests · Revue de code · Documentation</div>
+            </div>
+          </div>
+
+          <!-- DevOps -->
+          <div class="stack-section">
+            <div class="section-head">DEVOPS &amp; CI-CD</div>
+
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Gestion de version</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" title="Git" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" title="GitHub" class="logo logo-mono">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gitlab/gitlab-original.svg" alt="GitLab" title="GitLab" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">Git · GitHub · GitLab · Gitflow</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">CI-CD</div>
+              <div class="stack-row-text">Pipelines automatisés de build, test et déploiement · GitHub Actions · GitLab CI · Argo CD</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Conteneurisation</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" title="Docker" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">Docker · Docker Compose</div>
+            </div>
+          </div>
+
+          <!-- Autres -->
+          <div class="stack-section stack-section-last">
+            <div class="section-head">AUTRES TECHNOLOGIES</div>
+
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Langages</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript" title="TypeScript" class="logo logo-md">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" title="JavaScript" class="logo logo-md">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/julia/julia-original.svg" alt="Julia" title="Julia" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">TypeScript · JavaScript · Python · Julia</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Front &amp; Node</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" title="React" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" alt="Angular" title="Angular" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" alt="Vite" title="Vite" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" title="Node.js" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">React · Angular · Vite · Node.js · Express</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Bases de données</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" title="PostgreSQL + PostGIS" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL" title="MySQL" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" alt="Redis" title="Redis" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">PostgreSQL + PostGIS · MySQL · Redis · DynamoDB · H2</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Multiplateforme</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" alt="Flutter" title="Flutter" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg" alt="Dart" title="Dart" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">Flutter — applications mobiles et desktop multiplateformes</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">PWA</div>
+                <div class="logo-row">
+                  <img src="https://cdn.simpleicons.org/pwa/5A0FC8" alt="PWA" title="Progressive Web App" class="logo-sm">
+                </div>
+              </div>
+              <div class="stack-row-text">Progressive Web Apps — applications web installables, fonctionnement hors ligne, service workers</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Cloud &amp; observabilité</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" title="AWS" class="logo logo-mono">
+                </div>
+              </div>
+              <div class="stack-row-text">AWS Lambda · AWS SAM · MinIO / S3 · Render · Neon · Upstash · Sentry</div>
+            </div>
+            <div class="stack-row stack-row-final">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Environnements</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" alt="IntelliJ IDEA" title="IntelliJ IDEA" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" title="Visual Studio Code" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">IntelliJ IDEA · Visual Studio Code</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─────── CONTACT ─────── -->
+        <section data-view="contact" class="view view-contact">
+          <div class="label">CONTACT</div>
+          <h1 class="page-title">Travaillons ensemble.</h1>
+          <p class="page-lead">Architecture, back-end, systèmes distribués. Ouvert aux échanges sur les sujets de conception logicielle.</p>
+
+          <div class="contact-list">
+            <a href="mailto:moiseaganze76@gmail.com" class="contact-row">
+              <span class="contact-key"><i class="fa-solid fa-envelope contact-icon" style="color:#ea4335"></i>EMAIL</span>
+              <span class="contact-value">moiseaganze76@gmail.com</span>
+            </a>
+            <a href="tel:+33618665461" class="contact-row">
+              <span class="contact-key"><i class="fa-solid fa-phone contact-icon" style="color:#1a9d5a"></i>TÉLÉPHONE</span>
+              <span class="contact-value">+33 6 18 66 54 61</span>
+            </a>
+            <a href="https://www.linkedin.com/in/mo%C3%AFse-aganze-lwaboshi-657302254/" target="_blank" rel="noopener" class="contact-row">
+              <span class="contact-key"><i class="fa-brands fa-linkedin-in contact-icon" style="color:#0a66c2"></i>LINKEDIN</span>
+              <span class="contact-value">Moïse Aganze Lwaboshi ↗</span>
+            </a>
+            <a href="https://github.com/IrALm" target="_blank" rel="noopener" class="contact-row">
+              <span class="contact-key"><i class="fa-brands fa-github contact-icon" style="color:var(--fg)"></i>GITHUB</span>
+              <span class="contact-value">github.com/IrALm ↗</span>
+            </a>
+            <a href="https://gitlab.com/MoiseAL" target="_blank" rel="noopener" class="contact-row">
+              <span class="contact-key"><i class="fa-brands fa-gitlab contact-icon" style="color:#fc6d26"></i>GITLAB</span>
+              <span class="contact-value">gitlab.com/MoiseAL ↗</span>
+            </a>
+            <a href="CV_Moise_Aganze_Lwaboshi_M1.pdf" target="_blank" rel="noopener" class="contact-row">
+              <span class="contact-key"><i class="fa-solid fa-file-arrow-down contact-icon" style="color:#d93025"></i>CV</span>
+              <span class="contact-value">Télécharger (PDF) ↓</span>
             </a>
           </div>
 
-          <!-- Vidéo -->
-          <div class="col-12 col-lg-6">
-            <div class="kupanga-video-wrap">
-              <iframe
-                class="kupanga-video"
-                src="https://www.youtube.com/embed/1R9kjwI1Cyg"
-                title="Démo Kupanga"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen>
-              </iframe>
-            </div>
-          </div>
+          <div class="footer-note">© 2026 Moïse Aganze Lwaboshi</div>
+        </section>
 
-        </div>
-      </div>
+      </main>
     </div>
-  </section>
+  </div>
 
-  <!-- ============================= AUTRES PROJETS ============================= -->
-  <section class="py-4">
-    <div class="container">
-      <h2 class="display-font fw-bold mb-4" style="font-size:30px">Projets</h2>
-      <div id="projectGroups"></div>
-    </div>
-  </section>
-
-  <!-- ============================= STACK ============================= -->
-  <section class="py-4" id="stack">
-    <div class="container">
-      <div class="surface p-4 p-md-5" style="border-radius:20px">
-        <h2 class="display-font fw-bold mb-4" style="font-size:28px">Stack technique</h2>
-        <div class="row g-4" id="stackGroups"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================= PARCOURS ============================= -->
-  <section class="py-4" id="parcours">
-    <div class="container">
-      <h2 class="display-font fw-bold mb-4" style="font-size:28px">Parcours</h2>
-      <div class="row g-3">
-
-        <div class="col-12 col-md-6">
-          <div class="surface p-4 h-100">
-            <p class="mono-label mb-3" style="color:var(--accent)">Expérience</p>
-            <span style="font:600 12px 'Manrope';color:var(--faint)">Sept. 2025 — Présent</span>
-            <h6 class="display-font fw-bold mt-2 mb-1" style="font-size:16.5px">Développeur Back-end Java</h6>
-            <p class="fw-bold mb-2" style="font-size:13px;color:var(--accent)">
-              Crédit Agricole Technologies et Services · Paris
-            </p>
-            <p class="mb-0" style="font-size:13px;line-height:1.6;color:var(--muted)">
-              Solution bancaire de gestion budgétaire — Java 25, Spring Boot, Spring Batch, MySQL, GitLab CI, Argo CD.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6">
-          <div class="surface p-4 h-100">
-            <p class="mono-label mb-3" style="color:var(--accent)">Formation</p>
-            <div class="mb-4">
-              <span style="font:600 12px 'Manrope';color:var(--faint)">2025 — 2027</span>
-              <h6 class="display-font fw-bold mt-2 mb-1" style="font-size:16.5px">Mastère Architecture des Logiciels</h6>
-              <p class="mb-0" style="font-size:13px;color:var(--muted)">ESGI · Nantes</p>
-            </div>
-            <div>
-              <span style="font:600 12px 'Manrope';color:var(--faint)">2022 — 2025</span>
-              <h6 class="display-font fw-bold mt-2 mb-1" style="font-size:16.5px">Licence Informatique — Math-Informatique</h6>
-              <p class="mb-0" style="font-size:13px;color:var(--muted)">Nantes Université</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  </main>
-
-  <!-- ============================= CONTACT ============================= -->
-  <footer class="contact-band mt-5" id="contacts">
-    <div class="container py-5">
-      <h2 class="display-font fw-bold mb-2" style="font-size:clamp(28px,5vw,42px);color:#07161f">
-        Travaillons ensemble.
-      </h2>
-      <p class="mb-4" style="font-size:14.5px;color:rgba(7,22,31,.85)">
-        Architecture, back-end, systèmes distribués.
-      </p>
-      <div class="d-flex gap-2 flex-wrap" id="contactList"></div>
-      <p class="mt-4 mb-0" style="font:600 11.5px 'Manrope';color:rgba(7,22,31,.6)">
-        © 2025 Moïse Aganze Lwaboshi
-      </p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script>
-  /* ── Theme toggle ── */
-  (function () {
-    const root = document.documentElement;
-    const btn  = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('portfolio-theme');
-    if (saved) root.setAttribute('data-theme', saved);
-    function sync() {
-      const dark = root.getAttribute('data-theme') === 'dark';
-      btn.querySelector('i').className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-    }
-    sync();
-    btn.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('portfolio-theme', next);
-      sync();
-    });
-  })();
-
-  /* ── Mobile menu ── */
-  const mobileMenu = document.getElementById('mobileMenu');
-  document.getElementById('mobileMenuToggle').addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-  function closeMobileMenu() { mobileMenu.classList.remove('open'); }
-
-  /* ── Data ── */
-  const DEV = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/';
-  const IC = {
-    aws:      DEV + 'amazonwebservices/amazonwebservices-original-wordmark.svg',
-    spring:   DEV + 'spring/spring-original-wordmark.svg',
-    java:     DEV + 'java/java-original-wordmark.svg',
-    node:     DEV + 'nodejs/nodejs-original-wordmark.svg',
-    react:    DEV + 'react/react-original-wordmark.svg',
-    julia:    DEV + 'julia/julia-original-wordmark.svg',
-    python:   DEV + 'python/python-original-wordmark.svg',
-    ts:       DEV + 'typescript/typescript-original.svg',
-    js:       DEV + 'javascript/javascript-original.svg',
-    angular:  DEV + 'angularjs/angularjs-original-wordmark.svg',
-    postgres: DEV + 'postgresql/postgresql-original-wordmark.svg',
-    mysql:    DEV + 'mysql/mysql-original-wordmark.svg',
-    redis:    DEV + 'redis/redis-original-wordmark.svg',
-    docker:   DEV + 'docker/docker-original-wordmark.svg',
-    git:      DEV + 'git/git-original-wordmark.svg',
-    github:   DEV + 'github/github-original-wordmark.svg',
-    intellij: DEV + 'intellij/intellij-original.svg',
-    vscode:   DEV + 'vscode/vscode-original-wordmark.svg'
-  };
-
-  const kupangaDetails = [
-    'Spring Boot / Java 21 · PostgreSQL + PostGIS · Redis · MinIO / S3',
-    'Sécurité : JWT + Google OAuth2 · double chaîne Spring Security · RBAC',
-    'WebSocket temps réel · génération & signature PDF (Thymeleaf + Flying Saucer)',
-    'Recherche géospatiale · CI/CD GitHub Actions · Render / Neon / Upstash',
-    'TDD · JUnit · Mockito · Testcontainers · Cucumber (BDD) · JaCoCo',
-    'Observabilité : Sentry · Spring Actuator · Swagger / OpenAPI'
-  ];
-  const kupangaTags = ['Java 21','Spring Boot','PostgreSQL + PostGIS','Redis','JWT / OAuth2','WebSocket','Docker','GitHub Actions','Sentry'];
-
-  const categories = [
-    { name: 'Cloud & Serverless', projects: [
-      { icon: IC.aws,    title: 'url-shortener',
-        desc: 'Service de raccourcissement d\'URL Event-Driven et 100% serverless (AWS Lambda, Node.js 20). DynamoDB Streams déclenche les jobs asynchrones (stats, favicons), IaC via AWS SAM. Reproductible en local à fidélité de production avec Docker et un simulateur de streams maison.',
-        tags: ['AWS Lambda','DynamoDB','DynamoDB Streams','AWS SAM','Docker','MinIO','Node.js'], repo: 'https://github.com/IrALm/url-shortener',
-        arch: `
-          <div class="arch-tier"><span class="arch-box">Client</span></div>
-          <i class="fa-solid fa-arrow-down arch-arrow"></i>
-          <div class="arch-tier"><span class="arch-box arch-box-accent">Lambda API<br><small>Shorten · Redirect · Stats · List</small></span></div>
-          <i class="fa-solid fa-arrow-down arch-arrow"></i>
-          <div class="arch-row">
-            <span class="arch-box">DynamoDB<br><small>urls · click_events · daily_stats</small></span>
-            <span class="arch-box">S3 / MinIO<br><small>favicons</small></span>
-          </div>
-          <i class="fa-solid fa-arrow-down arch-arrow"></i>
-          <div class="arch-tier"><span class="arch-box arch-box-dashed">DynamoDB Streams → Lambda async<br><small>stats &amp; favicon jobs</small></span></div>
-        ` },
-      { icon: IC.aws,    title: 'voicefaker',
-        desc: 'API serverless de synthèse vocale — 5 langues, 6 effets de voix. Architecture SAM, stockage audio MinIO, déploiement AWS.',
-        tags: ['AWS Lambda','SAM','FastAPI','DynamoDB','MinIO','React'], repo: 'https://github.com/IrALm/voicefaker', demo: 'https://youtu.be/aDLdIkbKqy8' }
-    ]},
-    { name: 'Java / Spring Boot', projects: [
-      { icon: IC.spring, title: 'CampusRoomAPI',
-        desc: 'API de réservation de salles universitaires. Architecture en couches, patterns Factory & Strategy, gestion des conflits de planification et règles métier avancées.',
-        tags: ['Java 21','Spring Boot','H2','JUnit 5','Mockito','Swagger'], repo: 'https://github.com/IrALm/CampusRoomAPI' },
-      { icon: IC.spring, title: 'Michelin Guide — API Backend (Hackathon)',
-        desc: 'Backend Spring Boot d\'une plateforme de réservation d\'hôtels et restaurants façon guide Michelin. Recherche géolocalisée avec scoring (PostGIS), assistants conversationnels IA (Groq) pour la recherche et la réservation, back-office admin. Livré en conditions de hackathon sous contrainte de temps.',
-        tags: ['Java 21','Spring Boot','Spring AI / Groq','PostgreSQL + PostGIS','Supabase Auth (JWT)','Docker','GitHub Actions'], repo: 'https://github.com/IrALm/Proof-of-Concept-Hackaton' }
-    ]},
-    { name: 'Full Stack', projects: [
-      { icon: IC.node,   title: 'DevSprint',
-        desc: 'Alternative Jira simplifiée pour sprints agiles. Kanban drag-and-drop, burndown charts, story points, export JSON. Typage strict TypeScript end-to-end.',
-        tags: ['React 18','TypeScript','Node.js','Express','PostgreSQL','Prisma','Tailwind'], repo: 'https://github.com/IrALm/devsprint', demo: 'https://youtu.be/BQs2P0S4FuE' },
-      { icon: IC.react,  title: 'ChatBoot',
-        desc: 'Interface web de chatbot construite avec React et Vite, connectée à une API Spring Boot (Michelin Guide) pour la recherche et la réservation conversationnelle d\'hôtels et restaurants via des assistants IA (Groq). Architecture composants modulaire, HMR pour un cycle de développement rapide.',
-        tags: ['React','Vite','JavaScript','IA conversationnelle'], repo: 'https://github.com/IrALm/ChatBoot', demo: 'https://youtu.be/mgax3GmW33M' }
-    ]},
-    { name: 'Algorithmique', projects: [
-      { icon: IC.julia,  title: 'PathFinding',
-        desc: 'Implémentation de BFS, GBFS, Dijkstra et A* pour la recherche du plus court chemin dans des graphes pondérés ou non. Applications : jeux, robotique, navigation.',
-        tags: ['Julia','Graphes','BFS / Dijkstra / A*'], repo: 'https://github.com/IrALm/PathFinding.git' }
-    ]}
-  ];
-
-  const stackGroups = [
-    { name: 'LANGAGES',            icons: [IC.java, IC.python, IC.ts, IC.js, IC.julia] },
-    { name: 'FRAMEWORKS & BDD',    icons: [IC.spring, IC.react, IC.angular, IC.postgres, IC.mysql, IC.redis, IC.node] },
-    { name: 'OUTILS & CLOUD',      icons: [IC.docker, IC.aws, IC.git, IC.github, IC.intellij, IC.vscode] }
-  ];
-
-  const contacts = [
-    { icon: 'fa-solid fa-phone',          label: 'Téléphone', href: 'tel:+33618665461' },
-    { icon: 'fa-solid fa-envelope',       label: 'Email',     href: 'mailto:moiseaganze76@gmail.com' },
-    { icon: 'fa-brands fa-linkedin',      label: 'LinkedIn',  href: 'https://www.linkedin.com/in/mo%C3%AFse-aganze-lwaboshi-657302254/' },
-    { icon: 'fa-brands fa-github',        label: 'GitHub',    href: 'https://github.com/IrALm' },
-    { icon: 'fa-solid fa-file-arrow-down',label: 'CV',        href: 'CV_Moise_Aganze_Lwaboshi_M1.pdf' }
-  ];
-
-  /* ── Render ── */
-  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  const ytEmbed = url => {
-    const m = url.match(/(?:youtu\.be\/|[?&]v=)([\w-]+)/);
-    return m ? `https://www.youtube.com/embed/${m[1]}` : url;
-  };
-
-  document.getElementById('kupangaDetails').innerHTML = kupangaDetails.map(d =>
-    `<div class="d-flex gap-2">
-       <i class="fa-solid fa-check" style="color:var(--accent);font-size:11px;margin-top:3px;flex-shrink:0"></i>
-       <span>${esc(d)}</span>
-     </div>`
-  ).join('');
-
-  document.getElementById('kupangaTags').innerHTML = kupangaTags.map(t =>
-    `<span class="chip">${esc(t)}</span>`
-  ).join('');
-
-  document.getElementById('projectGroups').innerHTML = categories.map(cat => `
-    <div class="mb-5">
-      <p class="mono-label mb-3" style="color:var(--accent)">${esc(cat.name)}</p>
-      <div class="row g-3">
-        ${cat.projects.map(p => `
-          <div class="col-12 col-md-6">
-            <div class="project-card">
-              <div class="d-flex align-items-center gap-3 mb-3">
-                <span class="icon-tile">
-                  <img src="${p.icon}" alt="" style="height:20px;max-width:34px;object-fit:contain">
-                </span>
-                <h5 class="display-font fw-bold mb-0" style="font-size:16.5px">${esc(p.title)}</h5>
-              </div>
-              <p class="mb-3" style="font-size:13.5px;line-height:1.6;color:var(--muted)">${esc(p.desc)}</p>
-              ${p.demo ? `
-              <div class="project-video-wrap mb-3">
-                <iframe
-                  src="${ytEmbed(p.demo)}"
-                  title="Démo ${esc(p.title)}"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin"
-                  allowfullscreen>
-                </iframe>
-              </div>` : p.arch ? `
-              <div class="project-arch-wrap mb-3">${p.arch}</div>` : ''}
-              <div class="d-flex flex-wrap gap-2 mb-3">
-                ${p.tags.map(t => `<span class="chip-pill">${esc(t)}</span>`).join('')}
-              </div>
-              <a href="${p.repo}" target="_blank" class="link-repo mt-auto">
-                <i class="fa-brands fa-github"></i> Code source
-                <i class="fa-solid fa-arrow-right" style="font-size:10px"></i>
-              </a>
-            </div>
-          </div>`).join('')}
-      </div>
-    </div>`
-  ).join('');
-
-  document.getElementById('stackGroups').innerHTML = stackGroups.map(g => `
-    <div class="col-12 col-md-4">
-      <p class="mono-label mb-3" style="color:var(--accent)">${esc(g.name)}</p>
-      <div class="d-flex flex-wrap gap-3">
-        ${g.icons.map(i => `<span class="stack-tile"><img src="${i}" alt=""></span>`).join('')}
-      </div>
-    </div>`
-  ).join('');
-
-  document.getElementById('contactList').innerHTML = contacts.map(c =>
-    `<a href="${c.href}" class="contact-btn"><i class="${c.icon}"></i> ${esc(c.label)}</a>`
-  ).join('');
-  </script>
-
+  <script src="scripts/main.js"></script>
 </body>
 </html>
