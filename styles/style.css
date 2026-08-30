@@ -278,7 +278,17 @@ html[data-theme="dark"] .badge { color: var(--bg); }
 
 .video-frame { aspect-ratio: 16/10; background: var(--surface); border-radius: 2px; overflow: hidden; }
 .video-frame iframe { width: 100%; height: 100%; border: 0; }
-.video-frame-16-9 { aspect-ratio: 16/9; margin-bottom: 20px; }
+.video-frame-16-9 { aspect-ratio: 16/9; }
+
+.video-fallback {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.video-fallback:hover { color: var(--accent); }
 
 .category { margin-bottom: 72px; }
 .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
@@ -384,6 +394,7 @@ html[data-theme="dark"] .badge { color: var(--bg); }
 .nav-link:focus-visible,
 .btn:focus-visible,
 .link-repo:focus-visible,
+.video-fallback:focus-visible,
 .contact-row:focus-visible,
 .theme-toggle:focus-visible,
 .burger:focus-visible {
