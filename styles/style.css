@@ -1,14 +1,11 @@
-/* =========================================================================
-   DESIGN TOKENS
-   Palette chaude neutre. Thème via [data-theme] sur <html>.
-   ========================================================================= */
+/* Couleurs (le thème est porté par data-theme sur <html>) */
 :root {
   --bg: #faf9f7; --fg: #1c1b19; --line: #e3e0da; --line2: #d5d1c9;
   --surface: #f0eeea; --faint: #8a8680; --muted: #6b6862; --body: #4a4843;
   --mono: none;
   --accent: #2f6b4f;        /* accent principal */
   --accent-soft: #e6efe9;   /* fond du lien de nav actif */
-  --accent-ink: #245740;    /* accent foncé : texte fort */
+  --accent-ink: #245740;    /* accent foncé pour le texte */
   --accent-label: #2f6b4f;  /* libellés de section en mono */
 }
 html[data-theme="dark"] {
@@ -18,12 +15,10 @@ html[data-theme="dark"] {
   --accent: #74b394;
   --accent-soft: #16211b;
   --accent-ink: #99cdb2;
-  --accent-label: #7cc39c;  /* éclairci pour rester ≥ 4.5:1 sur le fond sombre */
+  --accent-label: #7cc39c;  /* plus clair pour rester lisible en sombre */
 }
 
-/* =========================================================================
-   BASE
-   ========================================================================= */
+/* Base */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -52,13 +47,11 @@ h1, h2, h3, h4 { color: var(--accent); }
 }
 .caret::after { content: '▏'; }
 
-/* =========================================================================
-   SHELL
-   ========================================================================= */
+/* Shell */
 .shell { min-height: 100vh; display: flex; flex-direction: column; }
 .shell-inner { display: flex; flex: 1; align-items: stretch; }
 
-/* ── Sidebar ── */
+/* Sidebar */
 .sidebar {
   width: 260px;
   flex-shrink: 0;
@@ -129,7 +122,7 @@ h1, h2, h3, h4 { color: var(--accent); }
 
 .location { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--faint); line-height: 1.8; }
 
-/* ── Content ── */
+/* Content */
 .content { flex: 1; min-width: 0; }
 .view { padding: 96px 72px 72px; display: none; }
 .view.active { display: block; }
@@ -164,9 +157,7 @@ h1, h2, h3, h4 { color: var(--accent); }
   margin-bottom: 40px;
 }
 
-/* =========================================================================
-   ACCUEIL
-   ========================================================================= */
+/* Accueil */
 .view-accueil { max-width: 1000px; }
 .eyebrow {
   font-family: 'JetBrains Mono', monospace;
@@ -221,9 +212,7 @@ html[data-theme="dark"] .btn-primary { color: var(--bg); }
 .pillar h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
 .pillar p { font-size: 13.5px; line-height: 1.65; color: var(--muted); }
 
-/* =========================================================================
-   PARCOURS
-   ========================================================================= */
+/* Parcours */
 .view-parcours { max-width: 900px; }
 
 .section-block { margin-bottom: 72px; }
@@ -250,9 +239,7 @@ html[data-theme="dark"] .btn-primary { color: var(--bg); }
   color: var(--body);
 }
 
-/* =========================================================================
-   PROJETS
-   ========================================================================= */
+/* Projets */
 .view-projets { max-width: 1100px; }
 
 .featured { border-top: 2px solid var(--accent); padding-top: 32px; margin-bottom: 80px; }
@@ -308,9 +295,7 @@ html[data-theme="dark"] .badge { color: var(--bg); }
 .project-single { max-width: 520px; }
 .project-single .tags { margin-bottom: 20px; }
 
-/* =========================================================================
-   STACK & CONCEPTS
-   ========================================================================= */
+/* Stack & concepts */
 .view-stack { max-width: 1000px; }
 .view-stack .page-title { margin-bottom: 40px; }
 
@@ -360,9 +345,7 @@ html[data-theme="dark"] .badge { color: var(--bg); }
 
 .stack-section-last { margin-bottom: 0; }
 
-/* =========================================================================
-   CONTACT
-   ========================================================================= */
+/* Contact */
 .view-contact { max-width: 800px; }
 .view-contact .page-lead { max-width: 520px; margin-bottom: 64px; }
 
@@ -388,9 +371,7 @@ html[data-theme="dark"] .badge { color: var(--bg); }
 
 .footer-note { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--faint); }
 
-/* =========================================================================
-   FOCUS VISIBLE (accessibilité — absent du prototype, ajouté ici)
-   ========================================================================= */
+/* Focus clavier */
 .nav-link:focus-visible,
 .btn:focus-visible,
 .link-repo:focus-visible,
@@ -402,9 +383,7 @@ html[data-theme="dark"] .badge { color: var(--bg); }
   outline-offset: 2px;
 }
 
-/* =========================================================================
-   RESPONSIVE
-   ========================================================================= */
+/* Responsive */
 @media (max-width: 1180px) {
   .featured-grid { grid-template-columns: 1fr; gap: 32px; }
   .view { padding: 72px 48px 56px; }

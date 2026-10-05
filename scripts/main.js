@@ -3,7 +3,7 @@
 
   var PAGES = ['accueil', 'parcours', 'projets', 'stack', 'contact'];
   var TITLE = 'Je conçois des systèmes back-end faits pour durer.';
-  var PARA = "Développeur Back-end Java et concepteur d'architectures applicatives. Je construis des solutions robustes, scalables et centrées sur le domaine métier — actuellement chez Crédit Agricole Technologies et Services, en parallèle du Mastère Architecture des Logiciels à l'ESGI.";
+  var PARA = "Je suis développeur back-end Java et je m'intéresse surtout à l'architecture logicielle. Je suis en alternance chez Crédit Agricole Technologies et Services, en parallèle de mon Mastère Architecture des Logiciels à l'ESGI.";
   var TOTAL = TITLE.length + PARA.length;
   var TITLE_MS = 900;
   var PARA_MS = 1600;
@@ -25,7 +25,7 @@
 
   var typingTimer = null;
 
-  /* ── Theme ── */
+  // Thème
   function syncThemeLabel() {
     var dark = root.getAttribute('data-theme') === 'dark';
     themeLabel.textContent = dark ? 'Mode clair' : 'Mode sombre';
@@ -41,7 +41,7 @@
   themeToggle.addEventListener('click', toggleTheme);
   syncThemeLabel();
 
-  /* ── Mobile menu ── */
+  // Menu mobile
   function setMenuOpen(open) {
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     burger.innerHTML = '<i class="fa-solid ' + (open ? 'fa-xmark' : 'fa-bars') + '"></i>';
@@ -53,7 +53,7 @@
     setMenuOpen(!mainNav.classList.contains('open'));
   });
 
-  /* ── Typing animation ── */
+  // Animation du texte d'accueil
   function stopTyping() {
     if (typingTimer) { clearInterval(typingTimer); typingTimer = null; }
   }
@@ -90,7 +90,7 @@
     }, TICK_MS);
   }
 
-  /* ── Routing ── */
+  // Navigation entre les pages
   function currentPageFromHash() {
     var hash = (location.hash || '').replace('#', '');
     return PAGES.indexOf(hash) !== -1 ? hash : null;
@@ -134,7 +134,7 @@
 
   window.addEventListener('beforeunload', stopTyping);
 
-  /* ── Init ── */
+  // Démarrage
   (function init() {
     var initial = currentPageFromHash();
     if (!initial) {
