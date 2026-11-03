@@ -184,36 +184,148 @@
           <div class="featured">
             <div class="featured-head">
               <h2 class="featured-title">Kupanga</h2>
-              <span class="badge">EN PRODUCTION</span>
+              <span class="badge">EN LIGNE</span>
             </div>
-            <div class="featured-sub">Plateforme SaaS de gestion locative que j'ai conçue et développée seul. Elle est en ligne et son lancement est en cours.</div>
+            <div class="featured-sub">Plateforme SaaS de gestion locative conçue et développée en binôme, de l'API au front. Un même service accueille propriétaires et locataires en France et en République démocratique du Congo : le pays du bien décide des champs, des devises, des modèles de bail et des canaux de notification. Elle est en ligne et son lancement est en cours.</div>
 
             <div class="featured-grid">
               <div>
+                <div class="featured-block-title">FONCTIONNALITÉS</div>
                 <div class="spec-list">
                   <div class="spec-row">
-                    <span class="spec-label">SOCLE</span>
-                    <span class="spec-value">Spring Boot / Java 21, PostgreSQL + PostGIS, Redis, MinIO / S3</span>
+                    <span class="spec-label">ANNONCES</span>
+                    <span class="spec-value">Publication de biens avec photos, recherche par critères et sur carte, commerces et transports calculés autour de chaque bien. Le propriétaire place son bien sur la carte ou avec le GPS de son téléphone ; si l'adresse est introuvable, la position se replie sur le quartier puis la commune. La position publique est arrondie à 100 m.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">PAYS</span>
+                    <span class="spec-value">France et RDC : loyers en euros, dollars ou francs congolais, adresse congolaise (commune, quartier, parcelle, point de repère), types de biens et équipements locaux (forage, groupe électrogène, compteur Cash Power), garantie et avance exprimées en mois de loyer.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOCATION</span>
+                    <span class="spec-value">Le propriétaire propose son logement à un candidat, qui a 72 h pour accepter ou refuser. Bail, état des lieux et quittances sont ensuite générés en PDF, présentés comme de vrais actes, et signés en ligne par les deux parties.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">COMPTES</span>
+                    <span class="spec-value">Inscription confirmée par e-mail ou connexion Google, rôle propriétaire ou locataire, numéro de téléphone visible des seules parties d'un même logement.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOYERS</span>
+                    <span class="spec-value">Suivi des loyers reçus hors application (espèces, Mobile Money, virement), photo du reçu, quittance envoyée au locataire.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ÉCHANGES</span>
+                    <span class="spec-value">Messagerie en temps réel entre propriétaire et candidats, notifications, e-mails, messages WhatsApp préremplis pour le Congo.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MOBILE</span>
+                    <span class="spec-value">Application installable (PWA) consultable hors ligne, photos réduites avant l'envoi pour les réseaux lents.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ADMINISTRATION</span>
+                    <span class="spec-value">Back-office des comptes, des biens et des e-mails envoyés (renvoi d'un e-mail en échec). Les biens sont archivés plutôt que supprimés pour conserver les baux ; un compte est supprimé, ou anonymisé s'il a des documents (RGPD).</span>
+                  </div>
+                </div>
+
+                <div class="featured-block-title">INGÉNIERIE</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">ARCHITECTURE</span>
+                    <span class="spec-value">Un monolithe modulaire : une seule application Spring Boot, découpée en modules métier.
+                      <ul class="spec-sub">
+                        <li><strong>Back</strong> : Spring Boot 3 / Java 21, modules authentification, biens, baux, messagerie, notifications, e-mails, stockage et back-office ; DTO générés par MapStruct.</li>
+                        <li><strong>Front</strong> : Angular 20 en composants autonomes, état géré par Signals et services, sans NgRx ni bibliothèque de composants ; application installable (PWA) et consultable hors ligne.</li>
+                        <li><strong>Données</strong> : PostgreSQL + PostGIS, schéma versionné par 53 migrations Flyway et vérifié par Hibernate au démarrage.</li>
+                        <li><strong>Cache</strong> : Redis pour le géocodage, les commerces proches et les compteurs de tentatives ; l'application démarre et fonctionne même si Redis est indisponible.</li>
+                        <li><strong>Stockage</strong> : client S3 indépendant du fournisseur (SDK AWS v2) : RustFS, MinIO ou un S3 managé se changent par simple configuration.</li>
+                        <li><strong>Temps réel</strong> : WebSocket STOMP intégré au monolithe, choix argumenté plutôt qu'un service de messagerie séparé.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MULTI-PAYS</span>
+                    <span class="spec-value">Le pays du bien sélectionne un profil de règles : le code ne contient aucun test sur le pays.
+                      <ul class="spec-sub">
+                        <li><strong>Configuration</strong> : un profil YAML par pays : langue, fuseau, devises, champs obligatoires ou masqués, types de biens, équipements, modes de paiement, canaux de notification.</li>
+                        <li><strong>Strategy</strong> : une interface de règles métier et une implémentation par pays, choisie par un registre.</li>
+                        <li><strong>Validation</strong> : contrainte de classe qui renvoie une erreur par champ selon le pays ; le service revalide (défense en profondeur).</li>
+                        <li><strong>Valeurs figées</strong> : pays, devise et version du modèle copiés sur chaque bail, état des lieux et quittance : un document signé ne change jamais après coup.</li>
+                        <li><strong>Front piloté</strong> : l'API décrit le formulaire de chaque pays, Angular le construit dynamiquement.</li>
+                        <li><strong>Démarrage contrôlé</strong> : l'application refuse de démarrer si une configuration est incohérente (devise sans plafond, modèle manquant, bien dans un pays sans profil).</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">DOCUMENTS</span>
+                    <span class="spec-value">Bail, état des lieux et quittance sont générés en PDF côté serveur.
+                      <ul class="spec-sub">
+                        <li><strong>Rendu</strong> : Thymeleaf et Flying Saucer, présentation d'acte : articles numérotés, pagination « Page x sur y », tableaux jamais coupés entre deux pages.</li>
+                        <li><strong>Versions</strong> : un modèle par pays et par version ; un document régénéré garde toujours le modèle de sa création.</li>
+                        <li><strong>Montants</strong> : BigDecimal, formatés selon la langue et la devise du pays, avec des plafonds propres à chaque devise.</li>
+                        <li><strong>Signature</strong> : signature tracée à l'écran, lien unique à durée limitée (404 s'il est inconnu, 410 s'il a expiré), PDF signé régénéré et stocké en privé.</li>
+                      </ul>
+                    </span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">SÉCURITÉ</span>
-                    <span class="spec-value">JWT + Google OAuth2, double chaîne Spring Security, RBAC</span>
+                    <span class="spec-value">Deux chaînes Spring Security, l'une pour l'API (JWT, sans état), l'autre pour le back-office.
+                      <ul class="spec-sub">
+                        <li><strong>Authentification</strong> : jeton d'accès JWT court et jeton de rafraîchissement en cookie HttpOnly, révoqué au changement de mot de passe ; adresse e-mail confirmée avant la première connexion.</li>
+                        <li><strong>Google</strong> : connexion OAuth2 par jeton d'identité vérifié côté serveur, adresse confirmée par Google exigée ; un compte jamais confirmé est repris par le vrai titulaire de l'adresse.</li>
+                        <li><strong>Rate limiting</strong> : Bucket4j + Redis sur la connexion, l'inscription, le mot de passe oublié et Google, par e-mail, par IP et par couple e-mail + IP ; réponse 429 avec Retry-After. Les premiers contacts de la messagerie sont aussi plafonnés.</li>
+                        <li><strong>Autorisations</strong> : API fermée par défaut, rôles vérifiés par @PreAuthorize, contrôle de propriété sur chaque ressource contre les accès à la ressource d'autrui (IDOR), vérifié par des tests qui parcourent toutes les routes.</li>
+                        <li><strong>Anti-énumération</strong> : mêmes réponses et mêmes temps de réponse, que le compte existe ou non (connexion, inscription, mot de passe oublié).</li>
+                        <li><strong>Back-office</strong> : chaîne Spring Security séparée (session et formulaire), mot de passe comparé en temps constant, tentatives limitées par IP et au global.</li>
+                        <li><strong>Fichiers</strong> : documents en stockage privé servis par URL présignée de 5 min ; fichiers reconnus à leur contenu réel ; images réencodées sans métadonnées GPS et bornées avant décodage ; signatures PNG vérifiées bloc par bloc.</li>
+                        <li><strong>WebSocket</strong> : JWT exigé à la connexion STOMP, abonnements limités à sa propre file, origines autorisées restreintes comme pour le CORS.</li>
+                      </ul>
+                    </span>
                   </div>
                   <div class="spec-row">
-                    <span class="spec-label">TEMPS RÉEL</span>
-                    <span class="spec-value">WebSocket, génération et signature de PDF (Thymeleaf + Flying Saucer)</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-label">INFRA</span>
-                    <span class="spec-value">Recherche géospatiale, CI/CD GitHub Actions, Render / Neon / Upstash</span>
+                    <span class="spec-label">FIABILITÉ</span>
+                    <span class="spec-value">Aucune action ne doit se perdre ni s'appliquer deux fois, même en cas de panne.
+                      <ul class="spec-sub">
+                        <li><strong>Outbox</strong> : e-mails écrits en base dans la même transaction que l'action, puis envoyés par une file avec nouveaux essais de 1 min à 24 h ; réservation FOR UPDATE SKIP LOCKED ; seul un refus définitif du destinataire est abandonné.</li>
+                        <li><strong>Après commit</strong> : e-mails, notifications temps réel et calculs asynchrones déclenchés seulement si la transaction est validée.</li>
+                        <li><strong>Concurrence</strong> : verrou optimiste sur les baux, états des lieux et quittances, machine à états des signatures, 409 en cas de conflit.</li>
+                        <li><strong>Temps réel</strong> : battements STOMP, accusé de réception par identifiant client, file d'envoi locale et rattrapage des messages après reconnexion.</li>
+                        <li><strong>Services externes</strong> : délais courts, un seul nouvel essai et cache ; la création d'un bien n'est jamais bloquée par le géocodage.</li>
+                        <li><strong>Données</strong> : biens archivés plutôt que supprimés, comptes anonymisés, baux toujours conservés.</li>
+                      </ul>
+                    </span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">QUALITÉ</span>
-                    <span class="spec-value">TDD, JUnit, Mockito, Testcontainers, Cucumber (BDD), JaCoCo</span>
+                    <span class="spec-value">Plus de 850 tests côté API, lancés à chaque push par GitHub Actions.
+                      <ul class="spec-sub">
+                        <li><strong>Unitaires</strong> : JUnit 5 et Mockito sur les services, les validateurs et les règles par pays.</li>
+                        <li><strong>Intégration</strong> : sur de vrais services : PostgreSQL + PostGIS, stockage S3 (RustFS), serveur SMTP (GreenMail) et Redis.</li>
+                        <li><strong>Sécurité</strong> : un test découvre toutes les routes REST et vérifie le 401 sans jeton et le 403 sur la ressource d'autrui.</li>
+                        <li><strong>Front</strong> : tests Angular sur les services, l'intercepteur hors ligne, le WebSocket et la logique des écrans.</li>
+                        <li><strong>Couverture</strong> : mesurée par JaCoCo.</li>
+                      </ul>
+                    </span>
                   </div>
                   <div class="spec-row">
-                    <span class="spec-label">OBSERVABILITÉ</span>
-                    <span class="spec-value">Sentry, Spring Actuator, Swagger / OpenAPI</span>
+                    <span class="spec-label">EXPLOITATION</span>
+                    <span class="spec-value">Une application prête à être déployée en conteneur et surveillée.
+                      <ul class="spec-sub">
+                        <li><strong>Docker</strong> : image en plusieurs étapes, sans droits root, versions figées, sonde de santé et arrêt propre qui laisse finir les requêtes.</li>
+                        <li><strong>Observabilité</strong> : Sentry (erreurs et traces, sans données personnelles), Spring Actuator, alerte sur un e-mail critique en échec.</li>
+                        <li><strong>Démarrage</strong> : contrôle du serveur SMTP, chiffrement exigé en production, vérification que les espaces de stockage privés ne sont pas lisibles anonymement.</li>
+                        <li><strong>Développement</strong> : tout tourne dans Docker Compose (PostGIS, Redis, RustFS pour le S3, Mailpit pour les e-mails) ; documentation OpenAPI hors production.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MÉTHODE</span>
+                    <span class="spec-value">Un projet piloté par un audit de mise en production.
+                      <ul class="spec-sub">
+                        <li><strong>Audit</strong> : inventaire des failles et des manques avant la mise en ligne, classés par priorité.</li>
+                        <li><strong>Sprints</strong> : cinq sprints : sécurité, fiabilité, socle multi-pays, fonctionnalités Congo, stockage et e-mails.</li>
+                        <li><strong>Revue</strong> : chaque tâche passe par des tests et une relecture de sécurité indépendante.</li>
+                        <li><strong>Décisions</strong> : registre des décisions avec leur raison : monolithe plutôt que microservices, pas de Keycloak, aucun paiement dans l'application.</li>
+                      </ul>
+                    </span>
                   </div>
                 </div>
                 <a href="https://kupanga.lespacelibellule.com/" target="_blank" rel="noopener" class="btn btn-primary">Voir en ligne ↗</a>
@@ -226,6 +338,95 @@
                 <a href="https://youtu.be/1R9kjwI1Cyg" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
               </div>
             </div>
+
+            <figure class="archi">
+              <div class="featured-block-title">ARCHITECTURE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 860 470" role="img" aria-labelledby="archi-titre archi-desc">
+                  <title id="archi-titre">Schéma d'architecture de Kupanga</title>
+                  <desc id="archi-desc">À gauche, les clients : le front Angular appelle l'API REST et le WebSocket de l'application Spring Boot, le navigateur d'administration passe par le back-office. Au centre, l'application Spring Boot : API REST, file d'e-mails écrite dans la même transaction, WebSocket STOMP et back-office. À droite, ses données (stockage S3, PostgreSQL avec PostGIS, Redis) et les services externes (Google, OpenStreetMap, serveur SMTP, Sentry). Le front lit directement les photos et PDF du stockage S3 par des URL présignées.</desc>
+                  <defs>
+                    <marker id="archi-f-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="archi-f-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="archi-f-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="archi-f-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                  </defs>
+
+                  <!-- Titres de colonnes -->
+                  <text class="col-label" x="20" y="60">CLIENTS</text>
+                  <text class="col-label col-label--donnee" x="600" y="48">DONNÉES</text>
+                  <text class="col-label col-label--externe" x="600" y="228">SERVICES EXTERNES</text>
+
+                  <!-- Zone de l'application -->
+                  <rect class="zone" x="250" y="40" width="260" height="410" rx="12"/>
+                  <text class="zone-label" x="380" y="438" text-anchor="middle">API SPRING BOOT · JAVA 21</text>
+
+                  <!-- Liens (sous les blocs) : clients → application -->
+                  <path class="lien lien--client" d="M200,95 H268" marker-end="url(#archi-f-client)"/>
+                  <text class="lien-label" x="225" y="88" text-anchor="middle">JWT</text>
+                  <path class="lien lien--client" d="M202,255 H268" marker-start="url(#archi-f-client)" marker-end="url(#archi-f-client)"/>
+                  <text class="lien-label" x="225" y="248" text-anchor="middle">STOMP</text>
+                  <path class="lien lien--client" d="M200,385 H268" marker-end="url(#archi-f-client)"/>
+                  <text class="lien-label" x="225" y="378" text-anchor="middle">session</text>
+
+                  <!-- Dans l'application : l'action enregistre l'e-mail dans sa transaction -->
+                  <path class="lien lien--interne" d="M380,120 V148" marker-end="url(#archi-f-donnee)"/>
+                  <text class="lien-label" x="388" y="138">même transaction</text>
+
+                  <!-- Application → données -->
+                  <path class="lien lien--donnee" d="M510,78 H598" marker-end="url(#archi-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M510,130 H598" marker-end="url(#archi-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M510,182 H598" marker-end="url(#archi-f-donnee)"/>
+
+                  <!-- Application → services externes -->
+                  <path class="lien lien--externe" d="M510,260 H598" marker-end="url(#archi-f-externe)"/>
+                  <path class="lien lien--externe" d="M510,312 H598" marker-end="url(#archi-f-externe)"/>
+                  <path class="lien lien--externe" d="M510,364 H598" marker-end="url(#archi-f-externe)"/>
+                  <path class="lien lien--externe" d="M510,416 H598" marker-end="url(#archi-f-externe)"/>
+
+                  <!-- Front → stockage S3 en direct (URL présignées) -->
+                  <path class="lien lien--direct" d="M150,70 V20 H720 V54" marker-end="url(#archi-f-direct)"/>
+                  <text class="lien-label lien-label--direct" x="430" y="14" text-anchor="middle">photos et PDF lus en direct · URL présignées</text>
+
+                  <!-- Clients -->
+                  <g class="noeud noeud--client">
+                    <rect x="20" y="70" width="180" height="210" rx="10"/>
+                    <text x="110" y="160" text-anchor="middle">Front Angular 20</text>
+                    <text class="sous" x="110" y="180" text-anchor="middle">PWA · Signals</text>
+                    <text class="sous" x="110" y="196" text-anchor="middle">hors ligne</text>
+                  </g>
+                  <g class="noeud noeud--client">
+                    <rect x="20" y="360" width="180" height="50" rx="10"/>
+                    <text x="110" y="390" text-anchor="middle">Navigateur admin</text>
+                  </g>
+
+                  <!-- Modules de l'application -->
+                  <g class="noeud noeud--app"><rect x="270" y="70" width="220" height="50" rx="10"/><text x="380" y="92" text-anchor="middle">API REST</text><text class="sous" x="380" y="108" text-anchor="middle">règles par pays · PDF</text></g>
+                  <g class="noeud noeud--app"><rect x="270" y="150" width="220" height="50" rx="10"/><text x="380" y="172" text-anchor="middle">File d'e-mails</text><text class="sous" x="380" y="188" text-anchor="middle">outbox · nouveaux essais</text></g>
+                  <g class="noeud noeud--app"><rect x="270" y="230" width="220" height="50" rx="10"/><text x="380" y="252" text-anchor="middle">WebSocket STOMP</text><text class="sous" x="380" y="268" text-anchor="middle">messagerie · notifications</text></g>
+                  <g class="noeud noeud--app"><rect x="270" y="360" width="220" height="50" rx="10"/><text x="380" y="382" text-anchor="middle">Back-office</text><text class="sous" x="380" y="398" text-anchor="middle">Thymeleaf · session</text></g>
+
+                  <!-- Données -->
+                  <g class="noeud noeud--donnee"><rect x="600" y="56" width="240" height="44" rx="10"/><text x="616" y="75">Stockage S3</text><text class="sous" x="616" y="91">photos, PDF, reçus</text></g>
+                  <g class="noeud noeud--donnee"><rect x="600" y="108" width="240" height="44" rx="10"/><text x="616" y="127">PostgreSQL + PostGIS</text><text class="sous" x="616" y="143">données, file d'e-mails · Flyway</text></g>
+                  <g class="noeud noeud--donnee"><rect x="600" y="160" width="240" height="44" rx="10"/><text x="616" y="179">Redis</text><text class="sous" x="616" y="195">cache · limites de tentatives</text></g>
+
+                  <!-- Services externes -->
+                  <g class="noeud noeud--externe"><rect x="600" y="238" width="240" height="44" rx="10"/><text x="616" y="257">Google</text><text class="sous" x="616" y="273">connexion OAuth2</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="290" width="240" height="44" rx="10"/><text x="616" y="309">OpenStreetMap</text><text class="sous" x="616" y="325">géocodage, commerces proches</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="342" width="240" height="44" rx="10"/><text x="616" y="361">Serveur SMTP</text><text class="sous" x="616" y="377">envoyé par la file d'e-mails</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="394" width="240" height="44" rx="10"/><text x="616" y="413">Sentry</text><text class="sous" x="616" y="429">erreurs et alertes</text></g>
+                </svg>
+              </div>
+              <ul class="archi-legende">
+                <li><span class="pastille pastille--client"></span>Clients</li>
+                <li><span class="pastille pastille--app"></span>Application</li>
+                <li><span class="pastille pastille--donnee"></span>Données</li>
+                <li><span class="pastille pastille--externe"></span>Services externes</li>
+                <li><span class="pastille pastille--direct"></span>Accès direct au stockage</li>
+              </ul>
+              <figcaption class="archi-caption">Chaque e-mail est enregistré dans la même transaction que l'action qui le déclenche, puis envoyé par la file avec de nouveaux essais. Les fichiers privés ne transitent pas par l'API : le front les lit avec une URL présignée de courte durée.</figcaption>
+            </figure>
           </div>
 
           <!-- Cloud & Serverless -->
