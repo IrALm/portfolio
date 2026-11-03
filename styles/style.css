@@ -259,6 +259,26 @@ html[data-theme="dark"] .badge { color: var(--bg); }
 .featured-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: start; }
 
 .spec-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.featured-block-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+  color: var(--accent-label); padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 18px;
+}
+
+/* Schéma d'architecture (SVG en ligne, couleurs du thème) */
+.archi { margin-top: 48px; }
+.archi-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.archi svg { display: block; width: 100%; min-width: 640px; height: auto; }
+.archi-caption { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
+.archi .zone { fill: none; stroke: var(--line2); stroke-dasharray: 5 4; }
+.archi .zone-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; fill: var(--accent-label); }
+.archi .noeud rect { fill: var(--surface); stroke: var(--line2); }
+.archi .noeud--app rect { stroke: var(--accent); }
+.archi .noeud--donnee rect { stroke: var(--accent); stroke-width: 1.5; }
+.archi .noeud--externe rect { stroke-dasharray: 4 3; }
+.archi .noeud text { font-family: 'Inter Tight', sans-serif; font-size: 12.5px; fill: var(--fg); }
+.archi .lien { fill: none; stroke: var(--faint); stroke-width: 1.2; }
+.archi .lien-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; fill: var(--muted); }
+.archi .fleche { fill: var(--faint); }
 .spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; font-size: 13px; line-height: 1.55; }
 .spec-label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--faint); padding-top: 2px; }
 .spec-value { color: var(--body); }

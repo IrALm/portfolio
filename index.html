@@ -184,36 +184,65 @@
           <div class="featured">
             <div class="featured-head">
               <h2 class="featured-title">Kupanga</h2>
-              <span class="badge">EN PRODUCTION</span>
+              <span class="badge">EN LIGNE</span>
             </div>
-            <div class="featured-sub">Plateforme SaaS de gestion locative que j'ai conçue et développée seul. Elle est en ligne et son lancement est en cours.</div>
+            <div class="featured-sub">Plateforme SaaS de gestion locative conçue et développée en binôme, de l'API au front. Un même service accueille propriétaires et locataires en France et en République démocratique du Congo : le pays du bien décide des champs, des devises, des modèles de bail et des canaux de notification. Elle est en ligne et son lancement est en cours.</div>
 
             <div class="featured-grid">
               <div>
+                <div class="featured-block-title">FONCTIONNALITÉS</div>
                 <div class="spec-list">
                   <div class="spec-row">
-                    <span class="spec-label">SOCLE</span>
-                    <span class="spec-value">Spring Boot / Java 21, PostgreSQL + PostGIS, Redis, MinIO / S3</span>
+                    <span class="spec-label">ANNONCES</span>
+                    <span class="spec-value">Publication de biens avec photos, recherche par critères et sur carte, commerces et transports calculés autour de chaque bien.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOCATION</span>
+                    <span class="spec-value">Le propriétaire propose son logement à un candidat, qui accepte ou refuse. Bail, état des lieux et quittances sont ensuite générés en PDF et signés en ligne par les deux parties.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOYERS</span>
+                    <span class="spec-value">Suivi des loyers reçus hors application (espèces, Mobile Money, virement), photo du reçu, quittance envoyée au locataire.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ÉCHANGES</span>
+                    <span class="spec-value">Messagerie en temps réel entre propriétaire et candidats, notifications, e-mails, messages WhatsApp préremplis pour le Congo.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MOBILE</span>
+                    <span class="spec-value">Application installable (PWA) consultable hors ligne, photos réduites avant l'envoi pour les réseaux lents.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ADMINISTRATION</span>
+                    <span class="spec-value">Back-office des comptes, des biens et des e-mails envoyés, suppression ou anonymisation des comptes (RGPD).</span>
+                  </div>
+                </div>
+
+                <div class="featured-block-title">INGÉNIERIE</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">ARCHITECTURE</span>
+                    <span class="spec-value">Monolithe modulaire Spring Boot 3 / Java 21 et front Angular 20 (Signals). PostgreSQL + PostGIS, Redis, stockage S3 indépendant du fournisseur, schéma versionné par 53 migrations Flyway.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MULTI-PAYS</span>
+                    <span class="spec-value">Un profil par pays en configuration et une règle métier par pays (pattern Strategy). Pays, devise et version du modèle sont figés sur chaque document signé : un bail ne change jamais après coup.</span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">SÉCURITÉ</span>
-                    <span class="spec-value">JWT + Google OAuth2, double chaîne Spring Security, RBAC</span>
+                    <span class="spec-value">JWT + Google OAuth2, deux chaînes Spring Security (API et back-office), contrôle de propriété sur chaque ressource, limitation des tentatives (Bucket4j + Redis), documents privés servis par URL présignée, images réencodées sans métadonnées GPS.</span>
                   </div>
                   <div class="spec-row">
-                    <span class="spec-label">TEMPS RÉEL</span>
-                    <span class="spec-value">WebSocket, génération et signature de PDF (Thymeleaf + Flying Saucer)</span>
-                  </div>
-                  <div class="spec-row">
-                    <span class="spec-label">INFRA</span>
-                    <span class="spec-value">Recherche géospatiale, CI/CD GitHub Actions, Render / Neon / Upstash</span>
+                    <span class="spec-label">FIABILITÉ</span>
+                    <span class="spec-value">File d'e-mails persistante avec nouveaux essais (pattern outbox), envois déclenchés après validation de la transaction, verrou optimiste sur les signatures, accusés de réception et reconnexion sur le WebSocket (STOMP).</span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">QUALITÉ</span>
-                    <span class="spec-value">TDD, JUnit, Mockito, Testcontainers, Cucumber (BDD), JaCoCo</span>
+                    <span class="spec-value">Plus de 850 tests : JUnit 5, Mockito, tests d'intégration sur PostgreSQL et stockage S3 réels, JaCoCo. Intégration continue avec GitHub Actions.</span>
                   </div>
                   <div class="spec-row">
-                    <span class="spec-label">OBSERVABILITÉ</span>
-                    <span class="spec-value">Sentry, Spring Actuator, Swagger / OpenAPI</span>
+                    <span class="spec-label">EXPLOITATION</span>
+                    <span class="spec-value">Image Docker sans droits root, Sentry, Spring Actuator, documentation OpenAPI.</span>
                   </div>
                 </div>
                 <a href="https://kupanga.lespacelibellule.com/" target="_blank" rel="noopener" class="btn btn-primary">Voir en ligne ↗</a>
@@ -226,6 +255,61 @@
                 <a href="https://youtu.be/1R9kjwI1Cyg" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
               </div>
             </div>
+
+            <figure class="archi">
+              <div class="featured-block-title">ARCHITECTURE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 820 400" role="img" aria-labelledby="archi-titre archi-desc">
+                  <title id="archi-titre">Schéma d'architecture de Kupanga</title>
+                  <desc id="archi-desc">Le front Angular appelle l'API REST et le WebSocket de l'application Spring Boot, le navigateur d'administration passe par le back-office. L'API s'appuie sur PostgreSQL avec PostGIS, Redis et un stockage S3, et appelle Google, OpenStreetMap, un serveur SMTP et Sentry.</desc>
+                  <defs>
+                    <marker id="archi-fleche" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                      <path class="fleche" d="M0,0 L10,5 L0,10 z"/>
+                    </marker>
+                  </defs>
+
+                  <!-- Liens (dessinés sous les blocs) -->
+                  <path class="lien" d="M170,80 L230,73" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M170,98 L230,228" marker-start="url(#archi-fleche)" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M85,60 C85,22 560,20 600,36" marker-end="url(#archi-fleche)"/>
+                  <text class="lien-label" x="270" y="12">photos et PDF (URL présignées)</text>
+                  <path class="lien" d="M170,324 L230,323" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M345,96 L345,130" marker-end="url(#archi-fleche)"/>
+                  <text class="lien-label" x="352" y="117">même transaction</text>
+                  <path class="lien" d="M460,64 L600,40" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,69 L600,92" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,74 L600,140" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,79 L600,196" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,84 L600,248" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,150 L600,146" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,158 L600,300" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M460,318 L600,150" marker-end="url(#archi-fleche)"/>
+                  <path class="lien" d="M480,362 L600,352" marker-end="url(#archi-fleche)"/>
+
+                  <!-- Clients -->
+                  <g class="noeud"><rect x="0" y="60" width="170" height="48" rx="8"/><text x="85" y="89" text-anchor="middle">Front Angular (PWA)</text></g>
+                  <g class="noeud"><rect x="0" y="300" width="170" height="48" rx="8"/><text x="85" y="329" text-anchor="middle">Navigateur admin</text></g>
+
+                  <!-- API Spring Boot -->
+                  <rect class="zone" x="210" y="30" width="270" height="350" rx="10"/>
+                  <text class="zone-label" x="345" y="370" text-anchor="middle">API SPRING BOOT</text>
+                  <g class="noeud noeud--app"><rect x="230" y="50" width="230" height="46" rx="8"/><text x="345" y="78" text-anchor="middle">API REST (JWT)</text></g>
+                  <g class="noeud noeud--app"><rect x="230" y="130" width="230" height="46" rx="8"/><text x="345" y="158" text-anchor="middle">File d'e-mails (outbox)</text></g>
+                  <g class="noeud noeud--app"><rect x="230" y="210" width="230" height="46" rx="8"/><text x="345" y="238" text-anchor="middle">WebSocket STOMP</text></g>
+                  <g class="noeud noeud--app"><rect x="230" y="300" width="230" height="46" rx="8"/><text x="345" y="328" text-anchor="middle">Back-office Thymeleaf</text></g>
+
+                  <!-- Données et services externes -->
+                  <g class="noeud noeud--donnee"><rect x="600" y="20" width="220" height="40" rx="8"/><text x="710" y="44" text-anchor="middle">Stockage S3</text></g>
+                  <g class="noeud noeud--donnee"><rect x="600" y="72" width="220" height="40" rx="8"/><text x="710" y="96" text-anchor="middle">Redis</text></g>
+                  <g class="noeud noeud--donnee"><rect x="600" y="124" width="220" height="40" rx="8"/><text x="710" y="148" text-anchor="middle">PostgreSQL + PostGIS</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="176" width="220" height="40" rx="8"/><text x="710" y="200" text-anchor="middle">Google (connexion)</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="228" width="220" height="40" rx="8"/><text x="710" y="252" text-anchor="middle">OpenStreetMap (carte, lieux)</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="280" width="220" height="40" rx="8"/><text x="710" y="304" text-anchor="middle">Serveur SMTP</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="332" width="220" height="40" rx="8"/><text x="710" y="356" text-anchor="middle">Sentry</text></g>
+                </svg>
+              </div>
+              <figcaption class="archi-caption">Traits pleins : composants et données de l'application. Pointillés : services externes. Les e-mails sont enregistrés dans la même transaction que l'action qui les déclenche, puis envoyés par la file.</figcaption>
+            </figure>
           </div>
 
           <!-- Cloud & Serverless -->
