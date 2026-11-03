@@ -264,21 +264,58 @@ html[data-theme="dark"] .badge { color: var(--bg); }
   color: var(--accent-label); padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 18px;
 }
 
-/* Schéma d'architecture (SVG en ligne, couleurs du thème) */
+/* Schéma d'architecture (SVG en ligne, une couleur par famille, clair et sombre) */
+:root {
+  --archi-client: #2f6b4f; --archi-app: #4f5fb8; --archi-donnee: #2a7fa8;
+  --archi-externe: #c07a1e; --archi-direct: #9a4f9e;
+}
+html[data-theme="dark"] {
+  --archi-client: #74b394; --archi-app: #9aa6f0; --archi-donnee: #6cbbe0;
+  --archi-externe: #e8ad5c; --archi-direct: #cf8fd2;
+}
 .archi { margin-top: 48px; }
 .archi-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .archi svg { display: block; width: 100%; min-width: 640px; height: auto; }
 .archi-caption { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
-.archi .zone { fill: none; stroke: var(--line2); stroke-dasharray: 5 4; }
-.archi .zone-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; fill: var(--accent-label); }
-.archi .noeud rect { fill: var(--surface); stroke: var(--line2); }
-.archi .noeud--app rect { stroke: var(--accent); }
-.archi .noeud--donnee rect { stroke: var(--accent); stroke-width: 1.5; }
-.archi .noeud--externe rect { stroke-dasharray: 4 3; }
-.archi .noeud text { font-family: 'Inter Tight', sans-serif; font-size: 12.5px; fill: var(--fg); }
-.archi .lien { fill: none; stroke: var(--faint); stroke-width: 1.2; }
+.archi .zone { fill: var(--archi-app); fill-opacity: 0.04; stroke: var(--archi-app); stroke-opacity: 0.45; stroke-dasharray: 6 5; }
+.archi .zone-label, .archi .col-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; }
+.archi .zone-label { fill: var(--archi-app); }
+.archi .col-label { fill: var(--archi-client); }
+.archi .col-label--donnee { fill: var(--archi-donnee); }
+.archi .col-label--externe { fill: var(--archi-externe); }
+.archi .noeud rect { fill: var(--c); fill-opacity: 0.1; stroke: var(--c); stroke-width: 1.4; }
+.archi .noeud--client { --c: var(--archi-client); }
+.archi .noeud--app { --c: var(--archi-app); }
+.archi .noeud--donnee { --c: var(--archi-donnee); }
+.archi .noeud--externe { --c: var(--archi-externe); }
+.archi .noeud--externe rect { stroke-dasharray: 5 3; }
+.archi .noeud text { font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 500; fill: var(--fg); }
+.archi .noeud text.sous { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 400; fill: var(--muted); }
+.archi .lien { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.archi .lien--client { stroke: var(--archi-client); }
+.archi .lien--donnee, .archi .lien--interne { stroke: var(--archi-donnee); }
+.archi .lien--externe { stroke: var(--archi-externe); }
+.archi .lien--direct { stroke: var(--archi-direct); stroke-dasharray: 6 4; }
+.archi .f-client { fill: var(--archi-client); }
+.archi .f-donnee { fill: var(--archi-donnee); }
+.archi .f-externe { fill: var(--archi-externe); }
+.archi .f-direct { fill: var(--archi-direct); }
 .archi .lien-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; fill: var(--muted); }
-.archi .fleche { fill: var(--faint); }
+.archi .lien-label--direct { fill: var(--archi-direct); }
+.archi-legende { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); }
+.archi-legende li { display: flex; align-items: center; gap: 7px; }
+.pastille { width: 10px; height: 10px; border-radius: 3px; border: 1.5px solid var(--c); background: color-mix(in srgb, var(--c) 18%, transparent); }
+.pastille--client { --c: var(--archi-client); }
+.pastille--app { --c: var(--archi-app); }
+.pastille--donnee { --c: var(--archi-donnee); }
+.pastille--externe { --c: var(--archi-externe); border-style: dashed; }
+.pastille--direct { --c: var(--archi-direct); height: 0; border-radius: 0; border-width: 2px 0 0; border-style: dashed; background: none; width: 16px; }
+
+/* Sous-points d'une ligne de caractéristiques */
+.spec-sub { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.spec-sub li { position: relative; padding-left: 14px; }
+.spec-sub li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.spec-sub strong { font-weight: 600; color: var(--fg); }
 .spec-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; font-size: 13px; line-height: 1.55; }
 .spec-label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--faint); padding-top: 2px; }
 .spec-value { color: var(--body); }
