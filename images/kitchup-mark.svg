@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="KitchUp">
+  <defs>
+    <linearGradient id="kbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2667B0"/>
+      <stop offset="1" stop-color="#173F70"/>
+    </linearGradient>
+    <clipPath id="kclip"><rect width="512" height="512" rx="116"/></clipPath>
+  </defs>
+  <g clip-path="url(#kclip)">
+    <rect width="512" height="512" fill="url(#kbg)"/>
+    <!-- Veste de chef -->
+    <path d="M118 512c6-78 62-118 138-118s132 40 138 118z" fill="#FFFFFF" stroke="#10263D" stroke-width="10"/>
+    <path d="M256 400v112" stroke="#D5DEE8" stroke-width="8"/>
+    <circle cx="232" cy="446" r="8" fill="#10263D"/>
+    <circle cx="232" cy="486" r="8" fill="#10263D"/>
+    <circle cx="280" cy="446" r="8" fill="#10263D"/>
+    <circle cx="280" cy="486" r="8" fill="#10263D"/>
+    <!-- Foulard -->
+    <path d="M206 392l50 34 50-34-14 40h-72z" fill="#F5A524" stroke="#10263D" stroke-width="8" stroke-linejoin="round"/>
+    <!-- Visage -->
+    <circle cx="256" cy="292" r="96" fill="#F7CBA4" stroke="#10263D" stroke-width="10"/>
+    <!-- Toque -->
+    <path d="M160 214c-38-6-56-44-38-76 16-28 52-34 76-18 8-40 40-64 78-64s70 24 78 64c24-16 60-10 76 18 18 32 0 70-38 76z" fill="#FFFFFF" stroke="#10263D" stroke-width="10" stroke-linejoin="round"/>
+    <rect x="166" y="190" width="180" height="46" rx="12" fill="#FFFFFF" stroke="#10263D" stroke-width="10"/>
+    <path d="M206 196v34M256 196v34M306 196v34" stroke="#D5DEE8" stroke-width="7" stroke-linecap="round"/>
+    <!-- Yeux rieurs -->
+    <path d="M206 286q16-20 32 0M274 286q16-20 32 0" fill="none" stroke="#10263D" stroke-width="10" stroke-linecap="round"/>
+    <!-- Joues -->
+    <circle cx="200" cy="318" r="15" fill="#F29A8B" opacity="0.85"/>
+    <circle cx="312" cy="318" r="15" fill="#F29A8B" opacity="0.85"/>
+    <!-- Nez et sourire -->
+    <ellipse cx="256" cy="306" rx="11" ry="9" fill="#E9A57C"/>
+    <path d="M220 330q36 40 72 0z" fill="#8E2C2C" stroke="#10263D" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M236 346q20 10 40 0" fill="none" stroke="#F29A8B" stroke-width="7" stroke-linecap="round"/>
+    <!-- Poêle et ingrédient qui saute -->
+    <path d="M362 420h96" stroke="#10263D" stroke-width="18" stroke-linecap="round"/>
+    <ellipse cx="330" cy="420" rx="70" ry="24" fill="#2B2F36" stroke="#10263D" stroke-width="8"/>
+    <ellipse cx="330" cy="414" rx="54" ry="13" fill="#454B55"/>
+    <ellipse cx="368" cy="330" rx="34" ry="13" fill="#F5B83D" stroke="#10263D" stroke-width="7" transform="rotate(-18 368 330)"/>
+    <path d="M330 372q-10-22 4-42M418 352q12-20 0-40" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" opacity="0.85"/>
+  </g>
+</svg>

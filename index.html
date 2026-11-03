@@ -429,6 +429,207 @@
             </figure>
           </div>
 
+          <!-- KitchUp -->
+          <div class="featured">
+            <div class="featured-head">
+              <h2 class="featured-title">KitchUp</h2>
+              <span class="badge">PROJET FIL ROUGE</span>
+            </div>
+            <div class="featured-sub">Application de service en restaurant qui relie en temps réel le téléphone du serveur, l'écran de la cuisine et un plan de salle en 3D, avec une messagerie d'équipe. Le projet compare aussi, dans une même application, cinq façons de faire du temps réel sur le web : polling, long polling, SSE, WebSocket natif et Socket.IO. Elle est installable sur ordinateur, Android et iPhone, et se lance en une seule commande Docker.</div>
+
+            <div class="featured-grid">
+              <div>
+                <div class="featured-block-title">FONCTIONNALITÉS</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">SERVEUR</span>
+                    <span class="spec-value">Prise de commande sur téléphone : carte avec photos, bouton « Précision » (sans oignon, bien cuit…), total en direct. Le téléphone bipe ou annonce à voix haute qu'un plat est prêt et vibre sur Android. Le serveur marque la commande « servie » depuis la table, avec 30 s pour annuler.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">CUISINE</span>
+                    <span class="spec-value">Écran mural en quatre colonnes : à préparer, en préparation, prête au passe, servie. Un écran par poste (chaud, froid, pâtisserie, bar), des chronos avec des seuils de retard propres à chaque poste, et l'annonce vocale des nouvelles commandes.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SALLE 3D</span>
+                    <span class="spec-value">Jumeau numérique du restaurant en Three.js, niveau par niveau (rez-de-chaussée, étage, toit-terrasse) avec une vue éclatée. On voit les tables libres, occupées ou réservées et les clients assis, et des serveurs animés vont prendre les commandes. Depuis le plan, on installe des clients, on réserve ou on libère une table. Un plat qui attend trop au passe est annoncé en salle.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MESSAGERIE</span>
+                    <span class="spec-value">Messagerie d'équipe façon WhatsApp : un fil général et un fil par commande (« Table n° 12 · Commande #A47C »), des bulles, l'aperçu du dernier message, et des compteurs de messages non lus sur chaque conversation, sur l'onglet du menu et dans le titre de la page.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">RESPONSABLE</span>
+                    <span class="spec-value">Vue d'ensemble du service et toutes les actions, y compris l'annulation. Une page de réglages règle le nom, le logo (huit logos proposés ou un logo téléversé), les seuils de retard par poste et le délai d'annonce en salle.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MOBILE</span>
+                    <span class="spec-value">Application installable (PWA) : l'appareil est détecté, puis une fenêtre propose l'installation native ou la marche à suivre sur iPhone. Sur téléphone, une barre d'onglets donne la même allure qu'une application native.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ACCESSIBILITÉ</span>
+                    <span class="spec-value">Visée WCAG 2.1 AA : contrastes vérifiés dans les deux thèmes, cibles tactiles d'au moins 44 px, navigation au clavier, annonces aux lecteurs d'écran, mode clair, mode sombre ou réglage du système.</span>
+                  </div>
+                </div>
+
+                <div class="featured-block-title">INGÉNIERIE</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">ARCHITECTURE</span>
+                    <span class="spec-value">Un monorepo npm en TypeScript, du front jusqu'au back.
+                      <ul class="spec-sub">
+                        <li><strong>Back</strong> : NestJS 12, modules commandes, tables, chat, restaurant, authentification et temps réel.</li>
+                        <li><strong>Front</strong> : Angular 21 en composants autonomes, état géré par Signals, scène 3D Three.js chargée à la demande et tournant hors de la détection de changement.</li>
+                        <li><strong>Contrats partagés</strong> : schémas Zod communs au back et au front pour les commandes, les événements et les réglages, validés des deux côtés.</li>
+                        <li><strong>Données</strong> : PostgreSQL via Prisma, avec un schéma versionné par migrations.</li>
+                        <li><strong>Design system</strong> : variables CSS en oklch et thèmes clair et sombre, sans bibliothèque de composants.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">TEMPS RÉEL</span>
+                    <span class="spec-value">Un seul point d'écriture des événements, plusieurs transports qui l'écoutent.
+                      <ul class="spec-sub">
+                        <li><strong>Journal d'événements</strong> : chaque écriture métier ajoute une ligne à une table Event, dont l'identifiant auto-incrémenté sert de curseur, puis est diffusée par EventEmitter2.</li>
+                        <li><strong>Cinq transports</strong> : polling, long polling, SSE, WebSocket natif et Socket.IO, interchangeables en direct depuis l'interface, avec un panneau de performance qui mesure la latence de chaque événement.</li>
+                        <li><strong>Rattrapage</strong> : après une coupure, les événements manqués sont relus depuis le curseur (Last-Event-ID pour SSE, paramètre after pour le WebSocket) ou rechargés à la reconnexion pour Socket.IO.</li>
+                        <li><strong>Idempotence</strong> : recevoir deux fois le même événement n'a aucun effet côté client.</li>
+                        <li><strong>Mutations</strong> : toujours en REST, quel que soit le mode : seule la réception change.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">COHÉRENCE</span>
+                    <span class="spec-value">Le serveur fait autorité : un client demande une transition, le serveur la valide.
+                      <ul class="spec-sub">
+                        <li><strong>Machine à états</strong> : transitions autorisées par statut et par rôle (en attente → en préparation → prête → servie) ; 422 si la transition est interdite.</li>
+                        <li><strong>Concurrence</strong> : chaque action envoie le statut attendu ; 409 si un autre écran a modifié la commande ou la table entre-temps, avec une écriture conditionnelle en base.</li>
+                        <li><strong>Annulation</strong> : retour « servie → prête » accepté pendant une fenêtre de 35 s côté serveur, refusé ensuite.</li>
+                        <li><strong>Non-lus</strong> : dernière lecture enregistrée par utilisateur et par conversation, donc identique sur le téléphone et l'ordinateur.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SÉCURITÉ</span>
+                    <span class="spec-value">Une API fermée par défaut, sur la même origine que le front.
+                      <ul class="spec-sub">
+                        <li><strong>Authentification</strong> : jeton d'accès court et jeton de rafraîchissement à rotation, tous deux en cookies HttpOnly, sessions enregistrées en base et révocables.</li>
+                        <li><strong>Identité</strong> : l'auteur d'une action est toujours résolu par le serveur depuis la session, jamais lu dans le message du client, en REST comme en WebSocket.</li>
+                        <li><strong>Autorisations</strong> : droits par rôle définis une seule fois et appliqués à la fois en REST et en Socket.IO.</li>
+                        <li><strong>Connexion</strong> : limitée à 5 tentatives par minute et par IP.</li>
+                        <li><strong>En-têtes</strong> : Content-Security-Policy sans script inline, anti-clickjacking, nosniff, et aucun CORS.</li>
+                        <li><strong>Fichiers</strong> : logo reconnu à ses premiers octets (PNG, JPEG, WebP, SVG refusé), 2 Mo au plus, nom généré par le serveur.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">EXPLOITATION</span>
+                    <span class="spec-value">Toute l'application se lance avec <code>docker compose up -d --build</code>.
+                      <ul class="spec-sub">
+                        <li><strong>Docker</strong> : un seul Dockerfile pour deux images, avec des dépendances installées une fois, des builds en parallèle, des images Alpine et une image API débarrassée de ses outils de build.</li>
+                        <li><strong>Démarrage</strong> : le backend attend que Postgres soit prêt (sonde de santé), applique les migrations, charge une démo complète (brasserie sur 3 niveaux, 28 tables, 4 postes), puis démarre.</li>
+                        <li><strong>Proxy</strong> : un reverse proxy nginx, seul port exposé ; SSE sans mise en mémoire tampon, WebSocket et Socket.IO.</li>
+                        <li><strong>PWA</strong> : service worker Angular ; l'API, les WebSockets et les fichiers téléversés ne passent jamais par son cache.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">QUALITÉ</span>
+                    <span class="spec-value">Tests Vitest côté API et côté Angular.
+                      <ul class="spec-sub">
+                        <li><strong>Règles</strong> : transitions de statut, droits par rôle, conflits et fenêtre d'annulation testés côté API.</li>
+                        <li><strong>Documentation</strong> : dossier technique avec les diagrammes Mermaid, les événements et endpoints, les limites connues et les axes d'évolution.</li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+                <a href="https://github.com/IrALm/web-temps-reel" target="_blank" rel="noopener" class="btn btn-primary">Code sur GitHub ↗</a>
+              </div>
+
+              <div>
+                <div class="video-frame" style="display:grid;place-items:center;">
+                  <img src="images/kitchup-mark.svg" alt="Emblème KitchUp : un chef cuisinier souriant qui fait sauter une crêpe" style="width:56%;max-width:280px;height:auto;" loading="lazy" />
+                </div>
+                <span class="video-fallback">KitchUp · la cuisine connectée</span>
+              </div>
+            </div>
+
+            <figure class="archi">
+              <div class="featured-block-title">ARCHITECTURE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 860 470" role="img" aria-labelledby="kitchup-archi-titre kitchup-archi-desc">
+                  <title id="kitchup-archi-titre">Schéma d'architecture de KitchUp</title>
+                  <desc id="kitchup-archi-desc">À gauche, les clients : le téléphone du serveur, l'écran de la cuisine et la salle 3D. Ils passent tous par un reverse proxy nginx. Le proxy sert l'application Angular depuis un nginx de fichiers statiques et transmet l'API, le SSE et les WebSockets à l'application NestJS. Dans l'application, l'API REST écrit chaque événement dans le journal d'événements, qui le diffuse aux cinq transports temps réel et au chat. À droite, les données : PostgreSQL via Prisma, avec la table Event, et le volume des logos téléversés.</desc>
+                  <defs>
+                    <marker id="kitchup-f-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="kitchup-f-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="kitchup-f-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                  </defs>
+
+                  <!-- Titres de colonnes -->
+                  <text class="col-label" x="20" y="60">CLIENTS</text>
+                  <text class="col-label col-label--externe" x="200" y="60">PROXY</text>
+                  <text class="col-label col-label--donnee" x="640" y="60">DONNÉES</text>
+
+                  <!-- Zone de l'application -->
+                  <rect class="zone" x="345" y="40" width="270" height="410" rx="12"/>
+                  <text class="zone-label" x="480" y="438" text-anchor="middle">API NESTJS 12 · TYPESCRIPT</text>
+
+                  <!-- Clients → proxy -->
+                  <path class="lien lien--client" d="M170,105 H198" marker-end="url(#kitchup-f-client)"/>
+                  <path class="lien lien--client" d="M170,235 H198" marker-end="url(#kitchup-f-client)"/>
+                  <path class="lien lien--client" d="M170,365 H198" marker-end="url(#kitchup-f-client)"/>
+
+                  <!-- Proxy → application -->
+                  <path class="lien lien--client" d="M310,100 H363" marker-end="url(#kitchup-f-client)"/>
+                  <text class="lien-label" x="336" y="92" text-anchor="middle">REST</text>
+                  <path class="lien lien--client" d="M310,275 H363" marker-start="url(#kitchup-f-client)" marker-end="url(#kitchup-f-client)"/>
+                  <text class="lien-label" x="336" y="267" text-anchor="middle">push</text>
+
+                  <!-- Proxy → front statique -->
+                  <path class="lien lien--externe" d="M255,420 V458 H740 V447" marker-end="url(#kitchup-f-externe)"/>
+                  <text class="lien-label" x="500" y="468" text-anchor="middle">fichiers de l'app</text>
+
+                  <!-- Dans l'application -->
+                  <path class="lien lien--interne" d="M480,125 V158" marker-end="url(#kitchup-f-donnee)"/>
+                  <text class="lien-label" x="488" y="146">publie</text>
+                  <path class="lien lien--interne" d="M480,210 V243" marker-end="url(#kitchup-f-donnee)"/>
+                  <text class="lien-label" x="488" y="231">diffuse</text>
+
+                  <!-- Application → données -->
+                  <path class="lien lien--donnee" d="M595,100 H638" marker-end="url(#kitchup-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M595,185 H638" marker-end="url(#kitchup-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M595,370 H638" marker-end="url(#kitchup-f-donnee)"/>
+
+                  <!-- Clients -->
+                  <g class="noeud noeud--client"><rect x="20" y="75" width="150" height="60" rx="10"/><text x="95" y="101" text-anchor="middle">Serveur</text><text class="sous" x="95" y="119" text-anchor="middle">téléphone · PWA</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="205" width="150" height="60" rx="10"/><text x="95" y="231" text-anchor="middle">Cuisine</text><text class="sous" x="95" y="249" text-anchor="middle">écran mural</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="335" width="150" height="60" rx="10"/><text x="95" y="361" text-anchor="middle">Salle et responsable</text><text class="sous" x="95" y="379" text-anchor="middle">plan 3D · réglages</text></g>
+
+                  <!-- Proxy -->
+                  <g class="noeud noeud--externe"><rect x="200" y="75" width="110" height="345" rx="10"/><text x="255" y="236" text-anchor="middle">nginx</text><text class="sous" x="255" y="254" text-anchor="middle">port 80</text><text class="sous" x="255" y="270" text-anchor="middle">CSP</text></g>
+
+                  <!-- Modules de l'application -->
+                  <g class="noeud noeud--app"><rect x="365" y="75" width="230" height="50" rx="10"/><text x="480" y="97" text-anchor="middle">API REST</text><text class="sous" x="480" y="113" text-anchor="middle">commandes · tables · réglages</text></g>
+                  <g class="noeud noeud--app"><rect x="365" y="160" width="230" height="50" rx="10"/><text x="480" y="182" text-anchor="middle">Journal d'événements</text><text class="sous" x="480" y="198" text-anchor="middle">table Event · EventEmitter2</text></g>
+                  <g class="noeud noeud--app"><rect x="365" y="245" width="230" height="60" rx="10"/><text x="480" y="268" text-anchor="middle">5 transports temps réel</text><text class="sous" x="480" y="286" text-anchor="middle">polling · long polling · SSE</text><text class="sous" x="480" y="300" text-anchor="middle">WebSocket · Socket.IO</text></g>
+                  <g class="noeud noeud--app"><rect x="365" y="345" width="230" height="50" rx="10"/><text x="480" y="367" text-anchor="middle">Chat et uploads</text><text class="sous" x="480" y="383" text-anchor="middle">non-lus · logos</text></g>
+
+                  <!-- Données -->
+                  <g class="noeud noeud--donnee"><rect x="640" y="75" width="200" height="130" rx="10"/><text x="656" y="100">PostgreSQL</text><text class="sous" x="656" y="118">via Prisma · migrations</text><text class="sous" x="656" y="136">commandes, tables, chat</text><text class="sous" x="656" y="154">table Event (curseur)</text></g>
+                  <g class="noeud noeud--donnee"><rect x="640" y="348" width="200" height="44" rx="10"/><text x="656" y="367">Volume uploads</text><text class="sous" x="656" y="383">logos des restaurants</text></g>
+                  <g class="noeud noeud--externe"><rect x="640" y="400" width="200" height="44" rx="10"/><text x="656" y="419">Front nginx</text><text class="sous" x="656" y="435">build Angular · PWA</text></g>
+                </svg>
+              </div>
+              <ul class="archi-legende">
+                <li><span class="pastille pastille--client"></span>Clients et flux</li>
+                <li><span class="pastille pastille--externe"></span>Serveurs nginx</li>
+                <li><span class="pastille pastille--app"></span>Application</li>
+                <li><span class="pastille pastille--donnee"></span>Données</li>
+              </ul>
+              <figcaption class="archi-caption">Chaque écriture métier est enregistrée dans la table Event avant d'être diffusée. Les cinq transports lisent ce même journal : le rattrapage après une coupure et la comparaison des mécanismes reposent sur une seule source de vérité.</figcaption>
+            </figure>
+          </div>
+
           <!-- Cloud & Serverless -->
           <div class="category">
             <div class="section-head">CLOUD &amp; SERVERLESS</div>
