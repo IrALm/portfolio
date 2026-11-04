@@ -537,3 +537,32 @@ html[data-theme="dark"] {
   .page-title-photo { width: 72px; height: 72px; }
   .pillar-num { font-size: 26px; }
 }
+
+/* Projet KitchUp : logo dans le titre, galerie de captures, technologies */
+.featured-head--logo { align-items: center; }
+.featured-title--logo { display: inline-flex; align-items: center; gap: 14px; }
+/* L'icône de l'app telle quelle : ses coins arrondis sont dans le SVG, aucun cadre ajouté. */
+.app-icon { width: 44px; height: 44px; flex: none; display: block; }
+/* Mosaïque sur deux colonnes : chaque capture garde ses proportions et s'affiche en entier. */
+.kitchup-shots { column-count: 2; column-gap: 18px; margin-top: 4px; }
+.kitchup-shots figure { margin: 0 0 18px; break-inside: avoid; }
+.kitchup-shots .video-fallback { margin-bottom: 0; }
+.kitchup-group { margin-top: 26px; }
+/* Technologies : logos officiels (Simple Icons), en couleur de marque. */
+.tech-stack { margin-top: 32px; }
+.tech-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tech { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 2px;
+  background: var(--surface); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--body); }
+.tech img { width: 18px; height: 18px; flex: none; display: block; }
+/* Logos d'une seule couleur très foncée : passés en blanc en mode sombre. */
+html[data-theme="dark"] .tech img.tech-mono { filter: brightness(0) invert(1); }
+/* Logos à deux couleurs (AWS) : une version par thème. */
+.tech img.logo-dark { display: none; }
+html[data-theme="dark"] .tech img.logo-light { display: none; }
+html[data-theme="dark"] .tech img.logo-dark { display: block; }
+.kitchup-group-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+  color: var(--accent-label); padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+@media (max-width: 560px) {
+  .kitchup-shots { column-count: 1; }
+  .app-icon { width: 36px; height: 36px; }
+}
