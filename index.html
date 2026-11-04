@@ -329,11 +329,30 @@
                   </div>
                 </div>
                 <a href="https://kupanga.lespacelibellule.com/" target="_blank" rel="noopener" class="btn btn-primary">Voir en ligne ↗</a>
+
+                <div class="tech-stack">
+                  <div class="featured-block-title">TECHNOLOGIES</div>
+                  <ul class="tech-list" aria-label="Technologies utilisées">
+                    <li class="tech"><img src="images/tech/springboot.svg" alt="" width="18" height="18">Spring Boot 3</li>
+                    <li class="tech"><img src="images/tech/java.svg" alt="" width="18" height="18">Java 21</li>
+                    <li class="tech"><img src="images/tech/angular.svg" alt="" width="18" height="18">Angular 20</li>
+                    <li class="tech"><img src="images/tech/typescript.svg" alt="" width="18" height="18">TypeScript</li>
+                    <li class="tech"><img src="images/tech/postgresql.svg" alt="" width="18" height="18">PostgreSQL + PostGIS</li>
+                    <li class="tech"><img src="images/tech/hibernate.svg" alt="" width="18" height="18" class="tech-mono">Hibernate</li>
+                    <li class="tech"><img src="images/tech/flyway.svg" alt="" width="18" height="18">Flyway</li>
+                    <li class="tech"><img src="images/tech/redis.svg" alt="" width="18" height="18">Redis</li>
+                    <li class="tech"><img src="images/tech/thymeleaf.svg" alt="" width="18" height="18">Thymeleaf</li>
+                    <li class="tech"><img src="images/tech/junit5.svg" alt="" width="18" height="18">JUnit 5</li>
+                    <li class="tech"><img src="images/tech/docker.svg" alt="" width="18" height="18">Docker</li>
+                    <li class="tech"><img src="images/tech/githubactions.svg" alt="" width="18" height="18">GitHub Actions</li>
+                    <li class="tech"><img src="images/tech/sentry.svg" alt="" width="18" height="18" class="tech-mono">Sentry</li>
+                  </ul>
+                </div>
               </div>
 
               <div>
                 <div class="video-frame">
-                  <iframe src="https://www.youtube.com/embed/1R9kjwI1Cyg" title="Démo Kupanga" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <iframe src="https://www.youtube.com/embed/1R9kjwI1Cyg" referrerpolicy="strict-origin-when-cross-origin" title="Démo Kupanga" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <a href="https://youtu.be/1R9kjwI1Cyg" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
               </div>
@@ -431,8 +450,11 @@
 
           <!-- KitchUp -->
           <div class="featured">
-            <div class="featured-head">
-              <h2 class="featured-title">KitchUp</h2>
+            <div class="featured-head featured-head--logo">
+              <h2 class="featured-title featured-title--logo">
+                <img class="app-icon" src="images/kitchup-mark.svg" alt="" width="44" height="44" />
+                KitchUp
+              </h2>
               <span class="badge">PROJET FIL ROUGE</span>
             </div>
             <div class="featured-sub">Application de service en restaurant qui relie en temps réel le téléphone du serveur, l'écran de la cuisine et un plan de salle en 3D, avec une messagerie d'équipe. Le projet compare aussi, dans une même application, cinq façons de faire du temps réel sur le web : polling, long polling, SSE, WebSocket natif et Socket.IO. Elle est installable sur ordinateur, Android et iPhone, et se lance en une seule commande Docker.</div>
@@ -460,6 +482,10 @@
                   <div class="spec-row">
                     <span class="spec-label">RESPONSABLE</span>
                     <span class="spec-value">Vue d'ensemble du service et toutes les actions, y compris l'annulation. Une page de réglages règle le nom, le logo (huit logos proposés ou un logo téléversé), les seuils de retard par poste et le délai d'annonce en salle.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">TABLEAU DE BORD</span>
+                    <span class="spec-value">Pour le responsable, sur aujourd'hui, 7 ou 30 jours : chiffre d'affaires, commandes, panier moyen et temps jusqu'au service, comparés à la période précédente ; courbe du chiffre d'affaires, heures de pointe, carte de chaleur jour × heure, ventes par catégorie, plats les plus commandés et chiffre par serveur. La journée en cours se met à jour en direct.</span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">MOBILE</span>
@@ -526,7 +552,7 @@
                     <span class="spec-value">Toute l'application se lance avec <code>docker compose up -d --build</code>.
                       <ul class="spec-sub">
                         <li><strong>Docker</strong> : un seul Dockerfile pour deux images, avec des dépendances installées une fois, des builds en parallèle, des images Alpine et une image API débarrassée de ses outils de build.</li>
-                        <li><strong>Démarrage</strong> : le backend attend que Postgres soit prêt (sonde de santé), applique les migrations, charge une démo complète (brasserie sur 3 niveaux, 28 tables, 4 postes), puis démarre.</li>
+                        <li><strong>Démarrage</strong> : le backend attend que Postgres soit prêt (sonde de santé), applique les migrations, charge une démo complète (brasserie sur 3 niveaux, 34 tables, 4 postes, 60 jours d'historique de ventes), puis démarre.</li>
                         <li><strong>Proxy</strong> : un reverse proxy nginx, seul port exposé ; SSE sans mise en mémoire tampon, WebSocket et Socket.IO.</li>
                         <li><strong>PWA</strong> : service worker Angular ; l'API, les WebSockets et les fichiers téléversés ne passent jamais par son cache.</li>
                       </ul>
@@ -543,13 +569,223 @@
                   </div>
                 </div>
                 <a href="https://github.com/IrALm/web-temps-reel" target="_blank" rel="noopener" class="btn btn-primary">Code sur GitHub ↗</a>
+
+                <div class="tech-stack">
+                  <div class="featured-block-title">TECHNOLOGIES</div>
+                  <ul class="tech-list" aria-label="Technologies utilisées">
+                    <li class="tech"><img src="images/tech/angular.svg" alt="" width="18" height="18">Angular 21</li>
+                    <li class="tech"><img src="images/tech/typescript.svg" alt="" width="18" height="18">TypeScript</li>
+                    <li class="tech"><img src="images/tech/threedotjs.svg" alt="" width="18" height="18" class="tech-mono">Three.js</li>
+                    <li class="tech"><img src="images/tech/nestjs.svg" alt="" width="18" height="18">NestJS 12</li>
+                    <li class="tech"><img src="images/tech/nodedotjs.svg" alt="" width="18" height="18">Node.js</li>
+                    <li class="tech"><img src="images/tech/socketdotio.svg" alt="" width="18" height="18" class="tech-mono">Socket.IO</li>
+                    <li class="tech"><img src="images/tech/postgresql.svg" alt="" width="18" height="18">PostgreSQL 16</li>
+                    <li class="tech"><img src="images/tech/prisma.svg" alt="" width="18" height="18" class="tech-mono">Prisma</li>
+                    <li class="tech"><img src="images/tech/zod.svg" alt="" width="18" height="18">Zod</li>
+                    <li class="tech"><img src="images/tech/vitest.svg" alt="" width="18" height="18">Vitest</li>
+                    <li class="tech"><img src="images/tech/docker.svg" alt="" width="18" height="18">Docker</li>
+                    <li class="tech"><img src="images/tech/nginx.svg" alt="" width="18" height="18">nginx</li>
+                    <li class="tech"><img src="images/tech/githubactions.svg" alt="" width="18" height="18">GitHub Actions</li>
+                  </ul>
+                </div>
               </div>
 
               <div>
-                <div class="video-frame" style="display:grid;place-items:center;">
-                  <img src="images/kitchup-mark.svg" alt="Emblème KitchUp : un chef cuisinier souriant qui fait sauter une crêpe" style="width:56%;max-width:280px;height:auto;" loading="lazy" />
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/TXPQmdtpRM4" title="Démo KitchUp" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <span class="video-fallback">KitchUp · la cuisine connectée</span>
+                <a href="https://youtu.be/TXPQmdtpRM4" target="_blank" rel="noopener" class="video-fallback">Voir la démo sur YouTube (2 min 26) ↗</a>
+
+                <a href="images/kitchup/salle-3d.jpg" target="_blank" rel="noopener" class="shot-frame">
+                  <img src="images/kitchup/salle-3d.jpg" alt="Salle 3D : plan du rez-de-chaussée en Three.js, tables libres, occupées et réservées, clients assis, serveurs, cuisine ouverte avec ses postes et la passe" loading="lazy">
+                </a>
+                <span class="video-fallback">Salle 3D : tables, clients, serveurs et cuisine en direct</span>
+
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">SERVEUR · TÉLÉPHONE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/serveur.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/serveur.jpg" alt="Carte en cartes avec photos, quantités, bouton Envoyer en cuisine" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Prise de commande</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/serveur-precision.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/serveur-precision.jpg" alt="Fiche Précision ouverte : sans oignon, bien cuit, sauce à part, précision libre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Précisions sur un plat</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/serveur-plat-pret.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/serveur-plat-pret.jpg" alt="Alerte Table 1 prête au passe, liste des commandes à servir avec le bouton Marquer servie" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Plat prêt : alerte et service</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">CUISINE · ÉCRAN MURAL</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/cuisine.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/cuisine.jpg" alt="Tickets en colonnes à préparer, en préparation, prêtes au passe, servies, avec chronos et précisions" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tous les postes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/cuisine-poste.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/cuisine-poste.jpg" alt="Écran filtré sur le poste chaud : les tickets des autres postes sont masqués" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Filtré sur le poste chaud</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">SALLE 3D</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/salle-table.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/salle-table.jpg" alt="Panneau d'une table occupée : convives, commandes, actions" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Panneau d'une table</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-liberer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/salle-liberer.jpg" alt="Confirmation avant de libérer une table" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Libérer une table</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-installer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/salle-installer.jpg" alt="Table libre : installer des clients ou réserver" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Installer des clients</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-arrivee.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/salle-arrivee.jpg" alt="Les clients installés arrivent et s'assoient" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Arrivée des clients</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-niveaux.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/salle-niveaux.jpg" alt="Vue de tous les niveaux empilés : rez-de-chaussée, étage, toit-terrasse" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tous les niveaux</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">RESPONSABLE · COMMANDES</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/commandes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/commandes.jpg" alt="Indicateurs, recherche, filtres de statut avec compteurs, commandes en cartes avec photos des plats" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Liste des commandes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/commandes-tri.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/commandes-tri.jpg" alt="Menu de tri ouvert : plus récentes, montant, nombre d'articles, table, statut, serveur" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Menu de tri</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/commandes-recherche.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/commandes-recherche.jpg" alt="Recherche « burger » : seules les commandes concernées restent" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Recherche</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/commandes-par-table.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/commandes-par-table.jpg" alt="Vue par table : les commandes regroupées table par table, avec photos" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Vue par table</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/performance.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/performance.jpg" alt="Panneau Performance : requêtes et événements du mode temps réel choisi, avec leur latence" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Panneau Performance (temps réel)</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">TABLEAU DE BORD</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/dashboard.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/dashboard.jpg" alt="Récit du service et indicateurs comparés à la semaine précédente, courbe du chiffre d'affaires heure par heure" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Aujourd'hui, en direct</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-30j.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/dashboard-30j.jpg" alt="Sur 30 jours : chiffre d'affaires jour après jour comparé aux 30 jours précédents" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Sur 30 jours</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-chaleur.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/dashboard-chaleur.jpg" alt="Commandes par heure et carte de chaleur jour de semaine × heure" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Heures de pointe et carte de chaleur</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-ventes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/dashboard-ventes.jpg" alt="Chiffre d'affaires par catégorie en anneau, plats les plus commandés avec photos" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Ventes par catégorie et par plat</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-equipe.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/dashboard-equipe.jpg" alt="Commandes en cours, fil du service en direct et chiffre par serveur" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Cuisine en direct et équipe</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">ÉQUIPE ET RÉGLAGES</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/chat.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/chat.jpg" alt="Messagerie d'équipe : conversation générale et une conversation par commande, avec les messages non lus" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Messagerie et non-lus</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/reglages.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/reglages.jpg" alt="Réglages : nom et logo du restaurant, postes de cuisine et seuils de retard, délai d'annonce en salle" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Réglages du restaurant</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/landing.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/landing.jpg" alt="Page d'accueil de KitchUp : présentation, rôles et accès à la démo" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Page d'accueil</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">MODE SOMBRE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/dashboard-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/dashboard-sombre.jpg" alt="Tableau de bord en mode sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tableau de bord</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kitchup/salle-sombre.jpg" alt="Salle 3D en mode sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Salle 3D</figcaption>
+                    </figure>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -746,6 +982,18 @@
                   <img src="images/aws-interface.png" alt="Interface de l'application refaite : barre latérale, liste des étudiants avec filtre, thème clair" loading="lazy">
                 </a>
                 <span class="video-fallback">Interface de l'application, refaite en style intranet (clair et sombre)</span>
+
+                <div class="tech-stack">
+                  <div class="featured-block-title">TECHNOLOGIES</div>
+                  <ul class="tech-list" aria-label="Technologies utilisées">
+                    <li class="tech"><img src="images/tech/aws.svg" alt="" width="18" height="18" class="logo-light"><img src="images/tech/aws-dark.svg" alt="" width="18" height="18" class="logo-dark">AWS</li>
+                    <li class="tech"><img src="images/tech/terraform.svg" alt="" width="18" height="18">Terraform</li>
+                    <li class="tech"><img src="images/tech/docker.svg" alt="" width="18" height="18">Docker</li>
+                    <li class="tech"><img src="images/tech/nodedotjs.svg" alt="" width="18" height="18">Node.js 24</li>
+                    <li class="tech"><img src="images/tech/mysql.svg" alt="" width="18" height="18">MySQL</li>
+                    <li class="tech"><img src="images/tech/githubactions.svg" alt="" width="18" height="18">GitHub Actions</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -1031,7 +1279,7 @@
                 <h3 class="project-title">voicefaker</h3>
                 <p class="project-desc">API serverless de synthèse vocale qui gère 5 langues et 6 effets de voix. Elle est construite avec AWS SAM et déployée sur AWS, et les fichiers audio sont stockés sur MinIO.</p>
                 <div class="video-frame video-frame-16-9">
-                  <iframe src="https://www.youtube.com/embed/aDLdIkbKqy8" title="Démo voicefaker" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <iframe src="https://www.youtube.com/embed/aDLdIkbKqy8" referrerpolicy="strict-origin-when-cross-origin" title="Démo voicefaker" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <a href="https://youtu.be/aDLdIkbKqy8" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
                 <div class="tags">
@@ -1085,7 +1333,7 @@
                 <h3 class="project-title">DevSprint</h3>
                 <p class="project-desc">Un Jira simplifié pour gérer des sprints agiles : tableau Kanban en glisser-déposer, burndown charts, story points et export JSON. Le projet est en TypeScript strict, du front jusqu'au back.</p>
                 <div class="video-frame video-frame-16-9">
-                  <iframe src="https://www.youtube.com/embed/BQs2P0S4FuE" title="Démo DevSprint" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <iframe src="https://www.youtube.com/embed/BQs2P0S4FuE" referrerpolicy="strict-origin-when-cross-origin" title="Démo DevSprint" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <a href="https://youtu.be/BQs2P0S4FuE" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
                 <div class="tags">
@@ -1101,7 +1349,7 @@
                 <h3 class="project-title">ChatBoot</h3>
                 <p class="project-desc">L'interface de chatbot du projet Michelin Guide, faite avec React et Vite. Elle se branche sur l'API Spring Boot et permet de chercher un hôtel ou un restaurant, puis de réserver, en discutant avec les assistants IA (Groq).</p>
                 <div class="video-frame video-frame-16-9">
-                  <iframe src="https://www.youtube.com/embed/mgax3GmW33M" title="Démo ChatBoot" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  <iframe src="https://www.youtube.com/embed/mgax3GmW33M" referrerpolicy="strict-origin-when-cross-origin" title="Démo ChatBoot" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <a href="https://youtu.be/mgax3GmW33M" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
                 <div class="tags">
@@ -1223,7 +1471,7 @@
           <!-- IA -->
           <div class="stack-section">
             <div class="section-head">DÉVELOPPEMENT ASSISTÉ PAR IA</div>
-            <p class="stack-ai-lead">J'utilise des agents IA (Claude, Codex, Cursor, GitHub Copilot) dans mon travail, avec une approche <strong>Spec-Driven Development</strong> : je pars d'une spécification écrite, puis l'agent m'aide sur la conception, le code, les tests, la revue et la documentation.</p>
+            <p class="stack-ai-lead">J'utilise l'IA comme une <strong>équipe outillée</strong>, pas comme un générateur de code : j'écris le cadre (objectif, règles, critère de fin), l'agent exécute, et chaque changement est vérifié avant que je le relise et que je le commite. La méthode ne dépend ni du langage ni de l'outil : je l'applique aussi bien à une API Java qu'à un front Angular ou à de l'infrastructure Terraform, avec Claude Code, Codex ou Cursor.</p>
 
             <div class="stack-row stack-row-agents">
               <div class="stack-row-head">
@@ -1235,12 +1483,124 @@
                   <img src="https://cdn.simpleicons.org/githubcopilot/1c1b19" alt="GitHub Copilot" title="GitHub Copilot" class="logo-mono logo-sm">
                 </div>
               </div>
-              <div class="stack-row-text">Claude, Codex, Cursor, GitHub Copilot</div>
+              <div class="stack-row-text">Claude Code, Codex, Cursor, GitHub Copilot</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Point de départ</div>
+              <div class="stack-row-text">Jamais une demande vague : une spécification ou un audit qui découpe le travail en tâches courtes, chacune avec son critère de fin vérifiable (un test, une commande, un comportement observable). L'agent traite une tâche à la fois, dans l'ordre que je fixe.</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Boucle vérifiée</div>
+              <div class="stack-row-text">Pour chaque tâche : comprendre le code existant, faire le correctif minimal, écrire un test qui échouerait si le problème revenait, lancer les tests, faire relire, puis rendre un rapport court. Au bout de trois échecs, l'agent s'arrête et fait le point au lieu de forcer. Ce qui n'est pas vérifié n'est pas considéré comme fait.</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Sous-agents</div>
+              <div class="stack-row-text">Des agents spécialisés, chacun avec un rôle, des outils limités et le modèle adapté : un <em>testeur</em> (lance la suite, ne renvoie qu'un résumé des échecs, modèle léger), un <em>relecteur</em> en lecture seule qui reprend le changement avec un regard neuf (sécurité, contournements, régressions, tests manquants). Celui qui écrit le code n'est jamais celui qui le valide.</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Mémoire de projet</div>
+              <div class="stack-row-text">Un fichier d'instructions versionné, court (une à deux centaines de lignes) : objectif, stack, commandes, conventions, interdits, et des liens vers le reste. Les décisions d'architecture vivent dans des ADR lus à la demande, le reste à faire dans les issues, l'historique dans des messages de commit détaillés. Toute l'équipe, humains et agents, part du même contexte, sans le payer en tokens à chaque session.</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Commandes réutilisables</div>
+              <div class="stack-row-text">Les déroulés qui reviennent deviennent des commandes (skills) génériques et paramétrées, comme « traiter la tâche X » ou « préparer la mise en production », plutôt que des consignes réécrites à chaque fois. Je les déclenche moi-même : je garde la main sur le rythme.</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Garde-fous</div>
+              <div class="stack-row-text">Permissions versionnées avec le projet, complétées par des hooks qui bloquent les actions irréversibles quelle que soit leur forme (commit, push, réécriture d'historique, suppression). L'agent ne commite pas, ne tranche aucun choix métier (il pose la question), reste dans le périmètre de la tâche et signale ce qu'il voit ailleurs sans le corriger. Aucun secret ne lui est confié.</div>
+            </div>
+            <div class="stack-row stack-row-simple">
+              <div class="stack-row-title">Intégration continue</div>
+              <div class="stack-row-text">La même exigence hors de mon poste : la CI rejoue tests et analyses sur chaque pull request, et un agent de revue y commente le changement. Une règle n'existe que si elle est vérifiée automatiquement.</div>
             </div>
             <div class="stack-row stack-row-simple stack-row-last">
-              <div class="stack-row-title">Périmètre</div>
-              <div class="stack-row-text">Spécification, conception, code, tests, revue de code, documentation</div>
+              <div class="stack-row-title">Transposable</div>
+              <div class="stack-row-text">Le cadre est le même partout, seuls les noms changent : <code>CLAUDE.md</code>, <code>AGENTS.md</code>, <code>.cursor/rules</code> ou <code>copilot-instructions.md</code> pour la mémoire ; Maven, npm, pytest ou <code>terraform plan</code> pour le critère de fin ; GitHub Actions ou GitLab CI pour la vérification continue.</div>
             </div>
+            <figure class="archi">
+              <div class="featured-block-title">EXEMPLE D'ARCHITECTURE · LE CIRCUIT D'UNE TÂCHE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 860 470" role="img" aria-labelledby="ia-archi-titre ia-archi-desc">
+                  <title id="ia-archi-titre">Architecture d'un développement assisté par IA</title>
+                  <desc id="ia-archi-desc">À gauche, le cadre versionné avec le projet : la spécification ou l'audit, la mémoire de projet, les décisions, issues et commits lus à la demande, et les garde-fous. Au centre, la session de l'agent : le développeur lance une commande, l'agent principal comprend le code, corrige et écrit le test, puis délègue à un sous-agent testeur et à un sous-agent relecteur en lecture seule ; si tout est vert, il rend un rapport. À droite, le développeur relit, décide et commite ; la CI de la pull request rejoue les tests et un agent de revue, puis le changement est fusionné.</desc>
+                  <defs>
+                    <marker id="ia-f-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="ia-f-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="ia-f-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="ia-f-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                  </defs>
+
+                  <!-- Titres de colonnes -->
+                  <text class="col-label" x="20" y="40">CADRE VERSIONNÉ</text>
+                  <text class="col-label col-label--externe" x="640" y="40">DÉCISION ET VÉRIFICATION</text>
+
+                  <!-- Zone de la session de l'agent -->
+                  <rect class="zone" x="232" y="25" width="378" height="410" rx="12"/>
+                  <text class="zone-label" x="421" y="423" text-anchor="middle">SESSION DE L'AGENT · TOUT LANGAGE, TOUT OUTIL</text>
+
+                  <!-- Cadre → session -->
+                  <path class="lien lien--client" d="M200,86 H248" marker-end="url(#ia-f-client)"/>
+                  <text class="lien-label" x="224" y="78" text-anchor="middle">tâche</text>
+                  <path class="lien lien--client" d="M200,162 H248" marker-end="url(#ia-f-client)"/>
+                  <text class="lien-label" x="224" y="154" text-anchor="middle">contexte</text>
+                  <path class="lien lien--direct" d="M200,236 H222 V178 H248" marker-end="url(#ia-f-direct)"/>
+                  <text class="lien-label lien-label--direct" x="150" y="277" text-anchor="middle">lus à la demande</text>
+                  <path class="lien lien--client" d="M200,312 H230"/>
+                  <text class="lien-label" x="152" y="348" text-anchor="middle">encadrent toute la session</text>
+
+                  <!-- Développeur → commande -->
+                  <path class="lien lien--externe" d="M638,88 H594" marker-end="url(#ia-f-externe)"/>
+                  <text class="lien-label" x="616" y="80" text-anchor="middle">lance</text>
+
+                  <!-- Dans la session -->
+                  <path class="lien lien--interne" d="M421,108 V133" marker-end="url(#ia-f-donnee)"/>
+                  <path class="lien lien--interne" d="M330,195 V228" marker-start="url(#ia-f-donnee)" marker-end="url(#ia-f-donnee)"/>
+                  <text class="lien-label" x="338" y="216">délègue</text>
+                  <path class="lien lien--interne" d="M512,195 V228" marker-start="url(#ia-f-donnee)" marker-end="url(#ia-f-donnee)"/>
+                  <text class="lien-label" x="520" y="216">fait relire</text>
+                  <path class="lien lien--interne" d="M421,195 V328" marker-end="url(#ia-f-donnee)"/>
+                  <text class="lien-label" x="421" y="318" text-anchor="middle">si tout est vert</text>
+
+                  <!-- Rapport → développeur -->
+                  <path class="lien lien--externe" d="M592,355 H618 V104 H638" marker-end="url(#ia-f-externe)"/>
+                  <text class="lien-label" x="604" y="232" text-anchor="middle" transform="rotate(-90 604 232)">rapport</text>
+
+                  <!-- Développeur → dépôt → CI → fusion -->
+                  <path class="lien lien--donnee" d="M740,120 V148" marker-end="url(#ia-f-donnee)"/>
+                  <text class="lien-label" x="748" y="138">commite</text>
+                  <path class="lien lien--donnee" d="M740,200 V238" marker-end="url(#ia-f-donnee)"/>
+                  <text class="lien-label" x="748" y="223">pull request</text>
+                  <path class="lien lien--donnee" d="M740,312 V343" marker-end="url(#ia-f-donnee)"/>
+
+                  <!-- Cadre versionné -->
+                  <g class="noeud noeud--client"><rect x="20" y="60" width="180" height="52" rx="10"/><text x="110" y="83" text-anchor="middle">Spécification ou audit</text><text class="sous" x="110" y="100" text-anchor="middle">tâches · critères de fin</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="130" width="180" height="64" rx="10"/><text x="110" y="153" text-anchor="middle">Mémoire de projet</text><text class="sous" x="110" y="170" text-anchor="middle">CLAUDE.md · AGENTS.md</text><text class="sous" x="110" y="184" text-anchor="middle">règles · commandes · interdits</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="210" width="180" height="52" rx="10"/><text x="110" y="233" text-anchor="middle">ADR · issues · commits</text><text class="sous" x="110" y="250" text-anchor="middle">décisions · reste à faire</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="286" width="180" height="52" rx="10"/><text x="110" y="309" text-anchor="middle">Garde-fous</text><text class="sous" x="110" y="326" text-anchor="middle">permissions · hooks</text></g>
+
+                  <!-- Session de l'agent -->
+                  <g class="noeud noeud--app"><rect x="250" y="62" width="342" height="46" rx="10"/><text x="421" y="82" text-anchor="middle">Commande (skill)</text><text class="sous" x="421" y="98" text-anchor="middle">« traiter la tâche X » · déclenchée à la main</text></g>
+                  <g class="noeud noeud--app"><rect x="250" y="135" width="342" height="60" rx="10"/><text x="421" y="157" text-anchor="middle">Agent principal</text><text class="sous" x="421" y="174" text-anchor="middle">comprend · corrige au minimum</text><text class="sous" x="421" y="188" text-anchor="middle">écrit le test qui échouerait sans le correctif</text></g>
+                  <g class="noeud noeud--app"><rect x="250" y="230" width="160" height="62" rx="10"/><text x="330" y="252" text-anchor="middle">Testeur</text><text class="sous" x="330" y="269" text-anchor="middle">lance la suite</text><text class="sous" x="330" y="283" text-anchor="middle">modèle léger · résumé</text></g>
+                  <g class="noeud noeud--app"><rect x="432" y="230" width="160" height="62" rx="10"/><text x="512" y="252" text-anchor="middle">Relecteur</text><text class="sous" x="512" y="269" text-anchor="middle">lecture seule</text><text class="sous" x="512" y="283" text-anchor="middle">sécurité · régressions</text></g>
+                  <g class="noeud noeud--app"><rect x="250" y="330" width="342" height="50" rx="10"/><text x="421" y="351" text-anchor="middle">Rapport</text><text class="sous" x="421" y="368" text-anchor="middle">changements · tests · points ouverts · message de commit</text></g>
+
+                  <!-- Décision et vérification -->
+                  <g class="noeud noeud--externe"><rect x="640" y="62" width="200" height="58" rx="10"/><text x="740" y="85" text-anchor="middle">Développeur</text><text class="sous" x="740" y="103" text-anchor="middle">relit · décide · commite</text></g>
+                  <g class="noeud noeud--donnee"><rect x="640" y="150" width="200" height="50" rx="10"/><text x="656" y="171">Dépôt git</text><text class="sous" x="656" y="188">commits détaillés</text></g>
+                  <g class="noeud noeud--donnee"><rect x="640" y="240" width="200" height="72" rx="10"/><text x="656" y="262">CI de la pull request</text><text class="sous" x="656" y="280">tests · analyses</text><text class="sous" x="656" y="296">agent de revue</text></g>
+                  <g class="noeud noeud--donnee"><rect x="640" y="345" width="200" height="44" rx="10"/><text x="656" y="364">Fusion</text><text class="sous" x="656" y="380">seulement si tout est vert</text></g>
+                </svg>
+              </div>
+              <ul class="archi-legende">
+                <li><span class="pastille pastille--client"></span>Cadre versionné avec le projet</li>
+                <li><span class="pastille pastille--app"></span>Agents</li>
+                <li><span class="pastille pastille--externe"></span>Décision humaine</li>
+                <li><span class="pastille pastille--donnee"></span>Vérification</li>
+                <li><span class="pastille pastille--direct"></span>Chargé à la demande</li>
+              </ul>
+              <figcaption class="archi-caption">Le développeur tient les deux bouts de la chaîne : il fixe la tâche et il valide le résultat. Entre les deux, l'agent travaille dans un cadre versionné, se fait vérifier par des sous-agents qu'il ne contrôle pas, et la CI rejoue la même exigence sur chaque pull request. Le schéma reste le même quel que soit le langage, l'agent ou la CI.</figcaption>
+            </figure>
           </div>
 
           <!-- DevOps -->
