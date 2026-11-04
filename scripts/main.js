@@ -163,6 +163,32 @@
     });
   });
 
+  // Vidéos YouTube ouvertes en local (file://) : le navigateur n'envoie aucune
+  // origine et YouTube refuse la lecture (« Erreur 153 »). On remplace alors
+  // chaque lecteur par sa miniature, qui ouvre la vidéo sur YouTube. En ligne
+  // ou via un serveur local, rien ne change.
+  if (location.protocol === 'file:') {
+    document.querySelectorAll('iframe[src*="youtube.com/embed/"]').forEach(function (frame) {
+      var id = frame.src.split('/embed/')[1].split(/[?&#]/)[0];
+      var link = document.createElement('a');
+      link.className = 'video-poster';
+      link.href = 'https://youtu.be/' + id;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.setAttribute('aria-label', (frame.title || 'Vidéo') + ' : regarder sur YouTube');
+      var img = document.createElement('img');
+      img.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+      img.alt = '';
+      img.loading = 'lazy';
+      var play = document.createElement('span');
+      play.className = 'video-poster-play';
+      play.setAttribute('aria-hidden', 'true');
+      link.appendChild(img);
+      link.appendChild(play);
+      frame.replaceWith(link);
+    });
+  }
+
   // Démarrage
   (function init() {
     var initial = currentPageFromHash();
