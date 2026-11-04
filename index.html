@@ -630,6 +630,386 @@
             </figure>
           </div>
 
+          <!-- DevOps & Infrastructure -->
+          <div class="category">
+            <div class="section-head">DEVOPS &amp; INFRASTRUCTURE</div>
+          </div>
+
+          <!-- Dossiers étudiants sur AWS -->
+          <div class="featured">
+            <div class="featured-head">
+              <h2 class="featured-title">Dossiers étudiants sur AWS</h2>
+              <span class="badge">INFRASTRUCTURE AS CODE</span>
+            </div>
+            <div class="featured-sub">Preuve de concept pour une université dont l'application de dossiers étudiants ralentissait pendant les admissions. L'hébergement est reconstruit sur AWS en cinq étapes : d'une seule machine virtuelle à une architecture hautement disponible, conteneurisée et livrée par une chaîne CI/CD. Toute l'infrastructure est décrite en Terraform, déployée et mesurée dans un vrai compte AWS.</div>
+
+            <div class="featured-grid">
+              <div>
+                <div class="featured-block-title">RÉSULTATS MESURÉS</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">CHARGE</span>
+                    <span class="spec-value">600 000 requêtes à 1 000 req/s pendant 10 minutes, une seule erreur ; montée automatique de 2 à 4 instances.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">DISPONIBILITÉ</span>
+                    <span class="spec-value">Instance arrêtée brutalement : 87 requêtes sur 90 servies et remplaçante lancée en 40 s. Pendant un déploiement : 545 requêtes sur 545, sans coupure.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">CONTENEURS</span>
+                    <span class="spec-value">Même charge avec 5 fois moins de CPU (13 % au lieu de 64 %) ; une instance est prête en 62 s au lieu de 4 min.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LIVRAISON</span>
+                    <span class="spec-value">Du commit à la production en 7 minutes, chaîne verte au premier essai.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SÉCURITÉ</span>
+                    <span class="spec-value">Base de données inaccessible depuis Internet, aucun mot de passe dans le code, image Docker sans vulnérabilité connue (analyse ECR).</span>
+                  </div>
+                </div>
+
+                <div class="featured-block-title">INGÉNIERIE</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">TERRAFORM</span>
+                    <span class="spec-value">Une configuration par étape, construite sur des modules partagés.
+                      <ul class="spec-sub">
+                        <li><strong>Modules</strong> : réseau, sécurité, base, secret, serveur, équilibreur, Auto Scaling, registre d'images, tableau de bord ; chaque étape réutilise les précédents.</li>
+                        <li><strong>Garde-fous</strong> : validation des variables (IP d'administration, nombre de zones), noms bornés aux limites AWS, ordre de création imposé (le secret avant les serveurs).</li>
+                        <li><strong>Compatibilité</strong> : un module enrichi pour l'étape suivante ne change rien aux précédentes, vérifié par un plan sans modification.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">RÉSEAU</span>
+                    <span class="spec-value">Un VPC sur deux zones de disponibilité.
+                      <ul class="spec-sub">
+                        <li><strong>Isolation</strong> : base dans des sous-réseaux privés sans route vers Internet, sans NAT Gateway pour limiter le coût.</li>
+                        <li><strong>Security groups</strong> : chaîne équilibreur → serveurs → base par référence de groupe : chaque couche n'accepte que la précédente, sur un seul port.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SECRETS</span>
+                    <span class="spec-value">Mot de passe généré par Terraform, stocké dans Secrets Manager et lu par l'application grâce au rôle IAM de l'instance ; IMDSv2 obligatoire, disques et base chiffrés.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">HAUTE DISPO</span>
+                    <span class="spec-value">Application Load Balancer, groupe Auto Scaling de 2 à 4 instances sur 2 zones, remplacement des instances jugées défaillantes par l'équilibreur, suivi de cible à 50 % de CPU et tableau de bord CloudWatch.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">CONTENEURS</span>
+                    <span class="spec-value">L'application tourne dans une image Docker publiée sur Amazon ECR.
+                      <ul class="spec-sub">
+                        <li><strong>Image</strong> : plusieurs étapes, Node.js 24 Alpine, dépendances verrouillées, utilisateur sans droits root, sonde de santé, init qui relaie les signaux.</li>
+                        <li><strong>Registre</strong> : analyse de vulnérabilités à chaque publication, tag par commit, cycle de vie des images.</li>
+                        <li><strong>Instances</strong> : téléchargement de l'image avec le rôle IAM, sans identifiant stocké ; redémarrage automatique en 2 s si l'application plante.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">CI/CD</span>
+                    <span class="spec-value">GitHub Actions, six jobs, chacun bloque le suivant.
+                      <ul class="spec-sub">
+                        <li><strong>Build</strong> : dépendances verrouillées, vérification syntaxique, image construite une seule fois puis transmise aux étapes suivantes.</li>
+                        <li><strong>Qualité</strong> : hadolint, shellcheck, terraform fmt et validate, audit npm, puis tests fonctionnels de l'image avec Docker Compose.</li>
+                        <li><strong>Test de charge</strong> : l'image publiée est chargée à 200 req/s avec des seuils bloquants (erreurs, latence p95).</li>
+                        <li><strong>Production</strong> : l'image n'est promue en « latest » qu'après le test de charge ; les nouvelles instances sont saines avant le retrait des anciennes, puis l'application est testée en production.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">DIAGNOSTIC</span>
+                    <span class="spec-value">Des problèmes réels trouvés et corrigés pendant les tests.
+                      <ul class="spec-sub">
+                        <li><strong>Connexions</strong> : l'application fournie ne fermait jamais ses connexions MySQL. Corrigé côté infrastructure, sans toucher au code : 97 pages sur 150 affichées sous rafale avant, 300 sur 300 après.</li>
+                        <li><strong>Erreurs masquées</strong> : l'application renvoyait ses erreurs avec un code 200 ; les tests vérifient donc le contenu des pages.</li>
+                        <li><strong>Contraintes du compte</strong> : le remplacement d'instances standard d'AWS étant interdit, un script équivalent a été écrit avec les API autorisées.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MÉTHODE</span>
+                    <span class="spec-value">Chaque étape est déployée puis mesurée avant de passer à la suivante, avec un guide pas à pas, un schéma et des résultats chiffrés. L'infrastructure est détruite en fin de session pour maîtriser les coûts. Interface de l'application refaite en bonus, sans changer sa logique.</span>
+                  </div>
+                </div>
+                <a href="https://github.com/IrALm/projet-aws-terraform" target="_blank" rel="noopener" class="btn btn-primary">Code sur GitHub ↗</a>
+              </div>
+
+              <div>
+                <a href="images/aws-dashboard-charge.png" target="_blank" rel="noopener" class="shot-frame">
+                  <img src="images/aws-dashboard-charge.png" alt="Tableau de bord CloudWatch : 60 000 requêtes par minute pendant 10 minutes, CPU sous 20 %, pic à 4 instances lors du déploiement par la chaîne CI/CD, temps de réponse de quelques millisecondes" loading="lazy">
+                </a>
+                <span class="video-fallback">Tableau de bord CloudWatch : déploiement CI/CD puis test de charge</span>
+                <a href="images/aws-interface.png" target="_blank" rel="noopener" class="shot-frame shot-frame--spaced">
+                  <img src="images/aws-interface.png" alt="Interface de l'application refaite : barre latérale, liste des étudiants avec filtre, thème clair" loading="lazy">
+                </a>
+                <span class="video-fallback">Interface de l'application, refaite en style intranet (clair et sombre)</span>
+              </div>
+            </div>
+
+            <figure class="archi">
+              <div class="featured-block-title">ARCHITECTURE FINALE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 860 495" role="img" aria-labelledby="aws-archi-titre aws-archi-desc">
+                  <title id="aws-archi-titre">Architecture finale de l'application sur AWS</title>
+                  <desc id="aws-archi-desc">Les utilisateurs passent par un Application Load Balancer public, qui répartit le trafic entre les instances d'un groupe Auto Scaling sur deux zones. Chaque instance exécute l'application dans un conteneur Docker et se connecte à une base Amazon RDS MySQL placée dans des sous-réseaux privés. Les instances lisent les identifiants de la base dans Secrets Manager, téléchargent leur image depuis Amazon ECR et envoient leurs métriques à CloudWatch, qui pilote le nombre d'instances. La chaîne GitHub Actions publie l'image dans ECR puis remplace les instances.</desc>
+                  <defs>
+                    <marker id="aws-f-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="aws-f-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="aws-f-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="aws-f-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                  </defs>
+
+                  <text class="col-label" x="20" y="60">UTILISATEURS</text>
+                  <text class="col-label col-label--externe" x="640" y="135">SERVICES AWS</text>
+
+                  <rect class="zone" x="225" y="40" width="385" height="410" rx="12"/>
+                  <text class="zone-label" x="417" y="438" text-anchor="middle">VPC 10.0.0.0/16 · 2 ZONES · US-EAST-1</text>
+
+                  <!-- Liens -->
+                  <path class="lien lien--client" d="M190,110 H243" marker-end="url(#aws-f-client)"/>
+                  <text class="lien-label" x="206" y="102" text-anchor="middle">HTTP</text>
+                  <path class="lien lien--client" d="M337,120 V148" marker-end="url(#aws-f-client)"/>
+                  <path class="lien lien--client" d="M498,120 V148" marker-end="url(#aws-f-client)"/>
+                  <path class="lien lien--donnee" d="M337,294 V343" marker-end="url(#aws-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M498,294 V343" marker-end="url(#aws-f-donnee)"/>
+                  <text class="lien-label" x="345" y="324">3306</text>
+                  <path class="lien lien--externe" d="M590,172 H638" marker-end="url(#aws-f-externe)"/>
+                  <path class="lien lien--externe" d="M590,228 H638" marker-end="url(#aws-f-externe)"/>
+                  <path class="lien lien--externe" d="M590,284 H638" marker-end="url(#aws-f-externe)"/>
+                  <path class="lien lien--direct" d="M190,345 H212 V255 H243" marker-end="url(#aws-f-direct)"/>
+                  <path class="lien lien--direct" d="M105,390 V468 H740 V308" marker-end="url(#aws-f-direct)"/>
+                  <text class="lien-label lien-label--direct" x="417" y="486" text-anchor="middle">publication de l'image testée</text>
+
+                  <!-- Utilisateurs et chaîne CI/CD -->
+                  <g class="noeud noeud--client"><rect x="20" y="80" width="170" height="60" rx="10"/><text x="105" y="106" text-anchor="middle">Utilisateurs</text><text class="sous" x="105" y="124" text-anchor="middle">navigateur · HTTP</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="290" width="170" height="100" rx="10"/><text x="105" y="320" text-anchor="middle">GitHub Actions</text><text class="sous" x="105" y="340" text-anchor="middle">build · tests</text><text class="sous" x="105" y="355" text-anchor="middle">test de charge</text><text class="sous" x="105" y="370" text-anchor="middle">déploiement</text></g>
+
+                  <!-- Dans le VPC -->
+                  <g class="noeud noeud--app"><rect x="245" y="70" width="345" height="50" rx="10"/><text x="417" y="92" text-anchor="middle">Application Load Balancer</text><text class="sous" x="417" y="108" text-anchor="middle">public · 2 zones · health check</text></g>
+                  <g class="noeud noeud--app"><rect x="245" y="150" width="345" height="160" rx="10"/><text x="417" y="172" text-anchor="middle">Auto Scaling · 2 à 4 instances</text><text class="sous" x="417" y="188" text-anchor="middle">suivi de cible : CPU 50 %</text></g>
+                  <g class="noeud noeud--app"><rect x="262" y="202" width="150" height="92" rx="8"/><text x="337" y="228" text-anchor="middle">EC2 · zone a</text><text class="sous" x="337" y="246" text-anchor="middle">conteneur Docker</text><text class="sous" x="337" y="261" text-anchor="middle">non root</text><text class="sous" x="337" y="276" text-anchor="middle">rôle IAM · IMDSv2</text></g>
+                  <g class="noeud noeud--app"><rect x="423" y="202" width="150" height="92" rx="8"/><text x="498" y="228" text-anchor="middle">EC2 · zone b</text><text class="sous" x="498" y="246" text-anchor="middle">conteneur Docker</text><text class="sous" x="498" y="261" text-anchor="middle">non root</text><text class="sous" x="498" y="276" text-anchor="middle">rôle IAM · IMDSv2</text></g>
+                  <g class="noeud noeud--donnee"><rect x="245" y="345" width="345" height="55" rx="10"/><text x="417" y="368" text-anchor="middle">Amazon RDS · MySQL 8.4</text><text class="sous" x="417" y="386" text-anchor="middle">sous-réseaux privés · chiffrée</text></g>
+
+                  <!-- Services AWS -->
+                  <g class="noeud noeud--externe"><rect x="640" y="150" width="200" height="44" rx="10"/><text x="656" y="169">Secrets Manager</text><text class="sous" x="656" y="185">identifiants de la base</text></g>
+                  <g class="noeud noeud--externe"><rect x="640" y="206" width="200" height="44" rx="10"/><text x="656" y="225">CloudWatch</text><text class="sous" x="656" y="241">métriques · scaling</text></g>
+                  <g class="noeud noeud--externe"><rect x="640" y="262" width="200" height="44" rx="10"/><text x="656" y="281">Amazon ECR</text><text class="sous" x="656" y="297">image :sha · :latest</text></g>
+                </svg>
+              </div>
+              <ul class="archi-legende">
+                <li><span class="pastille pastille--client"></span>Utilisateurs et flux</li>
+                <li><span class="pastille pastille--app"></span>Calcul et réseau</li>
+                <li><span class="pastille pastille--donnee"></span>Données</li>
+                <li><span class="pastille pastille--externe"></span>Services AWS managés</li>
+                <li><span class="pastille pastille--direct"></span>Chaîne CI/CD</li>
+              </ul>
+              <figcaption class="archi-caption">Le trafic n'atteint les instances que par l'équilibreur, et la base n'accepte que les instances. Ses identifiants viennent de Secrets Manager grâce au rôle IAM. La chaîne CI/CD publie une image testée dans ECR, puis remplace les instances sans jamais réduire la capacité.</figcaption>
+            </figure>
+
+            <div class="archi archi-phases">
+              <div class="featured-block-title">ARCHITECTURE PAR ÉTAPE</div>
+              <div class="phase-tabs" role="tablist" aria-label="Architecture par étape">
+                <button type="button" class="phase-tab is-active" role="tab" id="aws-tab-1" aria-controls="aws-panel-1" aria-selected="true">1 · Machine unique</button>
+                <button type="button" class="phase-tab" role="tab" id="aws-tab-2" aria-controls="aws-panel-2" aria-selected="false" tabindex="-1">2 · Découplage</button>
+                <button type="button" class="phase-tab" role="tab" id="aws-tab-3" aria-controls="aws-panel-3" aria-selected="false" tabindex="-1">3 · Haute dispo</button>
+                <button type="button" class="phase-tab" role="tab" id="aws-tab-4" aria-controls="aws-panel-4" aria-selected="false" tabindex="-1">4 · Conteneurs</button>
+                <button type="button" class="phase-tab" role="tab" id="aws-tab-5" aria-controls="aws-panel-5" aria-selected="false" tabindex="-1">5 · CI/CD</button>
+              </div>
+
+              <!-- Étape 1 -->
+              <div class="phase-panel" role="tabpanel" id="aws-panel-1" aria-labelledby="aws-tab-1">
+                <div class="archi-scroll">
+                  <svg viewBox="0 0 860 400" role="img" aria-labelledby="aws-p1-titre aws-p1-desc">
+                    <title id="aws-p1-titre">Étape 1 : application sur une seule machine</title>
+                    <desc id="aws-p1-desc">Les utilisateurs accèdent en HTTP à une instance EC2 placée dans le sous-réseau public d'un VPC. Cette instance exécute à la fois l'application Node.js et la base MySQL. L'administrateur s'y connecte en SSH depuis une seule adresse IP. Terraform crée l'ensemble.</desc>
+                    <defs>
+                      <marker id="aws-p1-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p1-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p1-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                    </defs>
+                    <text class="col-label" x="20" y="70">ACCÈS</text>
+                    <rect class="zone" x="240" y="40" width="360" height="330" rx="12"/>
+                    <text class="zone-label" x="420" y="358" text-anchor="middle">VPC 10.0.0.0/16 · SOUS-RÉSEAU PUBLIC</text>
+
+                    <path class="lien lien--client" d="M190,120 H268" marker-end="url(#aws-p1-client)"/>
+                    <text class="lien-label" x="212" y="112" text-anchor="middle">HTTP</text>
+                    <path class="lien lien--client" d="M190,280 H268" marker-end="url(#aws-p1-client)"/>
+                    <text class="lien-label" x="212" y="272" text-anchor="middle">SSH</text>
+                    <path class="lien lien--donnee" d="M420,210 V233" marker-end="url(#aws-p1-donnee)"/>
+                    <path class="lien lien--direct" d="M638,190 H602" marker-end="url(#aws-p1-direct)"/>
+
+                    <g class="noeud noeud--client"><rect x="20" y="90" width="170" height="60" rx="10"/><text x="105" y="116" text-anchor="middle">Utilisateurs</text><text class="sous" x="105" y="134" text-anchor="middle">port 80</text></g>
+                    <g class="noeud noeud--client"><rect x="20" y="250" width="170" height="60" rx="10"/><text x="105" y="276" text-anchor="middle">Administrateur</text><text class="sous" x="105" y="294" text-anchor="middle">une seule IP autorisée</text></g>
+                    <g class="noeud noeud--app"><rect x="270" y="75" width="300" height="245" rx="10"/><text x="420" y="102" text-anchor="middle">EC2 Ubuntu 24.04</text><text class="sous" x="420" y="120" text-anchor="middle">security group : 80 public, 22 admin</text></g>
+                    <g class="noeud noeud--app"><rect x="295" y="145" width="250" height="65" rx="8"/><text x="420" y="173" text-anchor="middle">Application Node.js</text><text class="sous" x="420" y="191" text-anchor="middle">installée au démarrage</text></g>
+                    <g class="noeud noeud--donnee"><rect x="295" y="235" width="250" height="65" rx="8"/><text x="420" y="263" text-anchor="middle">MySQL local</text><text class="sous" x="420" y="281" text-anchor="middle">port 3306 fermé à Internet</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="160" width="200" height="60" rx="10"/><text x="656" y="186">Terraform</text><text class="sous" x="656" y="204">11 ressources, une commande</text></g>
+                  </svg>
+                </div>
+                <p class="archi-caption">Point de départ : tout tient sur une machine. L'application fonctionne, mais une panne du serveur la rend indisponible, et le mot de passe de la base figure dans le script d'installation.</p>
+              </div>
+
+              <!-- Étape 2 -->
+              <div class="phase-panel" role="tabpanel" id="aws-panel-2" aria-labelledby="aws-tab-2" hidden>
+                <div class="archi-scroll">
+                  <svg viewBox="0 0 860 400" role="img" aria-labelledby="aws-p2-titre aws-p2-desc">
+                    <title id="aws-p2-titre">Étape 2 : application et base de données séparées</title>
+                    <desc id="aws-p2-desc">Les utilisateurs accèdent à une instance EC2 dans un sous-réseau public. La base est déplacée vers Amazon RDS MySQL, dans des sous-réseaux privés sans route vers Internet, et n'accepte que l'instance. L'instance lit les identifiants dans Secrets Manager grâce à son rôle IAM. Le poste d'administration migre les données de l'étape 1.</desc>
+                    <defs>
+                      <marker id="aws-p2-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p2-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p2-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p2-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                    </defs>
+                    <text class="col-label" x="20" y="60">ACCÈS</text>
+                    <text class="col-label col-label--externe" x="640" y="60">SERVICES AWS</text>
+                    <rect class="zone" x="230" y="40" width="380" height="330" rx="12"/>
+                    <text class="zone-label" x="420" y="358" text-anchor="middle">VPC · 2 ZONES · PUBLIC ET PRIVÉ</text>
+
+                    <path class="lien lien--client" d="M190,105 H248" marker-end="url(#aws-p2-client)"/>
+                    <path class="lien lien--donnee" d="M420,145 V248" marker-end="url(#aws-p2-donnee)"/>
+                    <text class="lien-label" x="430" y="200">3306 · depuis le serveur web</text>
+                    <path class="lien lien--externe" d="M590,100 H638" marker-end="url(#aws-p2-externe)"/>
+                    <path class="lien lien--direct" d="M190,290 H212 V128 H248" marker-end="url(#aws-p2-direct)"/>
+                    <text class="lien-label lien-label--direct" x="20" y="340">migration des données de l'étape 1</text>
+
+                    <g class="noeud noeud--client"><rect x="20" y="75" width="170" height="60" rx="10"/><text x="105" y="101" text-anchor="middle">Utilisateurs</text><text class="sous" x="105" y="119" text-anchor="middle">port 80</text></g>
+                    <g class="noeud noeud--client"><rect x="20" y="260" width="170" height="60" rx="10"/><text x="105" y="286" text-anchor="middle">Poste admin</text><text class="sous" x="105" y="304" text-anchor="middle">Terraform · scripts</text></g>
+                    <g class="noeud noeud--app"><rect x="250" y="70" width="340" height="75" rx="10"/><text x="420" y="98" text-anchor="middle">EC2 · serveur web</text><text class="sous" x="420" y="116" text-anchor="middle">Node.js · sous-réseau public</text><text class="sous" x="420" y="131" text-anchor="middle">rôle IAM · IMDSv2 · disque chiffré</text></g>
+                    <g class="noeud noeud--donnee"><rect x="250" y="250" width="340" height="75" rx="10"/><text x="420" y="278" text-anchor="middle">Amazon RDS · MySQL 8.4</text><text class="sous" x="420" y="296" text-anchor="middle">sous-réseaux privés, sans route Internet</text><text class="sous" x="420" y="311" text-anchor="middle">chiffrée · non accessible publiquement</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="78" width="200" height="44" rx="10"/><text x="656" y="97">Secrets Manager</text><text class="sous" x="656" y="113">user, password, host, db</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="134" width="200" height="44" rx="10"/><text x="656" y="153">IAM</text><text class="sous" x="656" y="169">rôle de l'instance</text></g>
+                  </svg>
+                </div>
+                <p class="archi-caption">La base devient un service managé isolé du réseau public. L'application lit ses identifiants dans Secrets Manager avec le rôle de l'instance : plus aucun secret dans le code.</p>
+              </div>
+
+              <!-- Étape 3 -->
+              <div class="phase-panel" role="tabpanel" id="aws-panel-3" aria-labelledby="aws-tab-3" hidden>
+                <div class="archi-scroll">
+                  <svg viewBox="0 0 860 400" role="img" aria-labelledby="aws-p3-titre aws-p3-desc">
+                    <title id="aws-p3-titre">Étape 3 : haute disponibilité et mise à l'échelle</title>
+                    <desc id="aws-p3-desc">Les utilisateurs passent par un Application Load Balancer public sur deux zones. Il répartit le trafic entre les instances d'un groupe Auto Scaling, deux au minimum et jusqu'à quatre sous charge. Les instances utilisent la base RDS privée et Secrets Manager ; CloudWatch suit le CPU et pilote le nombre d'instances.</desc>
+                    <defs>
+                      <marker id="aws-p3-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p3-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p3-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                    </defs>
+                    <text class="col-label" x="20" y="60">ACCÈS</text>
+                    <text class="col-label col-label--externe" x="640" y="125">SERVICES AWS</text>
+                    <rect class="zone" x="225" y="40" width="385" height="330" rx="12"/>
+                    <text class="zone-label" x="417" y="358" text-anchor="middle">VPC · 2 ZONES</text>
+
+                    <path class="lien lien--client" d="M190,95 H243" marker-end="url(#aws-p3-client)"/>
+                    <path class="lien lien--client" d="M417,110 V133" marker-end="url(#aws-p3-client)"/>
+                    <path class="lien lien--donnee" d="M417,275 V298" marker-end="url(#aws-p3-donnee)"/>
+                    <path class="lien lien--externe" d="M590,157 H638" marker-end="url(#aws-p3-externe)"/>
+                    <path class="lien lien--externe" d="M590,213 H638" marker-end="url(#aws-p3-externe)"/>
+
+                    <g class="noeud noeud--client"><rect x="20" y="65" width="170" height="60" rx="10"/><text x="105" y="91" text-anchor="middle">Utilisateurs</text><text class="sous" x="105" y="109" text-anchor="middle">1 000 req/s en test</text></g>
+                    <g class="noeud noeud--app"><rect x="245" y="62" width="345" height="48" rx="10"/><text x="417" y="83" text-anchor="middle">Application Load Balancer</text><text class="sous" x="417" y="99" text-anchor="middle">public · health check toutes les 15 s</text></g>
+                    <g class="noeud noeud--app"><rect x="245" y="135" width="345" height="140" rx="10"/><text x="417" y="156" text-anchor="middle">Auto Scaling · min 2 · max 4</text><text class="sous" x="417" y="172" text-anchor="middle">cible CPU 50 % · instance défaillante remplacée</text></g>
+                    <g class="noeud noeud--app"><rect x="262" y="185" width="98" height="75" rx="8"/><text x="311" y="214" text-anchor="middle">EC2</text><text class="sous" x="311" y="232" text-anchor="middle">zone a</text></g>
+                    <g class="noeud noeud--app"><rect x="369" y="185" width="98" height="75" rx="8"/><text x="418" y="214" text-anchor="middle">EC2</text><text class="sous" x="418" y="232" text-anchor="middle">zone b</text></g>
+                    <g class="noeud noeud--externe"><rect x="476" y="185" width="98" height="75" rx="8"/><text x="525" y="214" text-anchor="middle">EC2 +2</text><text class="sous" x="525" y="232" text-anchor="middle">sous charge</text></g>
+                    <g class="noeud noeud--donnee"><rect x="245" y="300" width="345" height="48" rx="10"/><text x="417" y="321" text-anchor="middle">Amazon RDS · MySQL</text><text class="sous" x="417" y="337" text-anchor="middle">privée · connexions inactives fermées</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="135" width="200" height="44" rx="10"/><text x="656" y="154">Secrets Manager</text><text class="sous" x="656" y="170">identifiants de la base</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="191" width="200" height="44" rx="10"/><text x="656" y="210">CloudWatch</text><text class="sous" x="656" y="226">alarmes · tableau de bord</text></g>
+                  </svg>
+                </div>
+                <p class="archi-caption">Deux instances au minimum, une par zone, derrière un équilibreur ; le groupe en ajoute quand le CPU dépasse 50 %. Mesuré : 600 000 requêtes à 1 000 req/s avec une seule erreur, montée automatique de 2 à 4 instances.</p>
+              </div>
+
+              <!-- Étape 4 -->
+              <div class="phase-panel" role="tabpanel" id="aws-panel-4" aria-labelledby="aws-tab-4" hidden>
+                <div class="archi-scroll">
+                  <svg viewBox="0 0 860 400" role="img" aria-labelledby="aws-p4-titre aws-p4-desc">
+                    <title id="aws-p4-titre">Étape 4 : application conteneurisée</title>
+                    <desc id="aws-p4-desc">Même architecture qu'à l'étape 3, mais chaque instance exécute une image Docker. Le poste développeur construit l'image et la publie dans Amazon ECR, où elle est analysée. Au démarrage, les instances téléchargent l'image avec leur rôle IAM.</desc>
+                    <defs>
+                      <marker id="aws-p4-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p4-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p4-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p4-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                    </defs>
+                    <text class="col-label" x="20" y="60">ACCÈS</text>
+                    <text class="col-label col-label--externe" x="640" y="125">SERVICES AWS</text>
+                    <rect class="zone" x="225" y="40" width="385" height="330" rx="12"/>
+                    <text class="zone-label" x="417" y="362" text-anchor="middle">VPC · 2 ZONES</text>
+
+                    <path class="lien lien--client" d="M190,95 H243" marker-end="url(#aws-p4-client)"/>
+                    <path class="lien lien--client" d="M417,110 V133" marker-end="url(#aws-p4-client)"/>
+                    <path class="lien lien--donnee" d="M417,275 V298" marker-end="url(#aws-p4-donnee)"/>
+                    <path class="lien lien--externe" d="M590,157 H638" marker-end="url(#aws-p4-externe)"/>
+                    <path class="lien lien--externe" d="M590,213 H638" marker-end="url(#aws-p4-externe)"/>
+                    <path class="lien lien--externe" d="M590,262 H638" marker-end="url(#aws-p4-externe)"/>
+                    <path class="lien lien--direct" d="M105,315 V388 H740 V286" marker-end="url(#aws-p4-direct)"/>
+                    <text class="lien-label lien-label--direct" x="417" y="381" text-anchor="middle">docker push</text>
+
+                    <g class="noeud noeud--client"><rect x="20" y="65" width="170" height="60" rx="10"/><text x="105" y="91" text-anchor="middle">Utilisateurs</text><text class="sous" x="105" y="109" text-anchor="middle">port 80</text></g>
+                    <g class="noeud noeud--client"><rect x="20" y="255" width="170" height="60" rx="10"/><text x="105" y="281" text-anchor="middle">Poste développeur</text><text class="sous" x="105" y="299" text-anchor="middle">docker build · tests</text></g>
+                    <g class="noeud noeud--app"><rect x="245" y="62" width="345" height="48" rx="10"/><text x="417" y="83" text-anchor="middle">Application Load Balancer</text><text class="sous" x="417" y="99" text-anchor="middle">public · 2 zones</text></g>
+                    <g class="noeud noeud--app"><rect x="245" y="135" width="345" height="140" rx="10"/><text x="417" y="156" text-anchor="middle">Auto Scaling · min 2 · max 4</text><text class="sous" x="417" y="172" text-anchor="middle">démarrage d'une instance : 62 s</text></g>
+                    <g class="noeud noeud--app"><rect x="262" y="185" width="150" height="75" rx="8"/><text x="337" y="210" text-anchor="middle">EC2 + Docker</text><text class="sous" x="337" y="228" text-anchor="middle">non root · restart</text><text class="sous" x="337" y="243" text-anchor="middle">zone a</text></g>
+                    <g class="noeud noeud--app"><rect x="423" y="185" width="150" height="75" rx="8"/><text x="498" y="210" text-anchor="middle">EC2 + Docker</text><text class="sous" x="498" y="228" text-anchor="middle">non root · restart</text><text class="sous" x="498" y="243" text-anchor="middle">zone b</text></g>
+                    <g class="noeud noeud--donnee"><rect x="245" y="300" width="345" height="48" rx="10"/><text x="417" y="321" text-anchor="middle">Amazon RDS · MySQL</text><text class="sous" x="417" y="337" text-anchor="middle">inchangée</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="135" width="200" height="44" rx="10"/><text x="656" y="154">Secrets Manager</text><text class="sous" x="656" y="170">lu depuis le conteneur</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="191" width="200" height="44" rx="10"/><text x="656" y="210">CloudWatch</text><text class="sous" x="656" y="226">CPU 5 fois plus bas</text></g>
+                    <g class="noeud noeud--externe"><rect x="640" y="240" width="200" height="44" rx="10"/><text x="656" y="259">Amazon ECR</text><text class="sous" x="656" y="275">analyse à chaque push</text></g>
+                  </svg>
+                </div>
+                <p class="archi-caption">Les instances n'installent plus rien : elles téléchargent une image construite et testée une seule fois. Une instance est prête en 62 s au lieu de 4 min, et la même charge consomme 5 fois moins de CPU.</p>
+              </div>
+
+              <!-- Étape 5 -->
+              <div class="phase-panel" role="tabpanel" id="aws-panel-5" aria-labelledby="aws-tab-5" hidden>
+                <div class="archi-scroll">
+                  <svg viewBox="0 0 860 400" role="img" aria-labelledby="aws-p5-titre aws-p5-desc">
+                    <title id="aws-p5-titre">Étape 5 : chaîne CI/CD</title>
+                    <desc id="aws-p5-desc">Un push du développeur déclenche GitHub Actions : build, tests de qualité, publication de l'image dans ECR avec le numéro du commit, test de charge, puis déploiement. Le déploiement promeut l'image en latest, fait démarrer de nouvelles instances dans le groupe Auto Scaling avant de retirer les anciennes, puis teste l'application derrière l'équilibreur.</desc>
+                    <defs>
+                      <marker id="aws-p5-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p5-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                      <marker id="aws-p5-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                    </defs>
+                    <rect class="zone" x="160" y="40" width="685" height="135" rx="12"/>
+                    <text class="zone-label" x="502" y="163" text-anchor="middle">GITHUB ACTIONS · CHAQUE ÉTAPE BLOQUE LA SUIVANTE</text>
+                    <rect class="zone" x="160" y="215" width="685" height="160" rx="12"/>
+                    <text class="zone-label" x="502" y="363" text-anchor="middle">PRODUCTION AWS · INFRASTRUCTURE DE L'ÉTAPE 4</text>
+
+                    <path class="lien lien--client" d="M140,95 H173" marker-end="url(#aws-p5-client)"/>
+                    <path class="lien lien--client" d="M285,95 H298" marker-end="url(#aws-p5-client)"/>
+                    <path class="lien lien--client" d="M410,95 H423" marker-end="url(#aws-p5-client)"/>
+                    <path class="lien lien--client" d="M535,95 H548" marker-end="url(#aws-p5-client)"/>
+                    <path class="lien lien--client" d="M660,95 H673" marker-end="url(#aws-p5-client)"/>
+                    <path class="lien lien--direct" d="M480,130 V190 H275 V238" marker-end="url(#aws-p5-direct)"/>
+                    <text class="lien-label lien-label--direct" x="285" y="205">image :sha</text>
+                    <path class="lien lien--direct" d="M735,130 V198 H520 V238" marker-end="url(#aws-p5-direct)"/>
+                    <text class="lien-label lien-label--direct" x="530" y="212">remplacement</text>
+                    <path class="lien lien--direct" d="M800,130 V238" marker-end="url(#aws-p5-direct)"/>
+                    <text class="lien-label lien-label--direct" x="794" y="226" text-anchor="end">test en prod</text>
+                    <path class="lien lien--externe" d="M418,265 H377" marker-end="url(#aws-p5-externe)"/>
+
+                    <g class="noeud noeud--client"><rect x="20" y="65" width="120" height="60" rx="10"/><text x="80" y="91" text-anchor="middle">Développeur</text><text class="sous" x="80" y="109" text-anchor="middle">git push</text></g>
+                    <g class="noeud noeud--app"><rect x="175" y="60" width="110" height="70" rx="8"/><text x="230" y="88" text-anchor="middle">1. Build</text><text class="sous" x="230" y="106" text-anchor="middle">image unique</text></g>
+                    <g class="noeud noeud--app"><rect x="300" y="60" width="110" height="70" rx="8"/><text x="355" y="88" text-anchor="middle">2. Qualité</text><text class="sous" x="355" y="106" text-anchor="middle">lint · tests</text></g>
+                    <g class="noeud noeud--app"><rect x="425" y="60" width="110" height="70" rx="8"/><text x="480" y="88" text-anchor="middle">3. Push</text><text class="sous" x="480" y="106" text-anchor="middle">ECR · tag SHA</text></g>
+                    <g class="noeud noeud--app"><rect x="550" y="60" width="110" height="70" rx="8"/><text x="605" y="88" text-anchor="middle">4. Charge</text><text class="sous" x="605" y="106" text-anchor="middle">seuils bloquants</text></g>
+                    <g class="noeud noeud--app"><rect x="675" y="60" width="155" height="70" rx="8"/><text x="752" y="88" text-anchor="middle">5. Production</text><text class="sous" x="752" y="106" text-anchor="middle">promotion « latest »</text></g>
+                    <g class="noeud noeud--externe"><rect x="175" y="240" width="200" height="60" rx="10"/><text x="191" y="265">Amazon ECR</text><text class="sous" x="191" y="283">:sha → :latest</text></g>
+                    <g class="noeud noeud--app"><rect x="420" y="240" width="200" height="90" rx="10"/><text x="520" y="265" text-anchor="middle">Auto Scaling</text><text class="sous" x="520" y="283" text-anchor="middle">nouvelles instances saines</text><text class="sous" x="520" y="298" text-anchor="middle">avant le retrait</text><text class="sous" x="520" y="313" text-anchor="middle">des anciennes</text></g>
+                    <g class="noeud noeud--app"><rect x="650" y="240" width="180" height="60" rx="10"/><text x="740" y="265" text-anchor="middle">Load Balancer</text><text class="sous" x="740" y="283" text-anchor="middle">test-app.sh · 6/6</text></g>
+                  </svg>
+                </div>
+                <p class="archi-caption">Une image construite une seule fois traverse toutes les étapes, et n'est promue en « latest » qu'après le test de charge. Mesuré : du commit à la production en 7 minutes, 545 requêtes sur 545 réussies pendant le remplacement des instances.</p>
+              </div>
+            </div>
+          </div>
+
           <!-- Cloud & Serverless -->
           <div class="category">
             <div class="section-head">CLOUD &amp; SERVERLESS</div>
@@ -890,6 +1270,15 @@
                 </div>
               </div>
               <div class="stack-row-text">Docker, Docker Compose</div>
+            </div>
+            <div class="stack-row">
+              <div class="stack-row-head">
+                <div class="stack-row-title">Infrastructure as Code</div>
+                <div class="logo-row">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" title="Terraform" class="logo">
+                </div>
+              </div>
+              <div class="stack-row-text">Terraform en modules réutilisables sur AWS : VPC, EC2, Auto Scaling, Load Balancer, RDS, Secrets Manager, ECR, CloudWatch</div>
             </div>
           </div>
 
