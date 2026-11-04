@@ -320,6 +320,25 @@ html[data-theme="dark"] {
 .spec-label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--faint); padding-top: 2px; }
 .spec-value { color: var(--body); }
 
+/* Captures d'écran (projet AWS) : cadre fin, clic pour agrandir */
+.shot-frame { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 2px; overflow: hidden; }
+.shot-frame img { display: block; width: 100%; height: auto; }
+.shot-frame:hover { border-color: var(--line2); }
+.shot-frame--spaced { margin-top: 28px; }
+
+/* Architecture par étape : onglets */
+.archi-phases { margin-top: 48px; }
+.phase-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.phase-tab {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.02em;
+  padding: 7px 12px; border: 1px solid var(--line2); border-radius: 2px;
+  background: transparent; color: var(--muted); cursor: pointer;
+}
+.phase-tab:hover { color: var(--fg); border-color: var(--faint); }
+.phase-tab.is-active { color: var(--accent-ink); background: var(--accent-soft); border-color: var(--accent); }
+.phase-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.phase-panel[hidden] { display: none; }
+
 .video-frame { aspect-ratio: 16/10; background: var(--surface); border-radius: 2px; overflow: hidden; }
 .video-frame iframe { width: 100%; height: 100%; border: 0; }
 .video-frame-16-9 { aspect-ratio: 16/9; }
