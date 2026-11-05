@@ -182,8 +182,11 @@
 
           <!-- Kupanga -->
           <div class="featured">
-            <div class="featured-head">
-              <h2 class="featured-title">Kupanga</h2>
+            <div class="featured-head featured-head--logo">
+              <h2 class="featured-title featured-title--logo">
+                <img class="app-icon app-icon--trait" src="images/kupanga-mark.svg" alt="" width="44" height="44" />
+                Kupanga
+              </h2>
               <span class="badge">EN LIGNE</span>
             </div>
             <div class="featured-sub">Plateforme SaaS de gestion locative conçue et développée en binôme, de l'API au front. Un même service accueille propriétaires et locataires en France et en République démocratique du Congo : le pays du bien décide des champs, des devises, des modèles de bail et des canaux de notification. Elle est en ligne et son lancement est en cours.</div>
@@ -367,10 +370,466 @@
               </div>
 
               <div>
-                <div class="video-frame">
-                  <iframe src="https://www.youtube.com/embed/1R9kjwI1Cyg" referrerpolicy="strict-origin-when-cross-origin" title="Démo Kupanga" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <!-- Vidéo de démo (10 min, France et RDC) -->
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/lGlYv87DOc0" referrerpolicy="strict-origin-when-cross-origin" title="Démo Kupanga" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <a href="https://youtu.be/1R9kjwI1Cyg" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
+                <a href="https://youtu.be/lGlYv87DOc0" target="_blank" rel="noopener" class="video-fallback">Voir la démo sur YouTube (10 min, France et RDC) ↗</a>
+
+                <!-- Captures de la démo (kupanga-Api/demo/captures/exporter.py) -->
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">ANNONCES · SANS COMPTE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/explorer.jpg" alt="Explorer : annonces en France et en RDC, chacune dans sa devise" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonces</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/filtres.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/filtres.jpg" alt="Filtres : pays, ville, type, loyer, surface, meublé, écoles et pharmacies à proximité" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Filtres</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/explorer-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/explorer-rdc.jpg" alt="Villas à Kinshasa, loyers en dollars" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Résultats filtrés</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/carte.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/carte.jpg" alt="Vue carte des annonces, positions publiques arrondies à 100 m" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Carte</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/annonce-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/annonce-fr.jpg" alt="Annonce en France : photos, loyer, charges, DPE" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonce en France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/annonce-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/annonce-rdc.jpg" alt="Annonce à Kinshasa : commune, quartier, point de repère, équipements" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonce en RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-explorer.jpg" alt="Explorer sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Sur téléphone</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">COMPTE ET E-MAILS</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/inscription.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/inscription.jpg" alt="Inscription : identité et téléphone de contact au format international" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Inscription</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/email-confirmation.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/email-confirmation.jpg" alt="E-mail de confirmation de l'adresse, reçu dans Mailpit" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Confirmation par e-mail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/notifications.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/notifications.jpg" alt="Notifications : signatures, paiements, congé, réservations" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Notifications</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/mailpit.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/mailpit.jpg" alt="Tous les e-mails envoyés pendant la démo" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Boîte d'envoi</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">PROPRIÉTAIRE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/accueil.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/accueil.jpg" alt="Accueil de la propriétaire : tâches à faire et biens" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Accueil</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/mes-biens.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/mes-biens.jpg" alt="Mes biens : 26 biens, loués et vacants" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Mes biens</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/nouveau-carte.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/nouveau-carte.jpg" alt="Publication d'un bien : repère placé sur la carte" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Repère sur la carte</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/nouveau-bien.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/nouveau-bien.jpg" alt="Publication d'un bien : caractéristiques, équipements et DPE" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Caractéristiques</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/nouveau-photos.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/nouveau-photos.jpg" alt="Photos réduites dans le navigateur, métadonnées GPS retirées" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Photos</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-publie.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bien-publie.jpg" alt="Bien publié : fiche privée du propriétaire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien publié</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-loue.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bien-loue.jpg" alt="Bien loué : locataire, téléphone, WhatsApp, documents" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien loué</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/documents.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/documents.jpg" alt="Documents de tous les biens : baux, états des lieux, quittances" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Documents</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">LOUER · DE LA VISITE AU BAIL</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/messagerie.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/messagerie.jpg" alt="Conversation en temps réel entre la propriétaire et une candidate" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Messagerie</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/proposer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/proposer.jpg" alt="Demande de location envoyée, en attente de réponse" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Proposer la location</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/demande-recue.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/demande-recue.jpg" alt="La candidate accepte ou refuse la proposition" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Demande reçue</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/reservation.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/reservation.jpg" alt="Logement réservé 14 jours après acceptation" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Réservation</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-reserve.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bien-reserve.jpg" alt="Côté propriétaire : bien réservé, annonce retirée de la recherche" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien réservé</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bail-nouveau.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bail-nouveau.jpg" alt="Nouveau bail : loyer, charges et dépôt de garantie" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Nouveau bail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bail-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bail-signature.jpg" alt="Signature du bail à l'écran par la propriétaire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Signature du bail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-bail-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-bail-signature.jpg" alt="Signature du bail au doigt sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Signature sur téléphone</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/edl-compteurs.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/edl-compteurs.jpg" alt="État des lieux : relevé des compteurs" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Compteurs</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/edl.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/edl.jpg" alt="État des lieux pièce par pièce" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Pièces</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-edl-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-edl-signature.jpg" alt="Le locataire relit et signe l'état des lieux" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Signature de l'EDL</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/loyer-recu.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/loyer-recu.jpg" alt="Déclarer le loyer reçu : mode, référence, signature" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Loyer reçu</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/quittance-payee.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/quittance-payee.jpg" alt="Quittance payée, PDF envoyé au locataire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Quittance</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-mon-logement.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-mon-logement.jpg" alt="Mon logement, côté locataire, sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Côté locataire</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-quittances.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-quittances.jpg" alt="Mes quittances sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Mes quittances</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">FIN DE BAIL</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/donner-conge.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/donner-conge.jpg" alt="Le locataire donne congé avec une date de fin" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Donner congé</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/fin-de-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/fin-de-bail.jpg" alt="Fin du bail : dépôt restitué et motif de retenue" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Enregistrer la fin</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-libere.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bien-libere.jpg" alt="Bien libéré, de nouveau dans les annonces" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien libéré</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">RDC · KINSHASA</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/rdc-type.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-type.jpg" alt="Types de bien congolais : villa, annexe, chambre, parcelle, local commercial" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Types de bien</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-adresse.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-adresse.jpg" alt="Adresse congolaise : commune, quartier, parcelle, point de repère" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Adresse RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-gps.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-gps.jpg" alt="Repère placé avec le GPS du téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Repère GPS</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-equipements.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-equipements.jpg" alt="Forage, groupe électrogène, gardiennage et heures de courant" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Équipements</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-loyer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-loyer.jpg" alt="Loyer en dollars, garantie et loyers d'avance en mois" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Loyer et garantie</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-annonce.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-annonce.jpg" alt="Annonce publiée à Kinshasa" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonce publiée</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-villa.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-villa.jpg" alt="Villa louée : locataire au +243, WhatsApp" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Villa louée</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-quittances.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-quittances.jpg" alt="Loyer payé par Mobile Money, reçu photographié" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Mobile Money</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-whatsapp.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/rdc-whatsapp.jpg" alt="Rappel de loyer par WhatsApp, message prérempli" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Rappel WhatsApp</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-rdc-logement.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-rdc-logement.jpg" alt="Locataire à Kinshasa sur téléphone, loyer en dollars" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Locataire en RDC</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">DOCUMENTS PDF ET E-MAILS</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/pdf-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/pdf-bail.jpg" alt="Bail de location PDF, modèle français, signé par les deux parties" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bail France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-bail-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/pdf-bail-rdc.jpg" alt="Bail de location PDF, modèle RDC, garantie et avance en mois" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bail RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-edl-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/pdf-edl-fr.jpg" alt="État des lieux PDF, pièces et éléments" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">État des lieux France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-edl-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/pdf-edl-rdc.jpg" alt="État des lieux PDF, modèle RDC, compteur Cash Power" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">État des lieux RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-quittance-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/pdf-quittance-fr.jpg" alt="Quittance PDF en euros" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Quittance France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-quittance-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/pdf-quittance-rdc.jpg" alt="Quittance PDF en dollars, payée par Mobile Money" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Quittance RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/email-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/email-bail.jpg" alt="E-mail au locataire : bail à signer, PDF joint" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">E-mail du bail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/email-quittance.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/email-quittance.jpg" alt="E-mail de quittance au locataire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">E-mail de quittance</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">THÈME SOMBRE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/sombre.jpg" alt="Accueil en thème sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Accueil</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/sombre-explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/sombre-explorer.jpg" alt="Explorer en thème sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Explorer</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/m-sombre.jpg" alt="Thème sombre sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Sur téléphone</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">BACK-OFFICE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/bo-login.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-login.jpg" alt="Connexion de l'administrateur, session séparée de l'API" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Connexion</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-tableau-de-bord.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-tableau-de-bord.jpg" alt="Tableau de bord du back-office" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tableau de bord</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-camembert-comptes-villes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-camembert-comptes-villes.jpg" alt="Répartition des utilisateurs en camembert et biens par ville en barres" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Utilisateurs et villes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-camembert-types.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-camembert-types.jpg" alt="Répartition des biens par type en camembert, résumé des indicateurs" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Types de bien</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-camembert-documents.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-camembert-documents.jpg" alt="Répartition des documents en camembert, documents générés par bien" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Documents</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-biens.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-biens.jpg" alt="Biens filtrés par pays et par type, paginés" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Biens</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-archiver.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-archiver.jpg" alt="Archiver un bien : jamais supprimé, baux conservés" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Archivage</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-documents.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-documents.jpg" alt="Documents d'un bien : baux, états des lieux, quittances" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Documents d'un bien</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-comptes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-comptes.jpg" alt="Comptes : propriétaires, locataires, non confirmés, anonymisés" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Comptes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-emails.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/kupanga/bo-emails.jpg" alt="File des e-mails : envoyés, en attente, en échec, renvoi" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">E-mails</figcaption>
+                    </figure>
+                  </div>
+                </div>
               </div>
             </div>
 
