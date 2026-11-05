@@ -548,6 +548,8 @@ html[data-theme="dark"] {
 .featured-title--logo { display: inline-flex; align-items: center; gap: 14px; }
 /* L'icône de l'app telle quelle : ses coins arrondis sont dans le SVG, aucun cadre ajouté. */
 .app-icon { width: 44px; height: 44px; flex: none; display: block; }
+/* Logo au trait (Kupanga, favicon de l'app) : tuile claire en thème sombre pour garder le contraste */
+html[data-theme="dark"] .app-icon--trait { background: #effbdb; border-radius: 10px; padding: 3px; box-sizing: border-box; }
 /* Mosaïque sur deux colonnes : chaque capture garde ses proportions et s'affiche en entier. */
 .kitchup-shots { column-count: 2; column-gap: 18px; margin-top: 4px; }
 .kitchup-shots figure { margin: 0 0 18px; break-inside: avoid; }
