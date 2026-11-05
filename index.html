@@ -202,11 +202,15 @@
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">LOCATION</span>
-                    <span class="spec-value">Le propriétaire propose son logement à un candidat, qui a 72 h pour accepter ou refuser. Bail, état des lieux et quittances sont ensuite générés en PDF, présentés comme de vrais actes, et signés en ligne par les deux parties.</span>
+                    <span class="spec-value">Le propriétaire propose son logement à un candidat, qui a 72 h pour accepter. Accepter réserve le bien : l'annonce sort de la recherche et le candidat ne devient locataire qu'à la signature du bail. D'ici là, il peut se désister et le propriétaire retirer la réservation ; sans bail signé, elle expire au bout de 14 jours. Bail, état des lieux et quittances sont générés en PDF, présentés comme de vrais actes, et signés en ligne par les deux parties.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">FIN DE BAIL</span>
+                    <span class="spec-value">Le propriétaire ou le locataire donne congé avec une date de fin, et peut le retirer. À la date prévue, le propriétaire enregistre la fin et le dépôt de garantie restitué, avec un motif obligatoire en cas de retenue. Le bien repasse alors en annonce. L'ancien locataire garde ses documents. Chaque étape est annoncée par une notification et un e-mail.</span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">COMPTES</span>
-                    <span class="spec-value">Inscription confirmée par e-mail ou connexion Google, rôle propriétaire ou locataire, numéro de téléphone visible des seules parties d'un même logement.</span>
+                    <span class="spec-value">Inscription confirmée par e-mail ou connexion Google. Un même compte peut publier ses biens et louer un logement ailleurs : il n'y a pas de rôle figé, les droits viennent de la relation au bien. L'accueil réunit demandes, réservations, logements loués, biens possédés et tâches à faire (fin de bail à enregistrer, congé qui arrive). Le numéro de téléphone n'est visible que des parties d'un même logement.</span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">LOYERS</span>
@@ -214,7 +218,7 @@
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">ÉCHANGES</span>
-                    <span class="spec-value">Messagerie en temps réel entre propriétaire et candidats, notifications, e-mails, messages WhatsApp préremplis pour le Congo.</span>
+                    <span class="spec-value">Messagerie en temps réel entre propriétaire et candidats, notifications accessibles depuis chaque écran, e-mails, messages WhatsApp préremplis pour le Congo.</span>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">MOBILE</span>
@@ -233,8 +237,8 @@
                     <span class="spec-value">Un monolithe modulaire : une seule application Spring Boot, découpée en modules métier.
                       <ul class="spec-sub">
                         <li><strong>Back</strong> : Spring Boot 3 / Java 21, modules authentification, biens, baux, messagerie, notifications, e-mails, stockage et back-office ; DTO générés par MapStruct.</li>
-                        <li><strong>Front</strong> : Angular 20 en composants autonomes, état géré par Signals et services, sans NgRx ni bibliothèque de composants ; application installable (PWA) et consultable hors ligne.</li>
-                        <li><strong>Données</strong> : PostgreSQL + PostGIS, schéma versionné par 53 migrations Flyway et vérifié par Hibernate au démarrage.</li>
+                        <li><strong>Front</strong> : Angular 20 en composants autonomes, état géré par Signals et services, sans NgRx ni bibliothèque de composants ; navigation construite à partir des biens possédés et des logements loués, pas d'un rôle ; application installable (PWA) et consultable hors ligne.</li>
+                        <li><strong>Données</strong> : PostgreSQL + PostGIS, schéma versionné par 55 migrations Flyway et vérifié par Hibernate au démarrage.</li>
                         <li><strong>Cache</strong> : Redis pour le géocodage, les commerces proches et les compteurs de tentatives ; l'application démarre et fonctionne même si Redis est indisponible.</li>
                         <li><strong>Stockage</strong> : client S3 indépendant du fournisseur (SDK AWS v2) : RustFS, MinIO ou un S3 managé se changent par simple configuration.</li>
                         <li><strong>Temps réel</strong> : WebSocket STOMP intégré au monolithe, choix argumenté plutôt qu'un service de messagerie séparé.</li>
@@ -255,6 +259,18 @@
                     </span>
                   </div>
                   <div class="spec-row">
+                    <span class="spec-label">CYCLE DE LOCATION</span>
+                    <span class="spec-value">Une entité Location suit chaque relation entre un logement et son locataire, de la demande à la fin du bail.
+                      <ul class="spec-sub">
+                        <li><strong>Machine à états</strong> : demande (72 h), puis réservée, active, terminée ; ou désistée, annulée, expirée. Chaque transition contrôle qui la déclenche et dans quel état est la location.</li>
+                        <li><strong>Unicité</strong> : un index unique partiel garantit au plus une location réservée ou active par bien, et une seule demande en attente.</li>
+                        <li><strong>Signature</strong> : le candidat devient locataire dans la même transaction que la signature du bail ; un désistement, un retrait ou une expiration annule les baux non signés et invalide leurs liens.</li>
+                        <li><strong>Expiration</strong> : une tâche planifiée fait expirer les réservations, et le statut est aussi calculé à la lecture, ce qui évite tout décalage entre deux passages de la tâche.</li>
+                        <li><strong>Historique</strong> : les locations terminées sont conservées, avec le congé, la date de fin et le dépôt restitué ; un locataire peut avoir plusieurs logements.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
                     <span class="spec-label">DOCUMENTS</span>
                     <span class="spec-value">Bail, état des lieux et quittance sont générés en PDF côté serveur.
                       <ul class="spec-sub">
@@ -271,8 +287,8 @@
                       <ul class="spec-sub">
                         <li><strong>Authentification</strong> : jeton d'accès JWT court et jeton de rafraîchissement en cookie HttpOnly, révoqué au changement de mot de passe ; adresse e-mail confirmée avant la première connexion.</li>
                         <li><strong>Google</strong> : connexion OAuth2 par jeton d'identité vérifié côté serveur, adresse confirmée par Google exigée ; un compte jamais confirmé est repris par le vrai titulaire de l'adresse.</li>
-                        <li><strong>Rate limiting</strong> : Bucket4j + Redis sur la connexion, l'inscription, le mot de passe oublié et Google, par e-mail, par IP et par couple e-mail + IP ; réponse 429 avec Retry-After. Les premiers contacts de la messagerie sont aussi plafonnés.</li>
-                        <li><strong>Autorisations</strong> : API fermée par défaut, rôles vérifiés par @PreAuthorize, contrôle de propriété sur chaque ressource contre les accès à la ressource d'autrui (IDOR), vérifié par des tests qui parcourent toutes les routes.</li>
+                        <li><strong>Rate limiting</strong> : Bucket4j + Redis sur la connexion, l'inscription, le mot de passe oublié et Google, par e-mail, par IP et par couple e-mail + IP ; réponse 429 avec Retry-After. Les premiers contacts de la messagerie sont aussi plafonnés, ainsi que la publication de biens (10 par jour et par compte) : tout compte pouvant publier, cette limite freine les annonces en masse.</li>
+                        <li><strong>Autorisations</strong> : API fermée par défaut, sans droits liés à un rôle : chaque service vérifie que le compte est propriétaire ou locataire du bien concerné, ce qui bloque l'accès aux ressources d'autrui (IDOR). Des tests parcourent toutes les routes pour le vérifier.</li>
                         <li><strong>Anti-énumération</strong> : mêmes réponses et mêmes temps de réponse, que le compte existe ou non (connexion, inscription, mot de passe oublié).</li>
                         <li><strong>Back-office</strong> : chaîne Spring Security séparée (session et formulaire), mot de passe comparé en temps constant, tentatives limitées par IP et au global.</li>
                         <li><strong>Fichiers</strong> : documents en stockage privé servis par URL présignée de 5 min ; fichiers reconnus à leur contenu réel ; images réencodées sans métadonnées GPS et bornées avant décodage ; signatures PNG vérifiées bloc par bloc.</li>
@@ -295,7 +311,7 @@
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">QUALITÉ</span>
-                    <span class="spec-value">Plus de 850 tests côté API, lancés à chaque push par GitHub Actions.
+                    <span class="spec-value">Plus de 880 tests côté API, lancés à chaque push par GitHub Actions.
                       <ul class="spec-sub">
                         <li><strong>Unitaires</strong> : JUnit 5 et Mockito sur les services, les validateurs et les règles par pays.</li>
                         <li><strong>Intégration</strong> : sur de vrais services : PostgreSQL + PostGIS, stockage S3 (RustFS), serveur SMTP (GreenMail) et Redis.</li>
@@ -321,7 +337,7 @@
                     <span class="spec-value">Un projet piloté par un audit de mise en production.
                       <ul class="spec-sub">
                         <li><strong>Audit</strong> : inventaire des failles et des manques avant la mise en ligne, classés par priorité.</li>
-                        <li><strong>Sprints</strong> : cinq sprints : sécurité, fiabilité, socle multi-pays, fonctionnalités Congo, stockage et e-mails.</li>
+                        <li><strong>Sprints</strong> : cinq sprints : sécurité, fiabilité, socle multi-pays, fonctionnalités Congo, stockage et e-mails ; puis des évolutions produit livrées par lots (réservation, comptes sans rôle, fin de bail).</li>
                         <li><strong>Revue</strong> : chaque tâche passe par des tests et une relecture de sécurité indépendante.</li>
                         <li><strong>Décisions</strong> : registre des décisions avec leur raison : monolithe plutôt que microservices, pas de Keycloak, aucun paiement dans l'application.</li>
                       </ul>
