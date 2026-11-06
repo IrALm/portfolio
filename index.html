@@ -180,6 +180,19 @@
           <h1 class="page-title">Réalisations</h1>
           <p class="page-lead">Une sélection de projets. Certains sont en ligne, d'autres m'ont surtout servi à explorer une technologie ou un type d'architecture.</p>
 
+          <!-- Barre des projets : défilable horizontalement, les flèches n'apparaissent que s'il reste des projets cachés -->
+          <div class="project-nav-wrap" id="projectNavWrap">
+            <button type="button" class="project-nav-arrow project-nav-arrow--prev" data-dir="-1" aria-hidden="true" tabindex="-1" hidden>‹</button>
+            <nav class="project-nav" id="projectNav" aria-label="Projets">
+              <a href="#projets/kupanga" class="project-nav-link" data-project="kupanga"><span class="project-nav-num">01</span><span class="project-nav-name">Kupanga</span></a>
+              <a href="#projets/kitchup" class="project-nav-link" data-project="kitchup"><span class="project-nav-num">02</span><span class="project-nav-name">KitchUp</span></a>
+              <a href="#projets/aws" class="project-nav-link" data-project="aws"><span class="project-nav-num">03</span><span class="project-nav-name">Dossiers étudiants sur AWS</span></a>
+              <a href="#projets/autres" class="project-nav-link" data-project="autres"><span class="project-nav-num">04</span><span class="project-nav-name">Autres projets</span></a>
+            </nav>
+            <button type="button" class="project-nav-arrow project-nav-arrow--next" data-dir="1" aria-hidden="true" tabindex="-1" hidden>›</button>
+          </div>
+
+          <div class="project-page" data-project="kupanga" data-label="Kupanga" tabindex="-1">
           <!-- Kupanga -->
           <div class="featured">
             <div class="featured-head featured-head--logo">
@@ -923,6 +936,9 @@
             </figure>
           </div>
 
+          </div>
+
+          <div class="project-page" data-project="kitchup" data-label="KitchUp" tabindex="-1">
           <!-- KitchUp -->
           <div class="featured">
             <div class="featured-head featured-head--logo">
@@ -1341,11 +1357,9 @@
             </figure>
           </div>
 
-          <!-- DevOps & Infrastructure -->
-          <div class="category">
-            <div class="section-head">DEVOPS &amp; INFRASTRUCTURE</div>
           </div>
 
+          <div class="project-page" data-project="aws" data-label="Dossiers étudiants sur AWS" tabindex="-1">
           <!-- Dossiers étudiants sur AWS -->
           <div class="featured">
             <div class="featured-head">
@@ -1733,6 +1747,9 @@
             </div>
           </div>
 
+          </div>
+
+          <div class="project-page" data-project="autres" data-label="Autres projets" tabindex="-1">
           <!-- Cloud & Serverless -->
           <div class="category">
             <div class="section-head">CLOUD &amp; SERVERLESS</div>
@@ -1851,6 +1868,13 @@
               <a href="https://github.com/IrALm/PathFinding.git" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
             </div>
           </div>
+          </div>
+
+          <nav class="project-pager" aria-label="Projet précédent ou suivant">
+            <a href="#projets" class="project-pager-link project-pager-prev" id="projectPrev"><span class="project-pager-dir">← Projet précédent</span><span class="project-pager-name"></span></a>
+            <span class="project-pager-count" id="projectCount" aria-live="polite"></span>
+            <a href="#projets" class="project-pager-link project-pager-next" id="projectNext"><span class="project-pager-dir">Projet suivant →</span><span class="project-pager-name"></span></a>
+          </nav>
         </section>
 
         <!-- Stack & concepts -->
