@@ -33,8 +33,7 @@
           <div class="brand">
             <img src="images/photoCV.jpg" alt="Moïse Aganze" class="brand-photo">
             <div class="brand-text">
-              <div class="brand-name">Moïse Aganze</div>
-              <div class="brand-surname">Lwaboshi</div>
+              <div class="brand-name">Moïse Aganze Lwaboshi</div>
             </div>
             <button type="button" id="burger" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
               <i class="fa-solid fa-bars"></i>
@@ -57,7 +56,7 @@
           </button>
           <div class="location">
             <div>Nantes / Paris</div>
-            <div>Disponible</div>
+            <div>CDI dès sept. 2027</div>
           </div>
         </div>
       </aside>
@@ -72,6 +71,8 @@
           <h1 class="hero-title" id="typedTitle"><span class="typed-text"></span><span class="caret"></span></h1>
 
           <p class="hero-lead" id="typedPara"><span class="typed-text"></span><span class="caret"></span></p>
+
+          <p class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span><span>Je cherche un <strong>CDI back-end Java</strong> à partir de <strong>septembre 2027</strong>.</span></p>
 
           <div class="hero-cta">
             <a href="#projets" class="btn btn-primary" data-page="projets">Voir les projets</a>
@@ -118,8 +119,11 @@
               <div>
                 <h3 class="entry-title">Développeur back-end Java</h3>
                 <div class="entry-subtitle">Crédit Agricole Technologies et Services, Paris (alternance)</div>
-                <p class="entry-text">Je conçois, développe et optimise des services back-end pour une solution bancaire de gestion budgétaire.</p>
-                <p class="entry-text">Le contexte est exigeant : réglementation bancaire, sécurité et gros volumes de données. Je travaille sur des batchs industriels et des microservices.</p>
+                <ul class="entry-list">
+                  <li>Conception, développement et optimisation de services back-end pour une solution bancaire de gestion budgétaire : batchs industriels et microservices, dans un contexte exigeant (réglementation bancaire, sécurité, gros volumes de données).</li>
+                  <li>Un second projet mené <strong>100 % en autonomie</strong> : un service back-end de traitement des achats. Du cahier des charges fourni jusqu'à la validation et à la préparation de la mise en production, j'en ai assuré la conception, le développement et la documentation, dont le <strong>dossier d'architecture technique (DAT)</strong> complet : architecture détaillée et interactive, documentation fonctionnelle et technique.</li>
+                  <li>Mise en place d'<strong>agents IA</strong> qui automatisent des tâches récurrentes de l'équipe : génération de la documentation fonctionnelle et de l'architecture interactive, génération de tests intégrée au <em>continuous testing</em>, collections Postman générées et filtrables selon le besoin. Toute l'équipe en a constaté l'intérêt. Ce qu'ils produisent est vérifié et relu avant d'être utilisé (<a href="#stack" class="entry-link" data-page="stack">ma méthode</a>).</li>
+                </ul>
                 <div class="tags">
                   <span class="tag">Java 25</span>
                   <span class="tag">Spring Boot</span>
@@ -202,7 +206,16 @@
               </h2>
               <span class="badge">EN LIGNE</span>
             </div>
-            <div class="featured-sub">Plateforme SaaS de gestion locative conçue et développée en binôme, de l'API au front. Un même service accueille propriétaires et locataires en France et en République démocratique du Congo : le pays du bien décide des champs, des devises, des modèles de bail et des canaux de notification. Elle est en ligne et son lancement est en cours.</div>
+            <div class="featured-sub">Plateforme SaaS de gestion locative réalisée en binôme. J'en étais le lead dev back-end et DevOps, de la conception à la mise en production ; mon binôme était lead front, et c'est moi qui ai fait passer le front en Progressive Web App. Un même service accueille propriétaires et locataires en France et en République démocratique du Congo : le pays du bien décide des champs, des devises, des modèles de bail et des canaux de notification. Elle est en ligne et son lancement est en cours.</div>
+
+            <div class="brief">
+              <div class="brief-meta">LEAD DEV BACK-END &amp; DEVOPS · CONCEPTION → DÉVELOPPEMENT → MISE EN PRODUCTION</div>
+              <dl class="brief-grid">
+                <div class="brief-item"><dt>PROBLÈME</dt><dd>Gérer une location de l'annonce à la quittance, dans deux pays aux règles différentes : la France et la RDC.</dd></div>
+                <div class="brief-item"><dt>CE QUE J&#39;AI CONSTRUIT</dt><dd>Le back-end : un monolithe modulaire Spring Boot 3 / Java 21 où le pays du bien pilote les champs, les devises, les baux et les notifications. Côté front Angular 20, le passage en PWA installable et consultable hors ligne.</dd></div>
+                <div class="brief-item"><dt>RÉSULTAT</dt><dd>En production, lancement en cours. Plus de 880 tests côté API, lancés à chaque push.</dd></div>
+              </dl>
+            </div>
 
             <div class="featured-grid">
               <div>
@@ -245,6 +258,13 @@
                     <span class="spec-value">Back-office des comptes, des biens et des e-mails envoyés (renvoi d'un e-mail en échec). Les biens sont archivés plutôt que supprimés pour conserver les baux ; un compte est supprimé, ou anonymisé s'il a des documents (RGPD).</span>
                   </div>
                 </div>
+
+                <div class="featured-block-title">DÉCISIONS CLÉS</div>
+                <ol class="decision-list">
+                  <li class="decision"><strong>Monolithe modulaire plutôt que microservices.</strong> Un seul déploiement, des modules métier aux frontières nettes ; le temps réel (WebSocket STOMP) reste dans l'application plutôt que dans un service séparé.</li>
+                  <li class="decision"><strong>Le pays choisit des règles, le code ne teste jamais le pays.</strong> Un profil YAML et une Strategy par pays ; l'application refuse de démarrer si une configuration est incohérente.</li>
+                  <li class="decision"><strong>Outbox transactionnelle.</strong> Les e-mails sont écrits dans la même transaction que l'action, puis envoyés par une file avec nouveaux essais (FOR UPDATE SKIP LOCKED) : aucune action perdue ni envoyée deux fois.</li>
+                </ol>
 
                 <div class="featured-block-title">INGÉNIERIE</div>
                 <div class="spec-list">
@@ -395,43 +415,43 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/explorer.jpg" alt="Explorer : annonces en France et en RDC, chacune dans sa devise" loading="lazy">
+                        <img src="images/web/kupanga/explorer.webp" alt="Explorer : annonces en France et en RDC, chacune dans sa devise" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Annonces</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/filtres.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/filtres.jpg" alt="Filtres : pays, ville, type, loyer, surface, meublé, écoles et pharmacies à proximité" loading="lazy">
+                        <img src="images/web/kupanga/filtres.webp" alt="Filtres : pays, ville, type, loyer, surface, meublé, écoles et pharmacies à proximité" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Filtres</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/explorer-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/explorer-rdc.jpg" alt="Villas à Kinshasa, loyers en dollars" loading="lazy">
+                        <img src="images/web/kupanga/explorer-rdc.webp" alt="Villas à Kinshasa, loyers en dollars" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Résultats filtrés</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/carte.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/carte.jpg" alt="Vue carte des annonces, positions publiques arrondies à 100 m" loading="lazy">
+                        <img src="images/web/kupanga/carte.webp" alt="Vue carte des annonces, positions publiques arrondies à 100 m" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Carte</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/annonce-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/annonce-fr.jpg" alt="Annonce en France : photos, loyer, charges, DPE" loading="lazy">
+                        <img src="images/web/kupanga/annonce-fr.webp" alt="Annonce en France : photos, loyer, charges, DPE" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Annonce en France</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/annonce-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/annonce-rdc.jpg" alt="Annonce à Kinshasa : commune, quartier, point de repère, équipements" loading="lazy">
+                        <img src="images/web/kupanga/annonce-rdc.webp" alt="Annonce à Kinshasa : commune, quartier, point de repère, équipements" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Annonce en RDC</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-explorer.jpg" alt="Explorer sur téléphone" loading="lazy">
+                        <img src="images/web/kupanga/m-explorer.webp" alt="Explorer sur téléphone" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Sur téléphone</figcaption>
                     </figure>
@@ -442,25 +462,25 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/inscription.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/inscription.jpg" alt="Inscription : identité et téléphone de contact au format international" loading="lazy">
+                        <img src="images/web/kupanga/inscription.webp" alt="Inscription : identité et téléphone de contact au format international" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Inscription</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/email-confirmation.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/email-confirmation.jpg" alt="E-mail de confirmation de l'adresse, reçu dans Mailpit" loading="lazy">
+                        <img src="images/web/kupanga/email-confirmation.webp" alt="E-mail de confirmation de l'adresse, reçu dans Mailpit" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Confirmation par e-mail</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/notifications.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/notifications.jpg" alt="Notifications : signatures, paiements, congé, réservations" loading="lazy">
+                        <img src="images/web/kupanga/notifications.webp" alt="Notifications : signatures, paiements, congé, réservations" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Notifications</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/mailpit.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/mailpit.jpg" alt="Tous les e-mails envoyés pendant la démo" loading="lazy">
+                        <img src="images/web/kupanga/mailpit.webp" alt="Tous les e-mails envoyés pendant la démo" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Boîte d'envoi</figcaption>
                     </figure>
@@ -471,49 +491,49 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/accueil.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/accueil.jpg" alt="Accueil de la propriétaire : tâches à faire et biens" loading="lazy">
+                        <img src="images/web/kupanga/accueil.webp" alt="Accueil de la propriétaire : tâches à faire et biens" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Accueil</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/mes-biens.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/mes-biens.jpg" alt="Mes biens : 26 biens, loués et vacants" loading="lazy">
+                        <img src="images/web/kupanga/mes-biens.webp" alt="Mes biens : 26 biens, loués et vacants" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Mes biens</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/nouveau-carte.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/nouveau-carte.jpg" alt="Publication d'un bien : repère placé sur la carte" loading="lazy">
+                        <img src="images/web/kupanga/nouveau-carte.webp" alt="Publication d'un bien : repère placé sur la carte" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Repère sur la carte</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/nouveau-bien.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/nouveau-bien.jpg" alt="Publication d'un bien : caractéristiques, équipements et DPE" loading="lazy">
+                        <img src="images/web/kupanga/nouveau-bien.webp" alt="Publication d'un bien : caractéristiques, équipements et DPE" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Caractéristiques</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/nouveau-photos.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/nouveau-photos.jpg" alt="Photos réduites dans le navigateur, métadonnées GPS retirées" loading="lazy">
+                        <img src="images/web/kupanga/nouveau-photos.webp" alt="Photos réduites dans le navigateur, métadonnées GPS retirées" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Photos</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bien-publie.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bien-publie.jpg" alt="Bien publié : fiche privée du propriétaire" loading="lazy">
+                        <img src="images/web/kupanga/bien-publie.webp" alt="Bien publié : fiche privée du propriétaire" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Bien publié</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bien-loue.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bien-loue.jpg" alt="Bien loué : locataire, téléphone, WhatsApp, documents" loading="lazy">
+                        <img src="images/web/kupanga/bien-loue.webp" alt="Bien loué : locataire, téléphone, WhatsApp, documents" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Bien loué</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/documents.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/documents.jpg" alt="Documents de tous les biens : baux, états des lieux, quittances" loading="lazy">
+                        <img src="images/web/kupanga/documents.webp" alt="Documents de tous les biens : baux, états des lieux, quittances" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Documents</figcaption>
                     </figure>
@@ -524,91 +544,91 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/messagerie.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/messagerie.jpg" alt="Conversation en temps réel entre la propriétaire et une candidate" loading="lazy">
+                        <img src="images/web/kupanga/messagerie.webp" alt="Conversation en temps réel entre la propriétaire et une candidate" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Messagerie</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/proposer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/proposer.jpg" alt="Demande de location envoyée, en attente de réponse" loading="lazy">
+                        <img src="images/web/kupanga/proposer.webp" alt="Demande de location envoyée, en attente de réponse" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Proposer la location</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/demande-recue.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/demande-recue.jpg" alt="La candidate accepte ou refuse la proposition" loading="lazy">
+                        <img src="images/web/kupanga/demande-recue.webp" alt="La candidate accepte ou refuse la proposition" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Demande reçue</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/reservation.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/reservation.jpg" alt="Logement réservé 14 jours après acceptation" loading="lazy">
+                        <img src="images/web/kupanga/reservation.webp" alt="Logement réservé 14 jours après acceptation" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Réservation</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bien-reserve.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bien-reserve.jpg" alt="Côté propriétaire : bien réservé, annonce retirée de la recherche" loading="lazy">
+                        <img src="images/web/kupanga/bien-reserve.webp" alt="Côté propriétaire : bien réservé, annonce retirée de la recherche" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Bien réservé</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bail-nouveau.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bail-nouveau.jpg" alt="Nouveau bail : loyer, charges et dépôt de garantie" loading="lazy">
+                        <img src="images/web/kupanga/bail-nouveau.webp" alt="Nouveau bail : loyer, charges et dépôt de garantie" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Nouveau bail</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bail-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bail-signature.jpg" alt="Signature du bail à l'écran par la propriétaire" loading="lazy">
+                        <img src="images/web/kupanga/bail-signature.webp" alt="Signature du bail à l'écran par la propriétaire" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Signature du bail</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-bail-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-bail-signature.jpg" alt="Signature du bail au doigt sur téléphone" loading="lazy">
+                        <img src="images/web/kupanga/m-bail-signature.webp" alt="Signature du bail au doigt sur téléphone" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Signature sur téléphone</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/edl-compteurs.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/edl-compteurs.jpg" alt="État des lieux : relevé des compteurs" loading="lazy">
+                        <img src="images/web/kupanga/edl-compteurs.webp" alt="État des lieux : relevé des compteurs" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Compteurs</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/edl.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/edl.jpg" alt="État des lieux pièce par pièce" loading="lazy">
+                        <img src="images/web/kupanga/edl.webp" alt="État des lieux pièce par pièce" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Pièces</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-edl-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-edl-signature.jpg" alt="Le locataire relit et signe l'état des lieux" loading="lazy">
+                        <img src="images/web/kupanga/m-edl-signature.webp" alt="Le locataire relit et signe l'état des lieux" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Signature de l'EDL</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/loyer-recu.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/loyer-recu.jpg" alt="Déclarer le loyer reçu : mode, référence, signature" loading="lazy">
+                        <img src="images/web/kupanga/loyer-recu.webp" alt="Déclarer le loyer reçu : mode, référence, signature" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Loyer reçu</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/quittance-payee.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/quittance-payee.jpg" alt="Quittance payée, PDF envoyé au locataire" loading="lazy">
+                        <img src="images/web/kupanga/quittance-payee.webp" alt="Quittance payée, PDF envoyé au locataire" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Quittance</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-mon-logement.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-mon-logement.jpg" alt="Mon logement, côté locataire, sur téléphone" loading="lazy">
+                        <img src="images/web/kupanga/m-mon-logement.webp" alt="Mon logement, côté locataire, sur téléphone" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Côté locataire</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-quittances.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-quittances.jpg" alt="Mes quittances sur téléphone" loading="lazy">
+                        <img src="images/web/kupanga/m-quittances.webp" alt="Mes quittances sur téléphone" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Mes quittances</figcaption>
                     </figure>
@@ -619,19 +639,19 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/donner-conge.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/donner-conge.jpg" alt="Le locataire donne congé avec une date de fin" loading="lazy">
+                        <img src="images/web/kupanga/donner-conge.webp" alt="Le locataire donne congé avec une date de fin" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Donner congé</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/fin-de-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/fin-de-bail.jpg" alt="Fin du bail : dépôt restitué et motif de retenue" loading="lazy">
+                        <img src="images/web/kupanga/fin-de-bail.webp" alt="Fin du bail : dépôt restitué et motif de retenue" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Enregistrer la fin</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bien-libere.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bien-libere.jpg" alt="Bien libéré, de nouveau dans les annonces" loading="lazy">
+                        <img src="images/web/kupanga/bien-libere.webp" alt="Bien libéré, de nouveau dans les annonces" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Bien libéré</figcaption>
                     </figure>
@@ -642,61 +662,61 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/rdc-type.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-type.jpg" alt="Types de bien congolais : villa, annexe, chambre, parcelle, local commercial" loading="lazy">
+                        <img src="images/web/kupanga/rdc-type.webp" alt="Types de bien congolais : villa, annexe, chambre, parcelle, local commercial" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Types de bien</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-adresse.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-adresse.jpg" alt="Adresse congolaise : commune, quartier, parcelle, point de repère" loading="lazy">
+                        <img src="images/web/kupanga/rdc-adresse.webp" alt="Adresse congolaise : commune, quartier, parcelle, point de repère" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Adresse RDC</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-gps.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-gps.jpg" alt="Repère placé avec le GPS du téléphone" loading="lazy">
+                        <img src="images/web/kupanga/rdc-gps.webp" alt="Repère placé avec le GPS du téléphone" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Repère GPS</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-equipements.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-equipements.jpg" alt="Forage, groupe électrogène, gardiennage et heures de courant" loading="lazy">
+                        <img src="images/web/kupanga/rdc-equipements.webp" alt="Forage, groupe électrogène, gardiennage et heures de courant" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Équipements</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-loyer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-loyer.jpg" alt="Loyer en dollars, garantie et loyers d'avance en mois" loading="lazy">
+                        <img src="images/web/kupanga/rdc-loyer.webp" alt="Loyer en dollars, garantie et loyers d'avance en mois" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Loyer et garantie</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-annonce.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-annonce.jpg" alt="Annonce publiée à Kinshasa" loading="lazy">
+                        <img src="images/web/kupanga/rdc-annonce.webp" alt="Annonce publiée à Kinshasa" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Annonce publiée</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-villa.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-villa.jpg" alt="Villa louée : locataire au +243, WhatsApp" loading="lazy">
+                        <img src="images/web/kupanga/rdc-villa.webp" alt="Villa louée : locataire au +243, WhatsApp" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Villa louée</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-quittances.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-quittances.jpg" alt="Loyer payé par Mobile Money, reçu photographié" loading="lazy">
+                        <img src="images/web/kupanga/rdc-quittances.webp" alt="Loyer payé par Mobile Money, reçu photographié" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Mobile Money</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/rdc-whatsapp.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/rdc-whatsapp.jpg" alt="Rappel de loyer par WhatsApp, message prérempli" loading="lazy">
+                        <img src="images/web/kupanga/rdc-whatsapp.webp" alt="Rappel de loyer par WhatsApp, message prérempli" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Rappel WhatsApp</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-rdc-logement.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-rdc-logement.jpg" alt="Locataire à Kinshasa sur téléphone, loyer en dollars" loading="lazy">
+                        <img src="images/web/kupanga/m-rdc-logement.webp" alt="Locataire à Kinshasa sur téléphone, loyer en dollars" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Locataire en RDC</figcaption>
                     </figure>
@@ -707,49 +727,49 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/pdf-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/pdf-bail.jpg" alt="Bail de location PDF, modèle français, signé par les deux parties" loading="lazy">
+                        <img src="images/web/kupanga/pdf-bail.webp" alt="Bail de location PDF, modèle français, signé par les deux parties" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Bail France</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/pdf-bail-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/pdf-bail-rdc.jpg" alt="Bail de location PDF, modèle RDC, garantie et avance en mois" loading="lazy">
+                        <img src="images/web/kupanga/pdf-bail-rdc.webp" alt="Bail de location PDF, modèle RDC, garantie et avance en mois" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Bail RDC</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/pdf-edl-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/pdf-edl-fr.jpg" alt="État des lieux PDF, pièces et éléments" loading="lazy">
+                        <img src="images/web/kupanga/pdf-edl-fr.webp" alt="État des lieux PDF, pièces et éléments" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">État des lieux France</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/pdf-edl-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/pdf-edl-rdc.jpg" alt="État des lieux PDF, modèle RDC, compteur Cash Power" loading="lazy">
+                        <img src="images/web/kupanga/pdf-edl-rdc.webp" alt="État des lieux PDF, modèle RDC, compteur Cash Power" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">État des lieux RDC</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/pdf-quittance-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/pdf-quittance-fr.jpg" alt="Quittance PDF en euros" loading="lazy">
+                        <img src="images/web/kupanga/pdf-quittance-fr.webp" alt="Quittance PDF en euros" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Quittance France</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/pdf-quittance-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/pdf-quittance-rdc.jpg" alt="Quittance PDF en dollars, payée par Mobile Money" loading="lazy">
+                        <img src="images/web/kupanga/pdf-quittance-rdc.webp" alt="Quittance PDF en dollars, payée par Mobile Money" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Quittance RDC</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/email-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/email-bail.jpg" alt="E-mail au locataire : bail à signer, PDF joint" loading="lazy">
+                        <img src="images/web/kupanga/email-bail.webp" alt="E-mail au locataire : bail à signer, PDF joint" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">E-mail du bail</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/email-quittance.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/email-quittance.jpg" alt="E-mail de quittance au locataire" loading="lazy">
+                        <img src="images/web/kupanga/email-quittance.webp" alt="E-mail de quittance au locataire" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">E-mail de quittance</figcaption>
                     </figure>
@@ -760,19 +780,19 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/sombre.jpg" alt="Accueil en thème sombre" loading="lazy">
+                        <img src="images/web/kupanga/sombre.webp" alt="Accueil en thème sombre" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Accueil</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/sombre-explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/sombre-explorer.jpg" alt="Explorer en thème sombre" loading="lazy">
+                        <img src="images/web/kupanga/sombre-explorer.webp" alt="Explorer en thème sombre" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Explorer</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/m-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/m-sombre.jpg" alt="Thème sombre sur téléphone" loading="lazy">
+                        <img src="images/web/kupanga/m-sombre.webp" alt="Thème sombre sur téléphone" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Sur téléphone</figcaption>
                     </figure>
@@ -783,61 +803,61 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kupanga/bo-login.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-login.jpg" alt="Connexion de l'administrateur, session séparée de l'API" loading="lazy">
+                        <img src="images/web/kupanga/bo-login.webp" alt="Connexion de l'administrateur, session séparée de l'API" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Connexion</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-tableau-de-bord.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-tableau-de-bord.jpg" alt="Tableau de bord du back-office" loading="lazy">
+                        <img src="images/web/kupanga/bo-tableau-de-bord.webp" alt="Tableau de bord du back-office" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Tableau de bord</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-camembert-comptes-villes.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-camembert-comptes-villes.jpg" alt="Répartition des utilisateurs en camembert et biens par ville en barres" loading="lazy">
+                        <img src="images/web/kupanga/bo-camembert-comptes-villes.webp" alt="Répartition des utilisateurs en camembert et biens par ville en barres" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Utilisateurs et villes</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-camembert-types.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-camembert-types.jpg" alt="Répartition des biens par type en camembert, résumé des indicateurs" loading="lazy">
+                        <img src="images/web/kupanga/bo-camembert-types.webp" alt="Répartition des biens par type en camembert, résumé des indicateurs" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Types de bien</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-camembert-documents.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-camembert-documents.jpg" alt="Répartition des documents en camembert, documents générés par bien" loading="lazy">
+                        <img src="images/web/kupanga/bo-camembert-documents.webp" alt="Répartition des documents en camembert, documents générés par bien" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Documents</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-biens.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-biens.jpg" alt="Biens filtrés par pays et par type, paginés" loading="lazy">
+                        <img src="images/web/kupanga/bo-biens.webp" alt="Biens filtrés par pays et par type, paginés" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Biens</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-archiver.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-archiver.jpg" alt="Archiver un bien : jamais supprimé, baux conservés" loading="lazy">
+                        <img src="images/web/kupanga/bo-archiver.webp" alt="Archiver un bien : jamais supprimé, baux conservés" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Archivage</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-documents.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-documents.jpg" alt="Documents d'un bien : baux, états des lieux, quittances" loading="lazy">
+                        <img src="images/web/kupanga/bo-documents.webp" alt="Documents d'un bien : baux, états des lieux, quittances" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Documents d'un bien</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-comptes.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-comptes.jpg" alt="Comptes : propriétaires, locataires, non confirmés, anonymisés" loading="lazy">
+                        <img src="images/web/kupanga/bo-comptes.webp" alt="Comptes : propriétaires, locataires, non confirmés, anonymisés" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Comptes</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kupanga/bo-emails.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kupanga/bo-emails.jpg" alt="File des e-mails : envoyés, en attente, en échec, renvoi" loading="lazy">
+                        <img src="images/web/kupanga/bo-emails.webp" alt="File des e-mails : envoyés, en attente, en échec, renvoi" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">E-mails</figcaption>
                     </figure>
@@ -950,6 +970,15 @@
             </div>
             <div class="featured-sub">Application de service en restaurant qui relie en temps réel le téléphone du serveur, l'écran de la cuisine et un plan de salle en 3D, avec une messagerie d'équipe. Le projet compare aussi, dans une même application, cinq façons de faire du temps réel sur le web : polling, long polling, SSE, WebSocket natif et Socket.IO. Elle est installable sur ordinateur, Android et iPhone, et se lance en une seule commande Docker.</div>
 
+            <div class="brief">
+              <div class="brief-meta">PROJET INDIVIDUEL · CONCEPTION → DÉVELOPPEMENT → DÉPLOIEMENT</div>
+              <dl class="brief-grid">
+                <div class="brief-item"><dt>PROBLÈME</dt><dd>Synchroniser en temps réel le téléphone du serveur, l'écran de la cuisine et le plan de salle.</dd></div>
+                <div class="brief-item"><dt>CE QUE J&#39;AI CONSTRUIT</dt><dd>Un journal d'événements unique, diffusé par cinq transports (polling, long polling, SSE, WebSocket, Socket.IO) comparés dans les mêmes conditions.</dd></div>
+                <div class="brief-item"><dt>RÉSULTAT</dt><dd>Installable sur ordinateur, Android et iPhone ; toute l'application et une démo complète démarrent en une commande Docker.</dd></div>
+              </dl>
+            </div>
+
             <div class="featured-grid">
               <div>
                 <div class="featured-block-title">FONCTIONNALITÉS</div>
@@ -987,6 +1016,13 @@
                     <span class="spec-value">Visée WCAG 2.1 AA : contrastes vérifiés dans les deux thèmes, cibles tactiles d'au moins 44 px, navigation au clavier, annonces aux lecteurs d'écran, mode clair, mode sombre ou réglage du système.</span>
                   </div>
                 </div>
+
+                <div class="featured-block-title">DÉCISIONS CLÉS</div>
+                <ol class="decision-list">
+                  <li class="decision"><strong>Un seul journal d'événements, cinq transports qui l'écoutent.</strong> Une table Event à curseur auto-incrémenté sert à la fois au rattrapage après coupure et à une comparaison honnête des transports.</li>
+                  <li class="decision"><strong>Les écritures passent toujours par REST.</strong> Seule la réception change : le transport temps réel se remplace en direct, sans toucher à la logique métier.</li>
+                  <li class="decision"><strong>Le serveur fait autorité.</strong> Machine à états par rôle et statut attendu envoyé à chaque action : 409 si un autre écran a modifié la commande entre-temps.</li>
+                </ol>
 
                 <div class="featured-block-title">INGÉNIERIE</div>
                 <div class="spec-list">
@@ -1088,7 +1124,7 @@
                 <a href="https://youtu.be/TXPQmdtpRM4" target="_blank" rel="noopener" class="video-fallback">Voir la démo sur YouTube (2 min 26) ↗</a>
 
                 <a href="images/kitchup/salle-3d.jpg" target="_blank" rel="noopener" class="shot-frame">
-                  <img src="images/kitchup/salle-3d.jpg" alt="Salle 3D : plan du rez-de-chaussée en Three.js, tables libres, occupées et réservées, clients assis, serveurs, cuisine ouverte avec ses postes et la passe" loading="lazy">
+                  <img src="images/web/kitchup/salle-3d.webp" alt="Salle 3D : plan du rez-de-chaussée en Three.js, tables libres, occupées et réservées, clients assis, serveurs, cuisine ouverte avec ses postes et la passe" loading="lazy">
                 </a>
                 <span class="video-fallback">Salle 3D : tables, clients, serveurs et cuisine en direct</span>
 
@@ -1097,19 +1133,19 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/serveur.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/serveur.jpg" alt="Carte en cartes avec photos, quantités, bouton Envoyer en cuisine" loading="lazy">
+                        <img src="images/web/kitchup/serveur.webp" alt="Carte en cartes avec photos, quantités, bouton Envoyer en cuisine" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Prise de commande</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/serveur-precision.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/serveur-precision.jpg" alt="Fiche Précision ouverte : sans oignon, bien cuit, sauce à part, précision libre" loading="lazy">
+                        <img src="images/web/kitchup/serveur-precision.webp" alt="Fiche Précision ouverte : sans oignon, bien cuit, sauce à part, précision libre" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Précisions sur un plat</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/serveur-plat-pret.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/serveur-plat-pret.jpg" alt="Alerte Table 1 prête au passe, liste des commandes à servir avec le bouton Marquer servie" loading="lazy">
+                        <img src="images/web/kitchup/serveur-plat-pret.webp" alt="Alerte Table 1 prête au passe, liste des commandes à servir avec le bouton Marquer servie" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Plat prêt : alerte et service</figcaption>
                     </figure>
@@ -1120,13 +1156,13 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/cuisine.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/cuisine.jpg" alt="Tickets en colonnes à préparer, en préparation, prêtes au passe, servies, avec chronos et précisions" loading="lazy">
+                        <img src="images/web/kitchup/cuisine.webp" alt="Tickets en colonnes à préparer, en préparation, prêtes au passe, servies, avec chronos et précisions" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Tous les postes</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/cuisine-poste.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/cuisine-poste.jpg" alt="Écran filtré sur le poste chaud : les tickets des autres postes sont masqués" loading="lazy">
+                        <img src="images/web/kitchup/cuisine-poste.webp" alt="Écran filtré sur le poste chaud : les tickets des autres postes sont masqués" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Filtré sur le poste chaud</figcaption>
                     </figure>
@@ -1137,31 +1173,31 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/salle-table.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/salle-table.jpg" alt="Panneau d'une table occupée : convives, commandes, actions" loading="lazy">
+                        <img src="images/web/kitchup/salle-table.webp" alt="Panneau d'une table occupée : convives, commandes, actions" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Panneau d'une table</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/salle-liberer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/salle-liberer.jpg" alt="Confirmation avant de libérer une table" loading="lazy">
+                        <img src="images/web/kitchup/salle-liberer.webp" alt="Confirmation avant de libérer une table" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Libérer une table</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/salle-installer.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/salle-installer.jpg" alt="Table libre : installer des clients ou réserver" loading="lazy">
+                        <img src="images/web/kitchup/salle-installer.webp" alt="Table libre : installer des clients ou réserver" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Installer des clients</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/salle-arrivee.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/salle-arrivee.jpg" alt="Les clients installés arrivent et s'assoient" loading="lazy">
+                        <img src="images/web/kitchup/salle-arrivee.webp" alt="Les clients installés arrivent et s'assoient" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Arrivée des clients</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/salle-niveaux.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/salle-niveaux.jpg" alt="Vue de tous les niveaux empilés : rez-de-chaussée, étage, toit-terrasse" loading="lazy">
+                        <img src="images/web/kitchup/salle-niveaux.webp" alt="Vue de tous les niveaux empilés : rez-de-chaussée, étage, toit-terrasse" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Tous les niveaux</figcaption>
                     </figure>
@@ -1172,31 +1208,31 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/commandes.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/commandes.jpg" alt="Indicateurs, recherche, filtres de statut avec compteurs, commandes en cartes avec photos des plats" loading="lazy">
+                        <img src="images/web/kitchup/commandes.webp" alt="Indicateurs, recherche, filtres de statut avec compteurs, commandes en cartes avec photos des plats" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Liste des commandes</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/commandes-tri.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/commandes-tri.jpg" alt="Menu de tri ouvert : plus récentes, montant, nombre d'articles, table, statut, serveur" loading="lazy">
+                        <img src="images/web/kitchup/commandes-tri.webp" alt="Menu de tri ouvert : plus récentes, montant, nombre d'articles, table, statut, serveur" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Menu de tri</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/commandes-recherche.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/commandes-recherche.jpg" alt="Recherche « burger » : seules les commandes concernées restent" loading="lazy">
+                        <img src="images/web/kitchup/commandes-recherche.webp" alt="Recherche « burger » : seules les commandes concernées restent" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Recherche</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/commandes-par-table.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/commandes-par-table.jpg" alt="Vue par table : les commandes regroupées table par table, avec photos" loading="lazy">
+                        <img src="images/web/kitchup/commandes-par-table.webp" alt="Vue par table : les commandes regroupées table par table, avec photos" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Vue par table</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/performance.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/performance.jpg" alt="Panneau Performance : requêtes et événements du mode temps réel choisi, avec leur latence" loading="lazy">
+                        <img src="images/web/kitchup/performance.webp" alt="Panneau Performance : requêtes et événements du mode temps réel choisi, avec leur latence" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Panneau Performance (temps réel)</figcaption>
                     </figure>
@@ -1207,31 +1243,31 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/dashboard.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/dashboard.jpg" alt="Récit du service et indicateurs comparés à la semaine précédente, courbe du chiffre d'affaires heure par heure" loading="lazy">
+                        <img src="images/web/kitchup/dashboard.webp" alt="Récit du service et indicateurs comparés à la semaine précédente, courbe du chiffre d'affaires heure par heure" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Aujourd'hui, en direct</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/dashboard-30j.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/dashboard-30j.jpg" alt="Sur 30 jours : chiffre d'affaires jour après jour comparé aux 30 jours précédents" loading="lazy">
+                        <img src="images/web/kitchup/dashboard-30j.webp" alt="Sur 30 jours : chiffre d'affaires jour après jour comparé aux 30 jours précédents" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Sur 30 jours</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/dashboard-chaleur.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/dashboard-chaleur.jpg" alt="Commandes par heure et carte de chaleur jour de semaine × heure" loading="lazy">
+                        <img src="images/web/kitchup/dashboard-chaleur.webp" alt="Commandes par heure et carte de chaleur jour de semaine × heure" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Heures de pointe et carte de chaleur</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/dashboard-ventes.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/dashboard-ventes.jpg" alt="Chiffre d'affaires par catégorie en anneau, plats les plus commandés avec photos" loading="lazy">
+                        <img src="images/web/kitchup/dashboard-ventes.webp" alt="Chiffre d'affaires par catégorie en anneau, plats les plus commandés avec photos" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Ventes par catégorie et par plat</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/dashboard-equipe.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/dashboard-equipe.jpg" alt="Commandes en cours, fil du service en direct et chiffre par serveur" loading="lazy">
+                        <img src="images/web/kitchup/dashboard-equipe.webp" alt="Commandes en cours, fil du service en direct et chiffre par serveur" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Cuisine en direct et équipe</figcaption>
                     </figure>
@@ -1242,19 +1278,19 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/chat.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/chat.jpg" alt="Messagerie d'équipe : conversation générale et une conversation par commande, avec les messages non lus" loading="lazy">
+                        <img src="images/web/kitchup/chat.webp" alt="Messagerie d'équipe : conversation générale et une conversation par commande, avec les messages non lus" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Messagerie et non-lus</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/reglages.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/reglages.jpg" alt="Réglages : nom et logo du restaurant, postes de cuisine et seuils de retard, délai d'annonce en salle" loading="lazy">
+                        <img src="images/web/kitchup/reglages.webp" alt="Réglages : nom et logo du restaurant, postes de cuisine et seuils de retard, délai d'annonce en salle" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Réglages du restaurant</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/landing.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/landing.jpg" alt="Page d'accueil de KitchUp : présentation, rôles et accès à la démo" loading="lazy">
+                        <img src="images/web/kitchup/landing.webp" alt="Page d'accueil de KitchUp : présentation, rôles et accès à la démo" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Page d'accueil</figcaption>
                     </figure>
@@ -1265,13 +1301,13 @@
                   <div class="kitchup-shots">
                     <figure>
                       <a href="images/kitchup/dashboard-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/dashboard-sombre.jpg" alt="Tableau de bord en mode sombre" loading="lazy">
+                        <img src="images/web/kitchup/dashboard-sombre.webp" alt="Tableau de bord en mode sombre" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Tableau de bord</figcaption>
                     </figure>
                     <figure>
                       <a href="images/kitchup/salle-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
-                        <img src="images/kitchup/salle-sombre.jpg" alt="Salle 3D en mode sombre" loading="lazy">
+                        <img src="images/web/kitchup/salle-sombre.webp" alt="Salle 3D en mode sombre" loading="lazy">
                       </a>
                       <figcaption class="video-fallback">Salle 3D</figcaption>
                     </figure>
@@ -1368,6 +1404,15 @@
             </div>
             <div class="featured-sub">Preuve de concept pour une université dont l'application de dossiers étudiants ralentissait pendant les admissions. L'hébergement est reconstruit sur AWS en cinq étapes : d'une seule machine virtuelle à une architecture hautement disponible, conteneurisée et livrée par une chaîne CI/CD. Toute l'infrastructure est décrite en Terraform, déployée et mesurée dans un vrai compte AWS.</div>
 
+            <div class="brief">
+              <div class="brief-meta">PROJET INDIVIDUEL · CONCEPTION → DÉVELOPPEMENT → DÉPLOIEMENT</div>
+              <dl class="brief-grid">
+                <div class="brief-item"><dt>PROBLÈME</dt><dd>Une application de dossiers étudiants qui ralentit pendant les admissions.</dd></div>
+                <div class="brief-item"><dt>CE QUE J&#39;AI CONSTRUIT</dt><dd>L'hébergement reconstruit en cinq étapes sur AWS, entièrement en Terraform, jusqu'à la haute disponibilité et une chaîne CI/CD.</dd></div>
+                <div class="brief-item"><dt>RÉSULTAT</dt><dd>Du commit à la production en 7 min ; 545 requêtes sur 545 servies pendant un déploiement ; 5 fois moins de CPU une fois conteneurisée.</dd></div>
+              </dl>
+            </div>
+
             <div class="featured-grid">
               <div>
                 <div class="featured-block-title">RÉSULTATS MESURÉS</div>
@@ -1393,6 +1438,13 @@
                     <span class="spec-value">Base de données inaccessible depuis Internet, aucun mot de passe dans le code, image Docker sans vulnérabilité connue (analyse ECR).</span>
                   </div>
                 </div>
+
+                <div class="featured-block-title">DÉCISIONS CLÉS</div>
+                <ol class="decision-list">
+                  <li class="decision"><strong>Cinq étapes, chacune mesurée avant la suivante.</strong> Des modules Terraform partagés ; enrichir un module pour une étape ne change rien aux précédentes, vérifié par un plan sans modification.</li>
+                  <li class="decision"><strong>Une image construite une seule fois.</strong> Elle traverse toute la chaîne CI/CD et n'est promue en « latest » qu'après un test de charge à seuils bloquants.</li>
+                  <li class="decision"><strong>Base privée, sans NAT Gateway.</strong> Aucune route vers Internet pour la base, et un coût réduit ; chaque couche réseau n'accepte que la précédente.</li>
+                </ol>
 
                 <div class="featured-block-title">INGÉNIERIE</div>
                 <div class="spec-list">
@@ -1464,11 +1516,11 @@
 
               <div>
                 <a href="images/aws-dashboard-charge.png" target="_blank" rel="noopener" class="shot-frame">
-                  <img src="images/aws-dashboard-charge.png" alt="Tableau de bord CloudWatch : 60 000 requêtes par minute pendant 10 minutes, CPU sous 20 %, pic à 4 instances lors du déploiement par la chaîne CI/CD, temps de réponse de quelques millisecondes" loading="lazy">
+                  <img src="images/web/aws-dashboard-charge.webp" alt="Tableau de bord CloudWatch : 60 000 requêtes par minute pendant 10 minutes, CPU sous 20 %, pic à 4 instances lors du déploiement par la chaîne CI/CD, temps de réponse de quelques millisecondes" loading="lazy">
                 </a>
                 <span class="video-fallback">Tableau de bord CloudWatch : déploiement CI/CD puis test de charge</span>
                 <a href="images/aws-interface.png" target="_blank" rel="noopener" class="shot-frame shot-frame--spaced">
-                  <img src="images/aws-interface.png" alt="Interface de l'application refaite : barre latérale, liste des étudiants avec filtre, thème clair" loading="lazy">
+                  <img src="images/web/aws-interface.webp" alt="Interface de l'application refaite : barre latérale, liste des étudiants avec filtre, thème clair" loading="lazy">
                 </a>
                 <span class="video-fallback">Interface de l'application, refaite en style intranet (clair et sombre)</span>
 
@@ -1750,6 +1802,8 @@
           </div>
 
           <div class="project-page" data-project="autres" data-label="Autres projets" tabindex="-1">
+          <p class="brief-meta brief-meta--page">PROJETS INDIVIDUELS</p>
+
           <!-- Cloud & Serverless -->
           <div class="category">
             <div class="section-head">CLOUD &amp; SERVERLESS</div>
@@ -1880,11 +1934,13 @@
         <!-- Stack & concepts -->
         <section data-view="stack" class="view view-stack">
           <div class="label">STACK &amp; CONCEPTS</div>
-          <h1 class="page-title">Compétences techniques</h1>
+          <h1 class="page-title with-photo with-photo--lead">
+            <img src="images/web/profilGithub-portrait.webp" alt="Moïse Aganze à La Défense" class="page-title-photo">
+            Compétences techniques
+          </h1>
 
-          <div class="stack-intro">
-            <p>Mon point fort, c'est Java et Spring. J'utilise aussi le cloud serverless, le front et le mobile selon les projets. Tout ce qui est listé ici, je m'en suis servi en alternance ou dans mes projets personnels.</p>
-            <img src="images/profilGithub.jpg" alt="Moïse Aganze à La Défense" class="stack-photo">
+          <div class="stack-lead">
+            <p class="page-lead">Mon point fort, c'est Java et Spring. J'utilise aussi le cloud serverless, le front et le mobile selon les projets. Tout ce qui est listé ici, je m'en suis servi en alternance ou dans mes projets personnels.</p>
           </div>
 
           <!-- Core & Spring -->
@@ -1905,7 +1961,8 @@
               <div class="stack-row-head">
                 <div class="stack-row-title">Spring Boot &amp; Framework</div>
                 <div class="logo-row">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="Spring" title="Spring Boot" class="logo">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" alt="Spring Framework" title="Spring Framework" class="logo">
+                  <img src="images/tech/springboot.svg" alt="Spring Boot" title="Spring Boot" class="logo">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/hibernate/hibernate-original.svg" alt="Hibernate" title="Hibernate / JPA" class="logo">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original.svg" alt="Swagger" title="Swagger / OpenAPI" class="logo">
                 </div>
@@ -1984,6 +2041,8 @@
               </div>
               <div class="stack-row-text">Claude Code, Codex, Cursor, GitHub Copilot</div>
             </div>
+            <button type="button" class="preview-toggle stack-more-toggle" aria-expanded="false" aria-controls="iaMethode" data-labels="Voir la méthode en détail ↓|Réduire ↑">Voir la méthode en détail ↓</button>
+            <div class="stack-more" id="iaMethode" hidden>
             <div class="stack-row stack-row-simple">
               <div class="stack-row-title">Point de départ</div>
               <div class="stack-row-text">Jamais une demande vague : une spécification ou un audit qui découpe le travail en tâches courtes, chacune avec son critère de fin vérifiable (un test, une commande, un comportement observable). L'agent traite une tâche à la fois, dans l'ordre que je fixe.</div>
@@ -2100,6 +2159,7 @@
               </ul>
               <figcaption class="archi-caption">Le développeur tient les deux bouts de la chaîne : il fixe la tâche et il valide le résultat. Entre les deux, l'agent travaille dans un cadre versionné, se fait vérifier par des sous-agents qu'il ne contrôle pas, et la CI rejoue la même exigence sur chaque pull request. Le schéma reste le même quel que soit le langage, l'agent ou la CI.</figcaption>
             </figure>
+            </div>
           </div>
 
           <!-- DevOps -->
@@ -2142,7 +2202,7 @@
           </div>
 
           <!-- Autres -->
-          <div class="stack-section stack-section-last">
+          <div class="stack-section stack-section-last stack-section--compact">
             <div class="section-head">AUTRES TECHNOLOGIES</div>
 
             <div class="stack-row">
@@ -2203,7 +2263,7 @@
               <div class="stack-row-head">
                 <div class="stack-row-title">Cloud &amp; observabilité</div>
                 <div class="logo-row">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" title="AWS" class="logo logo-mono">
+                  <img src="images/tech/aws.svg" alt="AWS" title="AWS" class="logo logo-light"><img src="images/tech/aws-dark.svg" alt="AWS" title="AWS" class="logo logo-dark">
                 </div>
               </div>
               <div class="stack-row-text">AWS Lambda, AWS SAM, MinIO / S3, Render, Neon, Upstash, Sentry</div>
@@ -2225,7 +2285,7 @@
         <section data-view="contact" class="view view-contact">
           <div class="label">CONTACT</div>
           <h1 class="page-title">Un projet, une question ?</h1>
-          <p class="page-lead">Je suis toujours partant pour parler back-end, architecture ou systèmes distribués. Le plus simple est de m'écrire par mail ou sur LinkedIn.</p>
+          <p class="page-lead">Je cherche un CDI back-end Java à partir de septembre 2027, et je suis toujours partant pour parler back-end, architecture ou systèmes distribués. Le plus simple est de m'écrire par mail ou sur LinkedIn.</p>
 
           <div class="contact-list">
             <a href="mailto:moiseaganze76@gmail.com" class="contact-row">
