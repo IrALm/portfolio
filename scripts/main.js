@@ -383,13 +383,13 @@
     });
   })();
 
-  // Blocs réduits des projets : en mode réduit, le texte (fonctionnalités, ingénierie…)
-  // défile lentement vers le haut et les captures défilent en bandeau ; « Déplier »
-  // fige le bloc et l'affiche en entier. Le défilement s'arrête au survol et au focus,
-  // et ne démarre pas si le système demande de réduire les animations.
+  // Blocs réduits des projets : le texte (fonctionnalités, ingénierie…) s'affiche en aperçu
+  // fixe avec « Lire la suite » ; les captures défilent en bandeau, « Tout afficher » rend
+  // la galerie complète. Le bandeau s'arrête au survol et au focus, et ne démarre pas si
+  // le système demande de réduire les animations.
   (function () {
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var SPEED = { y: 16, x: 36 }; // pixels par seconde
+    var SPEED = { x: 36 }; // pixels par seconde
     var reels = [];
     var count = 0;
 
@@ -408,13 +408,10 @@
 
     function measure(s) {
       if (s.open) return;
-      var fits = s.axis === 'y'
-        ? s.content.offsetHeight <= parseFloat(getComputedStyle(s.el).maxHeight)
-        : s.content.offsetWidth <= s.el.clientWidth;
+      var fits = s.content.offsetWidth <= s.el.clientWidth;
       s.fits = fits;
       s.el.classList.toggle('reel--fits', fits);
       if (fits) { s.offset = 0; s.track.style.transform = ''; }
-      if (s.axis === 'y') s.btn.hidden = fits;
     }
 
     function setOpen(s, open) {
@@ -469,13 +466,52 @@
       return s;
     }
 
-    // Texte : chaque liste « libellé / description » qui suit un titre de bloc.
+    // Texte : aperçu fixe des premières lignes, fondu en bas, « Lire la suite » sous le texte.
+    var previews = [];
     document.querySelectorAll('.project-page .featured-block-title + .spec-list').forEach(function (list) {
       var head = list.previousElementSibling;
-      var placeholder = el('div');
-      list.parentNode.insertBefore(placeholder, list);
-      var s = createReel('y', list, head, ['Déplier ↓', 'Réduire ↑']);
-      placeholder.replaceWith(s.el);
+      var box = el('div', 'preview');
+      box.id = 'preview-' + (++count);
+      list.parentNode.insertBefore(box, list);
+      box.appendChild(list);
+      var btn = el('button', 'preview-toggle');
+      btn.type = 'button';
+      btn.setAttribute('aria-controls', box.id);
+      box.after(btn);
+      var p = { box: box, list: list, head: head, btn: btn, open: false };
+
+      function render() {
+        btn.setAttribute('aria-expanded', p.open ? 'true' : 'false');
+        btn.textContent = p.open ? 'Réduire ↑' : 'Lire la suite ↓';
+        box.classList.toggle('is-open', p.open);
+      }
+      btn.addEventListener('click', function () {
+        p.open = !p.open;
+        render();
+        if (!p.open) {
+          var top = head.getBoundingClientRect().top;
+          if (top < 0) window.scrollBy(0, top - 24);
+        }
+      });
+      render();
+      previews.push(p);
+    });
+
+    // Un bloc assez court pour tenir dans l'aperçu s'affiche en entier, sans bouton.
+    function measurePreview(p) {
+      if (p.open || !p.box.clientWidth) return;
+      // Hauteur de l'aperçu lue tant qu'elle est active ; une fois le bloc affiché en entier
+      // elle vaut « none », d'où la valeur mémorisée (sinon la mesure oscillerait).
+      var limit = parseFloat(getComputedStyle(p.box).maxHeight);
+      if (isFinite(limit)) p.limit = limit;
+      if (!p.limit) return;
+      var fits = p.list.offsetHeight <= p.limit + 1;
+      p.box.classList.toggle('preview--fits', fits);
+      p.btn.hidden = fits;
+    }
+    previews.forEach(function (p) {
+      if ('ResizeObserver' in window) new ResizeObserver(function () { measurePreview(p); }).observe(p.box);
+      else measurePreview(p);
     });
 
     // Captures : tous les groupes d'une colonne réunis dans un bandeau ; « Tout afficher » rend les groupes.
@@ -499,7 +535,10 @@
           a.rel = 'noopener';
           var frame = el('span', 'reel-shot-frame');
           var im = el('img');
-          im.src = img.getAttribute('src');
+          // Miniature WebP (tools/optimiser-images.py) ; à défaut, l'image de la galerie.
+          var fallback = img.getAttribute('src');
+          im.src = link.getAttribute('href').replace(/^images\//, 'images/thumbs/').replace(/\.(jpe?g|png)$/i, '.webp');
+          im.onerror = function () { im.onerror = null; im.src = fallback; };
           im.alt = img.alt;
           im.loading = 'lazy';
           im.decoding = 'async';
@@ -575,16 +614,37 @@
       last = t;
       reels.forEach(function (s) {
         if (s.open || s.fits || s.paused || !s.inView) return;
-        var length = s.axis === 'y' ? s.copy.offsetHeight : s.copy.offsetWidth;
+        var length = s.copy.offsetWidth;
         if (!length) return;
         s.offset = (s.offset + SPEED[s.axis] * dt / 1000) % length;
         var d = -s.offset.toFixed(2);
-        s.track.style.transform = s.axis === 'y' ? 'translate3d(0,' + d + 'px,0)' : 'translate3d(' + d + 'px,0,0)';
+        s.track.style.transform = 'translate3d(' + d + 'px,0,0)';
       });
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   })();
+
+  // Blocs dépliables simples (page Stack) : un bouton affiche ou masque la zone qu'il contrôle.
+  document.querySelectorAll('.stack-more-toggle').forEach(function (btn) {
+    var region = document.getElementById(btn.getAttribute('aria-controls'));
+    var labels = (btn.getAttribute('data-labels') || '').split('|');
+    if (!region || labels.length !== 2) return;
+    btn.addEventListener('click', function () {
+      var open = region.hidden;
+      region.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? labels[1] : labels[0];
+      // Le bouton passe sous la zone dépliée pour qu'on puisse la refermer en fin de lecture.
+      if (open) region.after(btn);
+      else {
+        region.before(btn);
+        var top = btn.getBoundingClientRect().top;
+        if (top < 0) window.scrollBy(0, top - 120);
+      }
+      btn.focus({ preventScroll: true });
+    });
+  });
 
   // Vidéos YouTube ouvertes en local (file://) : le navigateur n'envoie aucune
   // origine et YouTube refuse la lecture (« Erreur 153 »). On remplace alors
