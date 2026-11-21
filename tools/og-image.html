@@ -1,0 +1,108 @@
+<!doctype html>
+<!-- Modèle de l'image de partage (Open Graph, 1200 × 630). Rendu par tools/og-image.mjs. -->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Image de partage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #faf9f7;
+        border-top: 10px solid #2f6b4f;
+        font-family: 'Inter Tight', sans-serif;
+        color: #1c1b19;
+        display: flex;
+        align-items: center;
+        gap: 64px;
+        padding: 0 88px;
+        position: relative;
+      }
+      .photo {
+        width: 260px;
+        height: 260px;
+        border-radius: 40px;
+        object-fit: cover;
+        object-position: 50% 18%;
+        flex-shrink: 0;
+        box-shadow: 0 0 0 6px #e6efe9;
+      }
+      .label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 18px;
+        letter-spacing: 0.2em;
+        color: #2f6b4f;
+      }
+      h1 {
+        font-family: 'Instrument Serif', serif;
+        font-weight: 400;
+        font-size: 66px;
+        line-height: 1.1;
+        color: #2f6b4f;
+        margin: 10px 0 12px;
+      }
+      .role {
+        font-size: 30px;
+        font-weight: 500;
+      }
+      .tags {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 18px;
+        color: #4a4843;
+        margin: 26px 0 24px;
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 20px;
+        border: 1px solid #d5d1c9;
+        border-radius: 999px;
+        background: #f0eeea;
+        font-size: 20px;
+        color: #4a4843;
+      }
+      .status::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #2f6b4f;
+      }
+      .status strong {
+        color: #245740;
+        font-weight: 600;
+      }
+      .url {
+        position: absolute;
+        right: 88px;
+        bottom: 42px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 17px;
+        color: #4a4843;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="photo" src="../images/photoCV.jpg" alt="" />
+    <div>
+      <div class="label">PORTFOLIO</div>
+      <h1>Moïse Aganze Lwaboshi</h1>
+      <div class="role">Développeur back-end Java &amp; DevOps</div>
+      <div class="tags">Spring · Architecture · AWS · Terraform · CI/CD</div>
+      <div class="status">
+        <span>Recherche un <strong>CDI</strong> dès <strong>septembre 2027</strong></span>
+      </div>
+    </div>
+    <div class="url">iralm.github.io/portfolio</div>
+  </body>
+</html>

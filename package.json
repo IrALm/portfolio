@@ -13,7 +13,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "playwright test",
-    "verify": "npm run build:check && npm run lint && npm test"
+    "verify": "npm run build:check && npm run lint && npm test",
+    "og-image": "node tools/og-image.mjs"
   },
   "engines": {
     "node": ">=20"
