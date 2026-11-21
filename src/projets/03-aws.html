@@ -22,23 +22,23 @@
                 <div class="spec-list">
                   <div class="spec-row">
                     <span class="spec-label">CHARGE</span>
-                    <span class="spec-value">600 000 requêtes à 1 000 req/s pendant 10 minutes, une seule erreur ; montée automatique de 2 à 4 instances.</span>
+                    <div class="spec-value">600 000 requêtes à 1 000 req/s pendant 10 minutes, une seule erreur ; montée automatique de 2 à 4 instances.</div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">DISPONIBILITÉ</span>
-                    <span class="spec-value">Instance arrêtée brutalement : 87 requêtes sur 90 servies et remplaçante lancée en 40 s. Pendant un déploiement : 545 requêtes sur 545, sans coupure.</span>
+                    <div class="spec-value">Instance arrêtée brutalement : 87 requêtes sur 90 servies et remplaçante lancée en 40 s. Pendant un déploiement : 545 requêtes sur 545, sans coupure.</div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">CONTENEURS</span>
-                    <span class="spec-value">Même charge avec 5 fois moins de CPU (13 % au lieu de 64 %) ; une instance est prête en 62 s au lieu de 4 min.</span>
+                    <div class="spec-value">Même charge avec 5 fois moins de CPU (13 % au lieu de 64 %) ; une instance est prête en 62 s au lieu de 4 min.</div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">LIVRAISON</span>
-                    <span class="spec-value">Du commit à la production en 7 minutes, chaîne verte au premier essai.</span>
+                    <div class="spec-value">Du commit à la production en 7 minutes, chaîne verte au premier essai.</div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">SÉCURITÉ</span>
-                    <span class="spec-value">Base de données inaccessible depuis Internet, aucun mot de passe dans le code, image Docker sans vulnérabilité connue (analyse ECR).</span>
+                    <div class="spec-value">Base de données inaccessible depuis Internet, aucun mot de passe dans le code, image Docker sans vulnérabilité connue (analyse ECR).</div>
                   </div>
                 </div>
 
@@ -53,65 +53,65 @@
                 <div class="spec-list">
                   <div class="spec-row">
                     <span class="spec-label">TERRAFORM</span>
-                    <span class="spec-value">Une configuration par étape, construite sur des modules partagés.
+                    <div class="spec-value">Une configuration par étape, construite sur des modules partagés.
                       <ul class="spec-sub">
                         <li><strong>Modules</strong> : réseau, sécurité, base, secret, serveur, équilibreur, Auto Scaling, registre d'images, tableau de bord ; chaque étape réutilise les précédents.</li>
                         <li><strong>Garde-fous</strong> : validation des variables (IP d'administration, nombre de zones), noms bornés aux limites AWS, ordre de création imposé (le secret avant les serveurs).</li>
                         <li><strong>Compatibilité</strong> : un module enrichi pour l'étape suivante ne change rien aux précédentes, vérifié par un plan sans modification.</li>
                       </ul>
-                    </span>
+                    </div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">RÉSEAU</span>
-                    <span class="spec-value">Un VPC sur deux zones de disponibilité.
+                    <div class="spec-value">Un VPC sur deux zones de disponibilité.
                       <ul class="spec-sub">
                         <li><strong>Isolation</strong> : base dans des sous-réseaux privés sans route vers Internet, sans NAT Gateway pour limiter le coût.</li>
                         <li><strong>Security groups</strong> : chaîne équilibreur → serveurs → base par référence de groupe : chaque couche n'accepte que la précédente, sur un seul port.</li>
                       </ul>
-                    </span>
+                    </div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">SECRETS</span>
-                    <span class="spec-value">Mot de passe généré par Terraform, stocké dans Secrets Manager et lu par l'application grâce au rôle IAM de l'instance ; IMDSv2 obligatoire, disques et base chiffrés.</span>
+                    <div class="spec-value">Mot de passe généré par Terraform, stocké dans Secrets Manager et lu par l'application grâce au rôle IAM de l'instance ; IMDSv2 obligatoire, disques et base chiffrés.</div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">HAUTE DISPO</span>
-                    <span class="spec-value">Application Load Balancer, groupe Auto Scaling de 2 à 4 instances sur 2 zones, remplacement des instances jugées défaillantes par l'équilibreur, suivi de cible à 50 % de CPU et tableau de bord CloudWatch.</span>
+                    <div class="spec-value">Application Load Balancer, groupe Auto Scaling de 2 à 4 instances sur 2 zones, remplacement des instances jugées défaillantes par l'équilibreur, suivi de cible à 50 % de CPU et tableau de bord CloudWatch.</div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">CONTENEURS</span>
-                    <span class="spec-value">L'application tourne dans une image Docker publiée sur Amazon ECR.
+                    <div class="spec-value">L'application tourne dans une image Docker publiée sur Amazon ECR.
                       <ul class="spec-sub">
                         <li><strong>Image</strong> : plusieurs étapes, Node.js 24 Alpine, dépendances verrouillées, utilisateur sans droits root, sonde de santé, init qui relaie les signaux.</li>
                         <li><strong>Registre</strong> : analyse de vulnérabilités à chaque publication, tag par commit, cycle de vie des images.</li>
                         <li><strong>Instances</strong> : téléchargement de l'image avec le rôle IAM, sans identifiant stocké ; redémarrage automatique en 2 s si l'application plante.</li>
                       </ul>
-                    </span>
+                    </div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">CI/CD</span>
-                    <span class="spec-value">GitHub Actions, six jobs, chacun bloque le suivant.
+                    <div class="spec-value">GitHub Actions, six jobs, chacun bloque le suivant.
                       <ul class="spec-sub">
                         <li><strong>Build</strong> : dépendances verrouillées, vérification syntaxique, image construite une seule fois puis transmise aux étapes suivantes.</li>
                         <li><strong>Qualité</strong> : hadolint, shellcheck, terraform fmt et validate, audit npm, puis tests fonctionnels de l'image avec Docker Compose.</li>
                         <li><strong>Test de charge</strong> : l'image publiée est chargée à 200 req/s avec des seuils bloquants (erreurs, latence p95).</li>
                         <li><strong>Production</strong> : l'image n'est promue en « latest » qu'après le test de charge ; les nouvelles instances sont saines avant le retrait des anciennes, puis l'application est testée en production.</li>
                       </ul>
-                    </span>
+                    </div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">DIAGNOSTIC</span>
-                    <span class="spec-value">Des problèmes réels trouvés et corrigés pendant les tests.
+                    <div class="spec-value">Des problèmes réels trouvés et corrigés pendant les tests.
                       <ul class="spec-sub">
                         <li><strong>Connexions</strong> : l'application fournie ne fermait jamais ses connexions MySQL. Corrigé côté infrastructure, sans toucher au code : 97 pages sur 150 affichées sous rafale avant, 300 sur 300 après.</li>
                         <li><strong>Erreurs masquées</strong> : l'application renvoyait ses erreurs avec un code 200 ; les tests vérifient donc le contenu des pages.</li>
                         <li><strong>Contraintes du compte</strong> : le remplacement d'instances standard d'AWS étant interdit, un script équivalent a été écrit avec les API autorisées.</li>
                       </ul>
-                    </span>
+                    </div>
                   </div>
                   <div class="spec-row">
                     <span class="spec-label">MÉTHODE</span>
-                    <span class="spec-value">Chaque étape est déployée puis mesurée avant de passer à la suivante, avec un guide pas à pas, un schéma et des résultats chiffrés. L'infrastructure est détruite en fin de session pour maîtriser les coûts. Interface de l'application refaite en bonus, sans changer sa logique.</span>
+                    <div class="spec-value">Chaque étape est déployée puis mesurée avant de passer à la suivante, avec un guide pas à pas, un schéma et des résultats chiffrés. L'infrastructure est détruite en fin de session pour maîtriser les coûts. Interface de l'application refaite en bonus, sans changer sa logique.</div>
                   </div>
                 </div>
                 <a href="https://github.com/IrALm/projet-aws-terraform" target="_blank" rel="noopener" class="btn btn-primary">Code sur GitHub ↗</a>

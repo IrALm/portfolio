@@ -435,6 +435,13 @@ html[data-theme="dark"] {
   color: var(--faint);
 }
 .contact-icon { font-size: 14px; width: 18px; text-align: center; }
+/* Couleurs de marque des icônes de contact */
+.contact-icon--email { color: #ea4335; }
+.contact-icon--phone { color: #1a9d5a; }
+.contact-icon--linkedin { color: #0a66c2; }
+.contact-icon--github { color: var(--fg); }
+.contact-icon--gitlab { color: #fc6d26; }
+.contact-icon--cv { color: #d93025; }
 .contact-value { font-size: 15px; }
 
 .footer-note { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--faint); }
