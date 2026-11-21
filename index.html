@@ -42,6 +42,8 @@
         ? saved
         : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
+      // Le JS est actif : le texte d'accueil reste masqué jusqu'au début de l'animation.
+      document.documentElement.classList.add('js');
     })();
   </script>
 </head>
@@ -91,9 +93,9 @@
         <section data-view="accueil" class="view view-accueil">
           <div class="eyebrow">DÉVELOPPEUR BACK-END JAVA</div>
 
-          <h1 class="hero-title" id="typedTitle"><span class="typed-text"></span><span class="caret"></span></h1>
+          <h1 class="hero-title" id="typedTitle"><span class="typed-text">Je conçois des systèmes back-end faits pour durer.</span><span class="caret"></span></h1>
 
-          <p class="hero-lead" id="typedPara"><span class="typed-text"></span><span class="caret"></span></p>
+          <p class="hero-lead" id="typedPara"><span class="typed-text">Je suis développeur back-end Java et je m'intéresse surtout à l'architecture logicielle. Je suis en alternance chez Crédit Agricole Technologies et Services, en parallèle de mon Mastère Architecture des Logiciels à l'ESGI.</span><span class="caret"></span></p>
 
           <p class="hero-status"><span class="hero-status-dot" aria-hidden="true"></span><span>Je cherche un <strong>CDI back-end Java</strong> à partir de <strong>septembre 2027</strong>.</span></p>
 
@@ -2344,6 +2346,6 @@
     </div>
   </div>
 
-  <script src="scripts/main.js"></script>
+  <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
