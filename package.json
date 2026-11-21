@@ -1,0 +1,29 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Portfolio de Moïse Aganze Lwaboshi : site statique publié sur GitHub Pages.",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:check": "node tools/build.mjs --check",
+    "start": "node tools/serve.mjs",
+    "lint": "npm run lint:js && npm run lint:html && npm run format:check",
+    "lint:js": "eslint .",
+    "lint:html": "html-validate index.html",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "playwright test",
+    "verify": "npm run build:check && npm run lint && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.65.1",
+    "eslint": "10.15.0",
+    "globals": "17.14.0",
+    "html-validate": "11.21.1",
+    "prettier": "3.10.1"
+  }
+}

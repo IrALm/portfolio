@@ -1,0 +1,7 @@
+# Le HTML est vérifié par html-validate : Prettier reformaterait les éléments en ligne
+# (espaces significatifs) et les schémas SVG écrits à la main.
+*.html
+images/
+package-lock.json
+test-results/
+playwright-report/
