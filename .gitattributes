@@ -1,0 +1,2 @@
+# Fins de ligne LF partout : index.html est comparé octet par octet à la sortie du build.
+* text=auto eol=lf

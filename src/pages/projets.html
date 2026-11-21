@@ -1,0 +1,23 @@
+        <!-- Projets -->
+        <section data-view="projets" class="view view-projets">
+          <div class="label">PROJETS</div>
+          <h1 class="page-title">Réalisations</h1>
+          <p class="page-lead">Une sélection de projets. Certains sont en ligne, d'autres m'ont surtout servi à explorer une technologie ou un type d'architecture.</p>
+
+          <!-- Barre des projets : défilable horizontalement, les flèches n'apparaissent que s'il reste des projets cachés -->
+          <div class="project-nav-wrap" id="projectNavWrap">
+            <button type="button" class="project-nav-arrow project-nav-arrow--prev" data-dir="-1" aria-hidden="true" tabindex="-1" hidden>‹</button>
+            <nav class="project-nav" id="projectNav" aria-label="Projets">
+              <!-- @projets-nav -->
+            </nav>
+            <button type="button" class="project-nav-arrow project-nav-arrow--next" data-dir="1" aria-hidden="true" tabindex="-1" hidden>›</button>
+          </div>
+
+          <!-- @projets-pages -->
+
+          <nav class="project-pager" aria-label="Projet précédent ou suivant">
+            <a href="#projets" class="project-pager-link project-pager-prev" id="projectPrev"><span class="project-pager-dir">← Projet précédent</span><span class="project-pager-name"></span></a>
+            <span class="project-pager-count" id="projectCount" aria-live="polite"></span>
+            <a href="#projets" class="project-pager-link project-pager-next" id="projectNext"><span class="project-pager-dir">Projet suivant →</span><span class="project-pager-name"></span></a>
+          </nav>
+        </section>

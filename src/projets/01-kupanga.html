@@ -1,0 +1,761 @@
+          <div class="project-page" data-project="kupanga" data-label="Kupanga" tabindex="-1">
+          <!-- Kupanga -->
+          <div class="featured">
+            <div class="featured-head featured-head--logo">
+              <h2 class="featured-title featured-title--logo">
+                <img class="app-icon app-icon--trait" src="images/kupanga-mark.svg" alt="" width="44" height="44" />
+                Kupanga
+              </h2>
+              <span class="badge">EN LIGNE</span>
+            </div>
+            <div class="featured-sub">Plateforme SaaS de gestion locative réalisée en binôme. J'en étais le lead dev back-end et DevOps, de la conception à la mise en production ; mon binôme était lead front, et c'est moi qui ai fait passer le front en Progressive Web App. Un même service accueille propriétaires et locataires en France et en République démocratique du Congo : le pays du bien décide des champs, des devises, des modèles de bail et des canaux de notification. Elle est en ligne et son lancement est en cours.</div>
+
+            <div class="brief">
+              <div class="brief-meta">LEAD DEV BACK-END &amp; DEVOPS · CONCEPTION → DÉVELOPPEMENT → MISE EN PRODUCTION</div>
+              <dl class="brief-grid">
+                <div class="brief-item"><dt>PROBLÈME</dt><dd>Gérer une location de l'annonce à la quittance, dans deux pays aux règles différentes : la France et la RDC.</dd></div>
+                <div class="brief-item"><dt>CE QUE J&#39;AI CONSTRUIT</dt><dd>Le back-end : un monolithe modulaire Spring Boot 3 / Java 21 où le pays du bien pilote les champs, les devises, les baux et les notifications. Côté front Angular 20, le passage en PWA installable et consultable hors ligne.</dd></div>
+                <div class="brief-item"><dt>RÉSULTAT</dt><dd>En production, lancement en cours. Plus de 880 tests côté API, lancés à chaque push.</dd></div>
+              </dl>
+            </div>
+
+            <div class="featured-grid">
+              <div>
+                <div class="featured-block-title">FONCTIONNALITÉS</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">ANNONCES</span>
+                    <span class="spec-value">Publication de biens avec photos, recherche par critères et sur carte, commerces et transports calculés autour de chaque bien. Le propriétaire place son bien sur la carte ou avec le GPS de son téléphone ; si l'adresse est introuvable, la position se replie sur le quartier puis la commune. La position publique est arrondie à 100 m.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">PAYS</span>
+                    <span class="spec-value">France et RDC : loyers en euros, dollars ou francs congolais, adresse congolaise (commune, quartier, parcelle, point de repère), types de biens et équipements locaux (forage, groupe électrogène, compteur Cash Power), garantie et avance exprimées en mois de loyer.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOCATION</span>
+                    <span class="spec-value">Le propriétaire propose son logement à un candidat, qui a 72 h pour accepter. Accepter réserve le bien : l'annonce sort de la recherche et le candidat ne devient locataire qu'à la signature du bail. D'ici là, il peut se désister et le propriétaire retirer la réservation ; sans bail signé, elle expire au bout de 14 jours. Bail, état des lieux et quittances sont générés en PDF, présentés comme de vrais actes, et signés en ligne par les deux parties.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">FIN DE BAIL</span>
+                    <span class="spec-value">Le propriétaire ou le locataire donne congé avec une date de fin, et peut le retirer. À la date prévue, le propriétaire enregistre la fin et le dépôt de garantie restitué, avec un motif obligatoire en cas de retenue. Le bien repasse alors en annonce. L'ancien locataire garde ses documents. Chaque étape est annoncée par une notification et un e-mail.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">COMPTES</span>
+                    <span class="spec-value">Inscription confirmée par e-mail ou connexion Google. Un même compte peut publier ses biens et louer un logement ailleurs : il n'y a pas de rôle figé, les droits viennent de la relation au bien. L'accueil réunit demandes, réservations, logements loués, biens possédés et tâches à faire (fin de bail à enregistrer, congé qui arrive). Le numéro de téléphone n'est visible que des parties d'un même logement.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">LOYERS</span>
+                    <span class="spec-value">Suivi des loyers reçus hors application (espèces, Mobile Money, virement), photo du reçu, quittance envoyée au locataire.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ÉCHANGES</span>
+                    <span class="spec-value">Messagerie en temps réel entre propriétaire et candidats, notifications accessibles depuis chaque écran, e-mails, messages WhatsApp préremplis pour le Congo.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MOBILE</span>
+                    <span class="spec-value">Application installable (PWA) consultable hors ligne, photos réduites avant l'envoi pour les réseaux lents.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ADMINISTRATION</span>
+                    <span class="spec-value">Back-office des comptes, des biens et des e-mails envoyés (renvoi d'un e-mail en échec). Les biens sont archivés plutôt que supprimés pour conserver les baux ; un compte est supprimé, ou anonymisé s'il a des documents (RGPD).</span>
+                  </div>
+                </div>
+
+                <div class="featured-block-title">DÉCISIONS CLÉS</div>
+                <ol class="decision-list">
+                  <li class="decision"><strong>Monolithe modulaire plutôt que microservices.</strong> Un seul déploiement, des modules métier aux frontières nettes ; le temps réel (WebSocket STOMP) reste dans l'application plutôt que dans un service séparé.</li>
+                  <li class="decision"><strong>Le pays choisit des règles, le code ne teste jamais le pays.</strong> Un profil YAML et une Strategy par pays ; l'application refuse de démarrer si une configuration est incohérente.</li>
+                  <li class="decision"><strong>Outbox transactionnelle.</strong> Les e-mails sont écrits dans la même transaction que l'action, puis envoyés par une file avec nouveaux essais (FOR UPDATE SKIP LOCKED) : aucune action perdue ni envoyée deux fois.</li>
+                </ol>
+
+                <div class="featured-block-title">INGÉNIERIE</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">ARCHITECTURE</span>
+                    <span class="spec-value">Un monolithe modulaire : une seule application Spring Boot, découpée en modules métier.
+                      <ul class="spec-sub">
+                        <li><strong>Back</strong> : Spring Boot 3 / Java 21, modules authentification, biens, baux, messagerie, notifications, e-mails, stockage et back-office ; DTO générés par MapStruct.</li>
+                        <li><strong>Front</strong> : Angular 20 en composants autonomes, état géré par Signals et services, sans NgRx ni bibliothèque de composants ; navigation construite à partir des biens possédés et des logements loués, pas d'un rôle ; application installable (PWA) et consultable hors ligne.</li>
+                        <li><strong>Données</strong> : PostgreSQL + PostGIS, schéma versionné par 55 migrations Flyway et vérifié par Hibernate au démarrage.</li>
+                        <li><strong>Cache</strong> : Redis pour le géocodage, les commerces proches et les compteurs de tentatives ; l'application démarre et fonctionne même si Redis est indisponible.</li>
+                        <li><strong>Stockage</strong> : client S3 indépendant du fournisseur (SDK AWS v2) : RustFS, MinIO ou un S3 managé se changent par simple configuration.</li>
+                        <li><strong>Temps réel</strong> : WebSocket STOMP intégré au monolithe, choix argumenté plutôt qu'un service de messagerie séparé.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MULTI-PAYS</span>
+                    <span class="spec-value">Le pays du bien sélectionne un profil de règles : le code ne contient aucun test sur le pays.
+                      <ul class="spec-sub">
+                        <li><strong>Configuration</strong> : un profil YAML par pays : langue, fuseau, devises, champs obligatoires ou masqués, types de biens, équipements, modes de paiement, canaux de notification.</li>
+                        <li><strong>Strategy</strong> : une interface de règles métier et une implémentation par pays, choisie par un registre.</li>
+                        <li><strong>Validation</strong> : contrainte de classe qui renvoie une erreur par champ selon le pays ; le service revalide (défense en profondeur).</li>
+                        <li><strong>Valeurs figées</strong> : pays, devise et version du modèle copiés sur chaque bail, état des lieux et quittance : un document signé ne change jamais après coup.</li>
+                        <li><strong>Front piloté</strong> : l'API décrit le formulaire de chaque pays, Angular le construit dynamiquement.</li>
+                        <li><strong>Démarrage contrôlé</strong> : l'application refuse de démarrer si une configuration est incohérente (devise sans plafond, modèle manquant, bien dans un pays sans profil).</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">CYCLE DE LOCATION</span>
+                    <span class="spec-value">Une entité Location suit chaque relation entre un logement et son locataire, de la demande à la fin du bail.
+                      <ul class="spec-sub">
+                        <li><strong>Machine à états</strong> : demande (72 h), puis réservée, active, terminée ; ou désistée, annulée, expirée. Chaque transition contrôle qui la déclenche et dans quel état est la location.</li>
+                        <li><strong>Unicité</strong> : un index unique partiel garantit au plus une location réservée ou active par bien, et une seule demande en attente.</li>
+                        <li><strong>Signature</strong> : le candidat devient locataire dans la même transaction que la signature du bail ; un désistement, un retrait ou une expiration annule les baux non signés et invalide leurs liens.</li>
+                        <li><strong>Expiration</strong> : une tâche planifiée fait expirer les réservations, et le statut est aussi calculé à la lecture, ce qui évite tout décalage entre deux passages de la tâche.</li>
+                        <li><strong>Historique</strong> : les locations terminées sont conservées, avec le congé, la date de fin et le dépôt restitué ; un locataire peut avoir plusieurs logements.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">DOCUMENTS</span>
+                    <span class="spec-value">Bail, état des lieux et quittance sont générés en PDF côté serveur.
+                      <ul class="spec-sub">
+                        <li><strong>Rendu</strong> : Thymeleaf et Flying Saucer, présentation d'acte : articles numérotés, pagination « Page x sur y », tableaux jamais coupés entre deux pages.</li>
+                        <li><strong>Versions</strong> : un modèle par pays et par version ; un document régénéré garde toujours le modèle de sa création.</li>
+                        <li><strong>Montants</strong> : BigDecimal, formatés selon la langue et la devise du pays, avec des plafonds propres à chaque devise.</li>
+                        <li><strong>Signature</strong> : signature tracée à l'écran, lien unique à durée limitée (404 s'il est inconnu, 410 s'il a expiré), PDF signé régénéré et stocké en privé.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SÉCURITÉ</span>
+                    <span class="spec-value">Deux chaînes Spring Security, l'une pour l'API (JWT, sans état), l'autre pour le back-office.
+                      <ul class="spec-sub">
+                        <li><strong>Authentification</strong> : jeton d'accès JWT court et jeton de rafraîchissement en cookie HttpOnly, révoqué au changement de mot de passe ; adresse e-mail confirmée avant la première connexion.</li>
+                        <li><strong>Google</strong> : connexion OAuth2 par jeton d'identité vérifié côté serveur, adresse confirmée par Google exigée ; un compte jamais confirmé est repris par le vrai titulaire de l'adresse.</li>
+                        <li><strong>Rate limiting</strong> : Bucket4j + Redis sur la connexion, l'inscription, le mot de passe oublié et Google, par e-mail, par IP et par couple e-mail + IP ; réponse 429 avec Retry-After. Les premiers contacts de la messagerie sont aussi plafonnés, ainsi que la publication de biens (10 par jour et par compte) : tout compte pouvant publier, cette limite freine les annonces en masse.</li>
+                        <li><strong>Autorisations</strong> : API fermée par défaut, sans droits liés à un rôle : chaque service vérifie que le compte est propriétaire ou locataire du bien concerné, ce qui bloque l'accès aux ressources d'autrui (IDOR). Des tests parcourent toutes les routes pour le vérifier.</li>
+                        <li><strong>Anti-énumération</strong> : mêmes réponses et mêmes temps de réponse, que le compte existe ou non (connexion, inscription, mot de passe oublié).</li>
+                        <li><strong>Back-office</strong> : chaîne Spring Security séparée (session et formulaire), mot de passe comparé en temps constant, tentatives limitées par IP et au global.</li>
+                        <li><strong>Fichiers</strong> : documents en stockage privé servis par URL présignée de 5 min ; fichiers reconnus à leur contenu réel ; images réencodées sans métadonnées GPS et bornées avant décodage ; signatures PNG vérifiées bloc par bloc.</li>
+                        <li><strong>WebSocket</strong> : JWT exigé à la connexion STOMP, abonnements limités à sa propre file, origines autorisées restreintes comme pour le CORS.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">FIABILITÉ</span>
+                    <span class="spec-value">Aucune action ne doit se perdre ni s'appliquer deux fois, même en cas de panne.
+                      <ul class="spec-sub">
+                        <li><strong>Outbox</strong> : e-mails écrits en base dans la même transaction que l'action, puis envoyés par une file avec nouveaux essais de 1 min à 24 h ; réservation FOR UPDATE SKIP LOCKED ; seul un refus définitif du destinataire est abandonné.</li>
+                        <li><strong>Après commit</strong> : e-mails, notifications temps réel et calculs asynchrones déclenchés seulement si la transaction est validée.</li>
+                        <li><strong>Concurrence</strong> : verrou optimiste sur les baux, états des lieux et quittances, machine à états des signatures, 409 en cas de conflit.</li>
+                        <li><strong>Temps réel</strong> : battements STOMP, accusé de réception par identifiant client, file d'envoi locale et rattrapage des messages après reconnexion.</li>
+                        <li><strong>Services externes</strong> : délais courts, un seul nouvel essai et cache ; la création d'un bien n'est jamais bloquée par le géocodage.</li>
+                        <li><strong>Données</strong> : biens archivés plutôt que supprimés, comptes anonymisés, baux toujours conservés.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">QUALITÉ</span>
+                    <span class="spec-value">Plus de 880 tests côté API, lancés à chaque push par GitHub Actions.
+                      <ul class="spec-sub">
+                        <li><strong>Unitaires</strong> : JUnit 5 et Mockito sur les services, les validateurs et les règles par pays.</li>
+                        <li><strong>Intégration</strong> : sur de vrais services : PostgreSQL + PostGIS, stockage S3 (RustFS), serveur SMTP (GreenMail) et Redis.</li>
+                        <li><strong>Sécurité</strong> : un test découvre toutes les routes REST et vérifie le 401 sans jeton et le 403 sur la ressource d'autrui.</li>
+                        <li><strong>Front</strong> : tests Angular sur les services, l'intercepteur hors ligne, le WebSocket et la logique des écrans.</li>
+                        <li><strong>Couverture</strong> : mesurée par JaCoCo.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">EXPLOITATION</span>
+                    <span class="spec-value">Une application prête à être déployée en conteneur et surveillée.
+                      <ul class="spec-sub">
+                        <li><strong>Docker</strong> : image en plusieurs étapes, sans droits root, versions figées, sonde de santé et arrêt propre qui laisse finir les requêtes.</li>
+                        <li><strong>Observabilité</strong> : Sentry (erreurs et traces, sans données personnelles), Spring Actuator, alerte sur un e-mail critique en échec.</li>
+                        <li><strong>Démarrage</strong> : contrôle du serveur SMTP, chiffrement exigé en production, vérification que les espaces de stockage privés ne sont pas lisibles anonymement.</li>
+                        <li><strong>Développement</strong> : tout tourne dans Docker Compose (PostGIS, Redis, RustFS pour le S3, Mailpit pour les e-mails) ; documentation OpenAPI hors production.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MÉTHODE</span>
+                    <span class="spec-value">Un projet piloté par un audit de mise en production.
+                      <ul class="spec-sub">
+                        <li><strong>Audit</strong> : inventaire des failles et des manques avant la mise en ligne, classés par priorité.</li>
+                        <li><strong>Sprints</strong> : cinq sprints : sécurité, fiabilité, socle multi-pays, fonctionnalités Congo, stockage et e-mails ; puis des évolutions produit livrées par lots (réservation, comptes sans rôle, fin de bail).</li>
+                        <li><strong>Revue</strong> : chaque tâche passe par des tests et une relecture de sécurité indépendante.</li>
+                        <li><strong>Décisions</strong> : registre des décisions avec leur raison : monolithe plutôt que microservices, pas de Keycloak, aucun paiement dans l'application.</li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+                <a href="https://kupanga.lespacelibellule.com/" target="_blank" rel="noopener" class="btn btn-primary">Voir en ligne ↗</a>
+
+                <div class="tech-stack">
+                  <div class="featured-block-title">TECHNOLOGIES</div>
+                  <ul class="tech-list" aria-label="Technologies utilisées">
+                    <li class="tech"><img src="images/tech/springboot.svg" alt="" width="18" height="18">Spring Boot 3</li>
+                    <li class="tech"><img src="images/tech/java.svg" alt="" width="18" height="18">Java 21</li>
+                    <li class="tech"><img src="images/tech/angular.svg" alt="" width="18" height="18">Angular 20</li>
+                    <li class="tech"><img src="images/tech/typescript.svg" alt="" width="18" height="18">TypeScript</li>
+                    <li class="tech"><img src="images/tech/postgresql.svg" alt="" width="18" height="18">PostgreSQL + PostGIS</li>
+                    <li class="tech"><img src="images/tech/hibernate.svg" alt="" width="18" height="18" class="tech-mono">Hibernate</li>
+                    <li class="tech"><img src="images/tech/flyway.svg" alt="" width="18" height="18">Flyway</li>
+                    <li class="tech"><img src="images/tech/redis.svg" alt="" width="18" height="18">Redis</li>
+                    <li class="tech"><img src="images/tech/thymeleaf.svg" alt="" width="18" height="18">Thymeleaf</li>
+                    <li class="tech"><img src="images/tech/junit5.svg" alt="" width="18" height="18">JUnit 5</li>
+                    <li class="tech"><img src="images/tech/docker.svg" alt="" width="18" height="18">Docker</li>
+                    <li class="tech"><img src="images/tech/githubactions.svg" alt="" width="18" height="18">GitHub Actions</li>
+                    <li class="tech"><img src="images/tech/sentry.svg" alt="" width="18" height="18" class="tech-mono">Sentry</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <!-- Vidéo de démo (10 min, France et RDC) -->
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/lGlYv87DOc0" referrerpolicy="strict-origin-when-cross-origin" title="Démo Kupanga" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <a href="https://youtu.be/lGlYv87DOc0" target="_blank" rel="noopener" class="video-fallback">Voir la démo sur YouTube (10 min, France et RDC) ↗</a>
+
+                <!-- Captures de la démo (kupanga-Api/demo/captures/exporter.py) -->
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">ANNONCES · SANS COMPTE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/explorer.webp" alt="Explorer : annonces en France et en RDC, chacune dans sa devise" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonces</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/filtres.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/filtres.webp" alt="Filtres : pays, ville, type, loyer, surface, meublé, écoles et pharmacies à proximité" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Filtres</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/explorer-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/explorer-rdc.webp" alt="Villas à Kinshasa, loyers en dollars" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Résultats filtrés</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/carte.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/carte.webp" alt="Vue carte des annonces, positions publiques arrondies à 100 m" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Carte</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/annonce-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/annonce-fr.webp" alt="Annonce en France : photos, loyer, charges, DPE" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonce en France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/annonce-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/annonce-rdc.webp" alt="Annonce à Kinshasa : commune, quartier, point de repère, équipements" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonce en RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-explorer.webp" alt="Explorer sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Sur téléphone</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">COMPTE ET E-MAILS</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/inscription.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/inscription.webp" alt="Inscription : identité et téléphone de contact au format international" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Inscription</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/email-confirmation.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/email-confirmation.webp" alt="E-mail de confirmation de l'adresse, reçu dans Mailpit" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Confirmation par e-mail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/notifications.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/notifications.webp" alt="Notifications : signatures, paiements, congé, réservations" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Notifications</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/mailpit.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/mailpit.webp" alt="Tous les e-mails envoyés pendant la démo" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Boîte d'envoi</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">PROPRIÉTAIRE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/accueil.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/accueil.webp" alt="Accueil de la propriétaire : tâches à faire et biens" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Accueil</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/mes-biens.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/mes-biens.webp" alt="Mes biens : 26 biens, loués et vacants" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Mes biens</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/nouveau-carte.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/nouveau-carte.webp" alt="Publication d'un bien : repère placé sur la carte" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Repère sur la carte</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/nouveau-bien.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/nouveau-bien.webp" alt="Publication d'un bien : caractéristiques, équipements et DPE" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Caractéristiques</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/nouveau-photos.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/nouveau-photos.webp" alt="Photos réduites dans le navigateur, métadonnées GPS retirées" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Photos</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-publie.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bien-publie.webp" alt="Bien publié : fiche privée du propriétaire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien publié</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-loue.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bien-loue.webp" alt="Bien loué : locataire, téléphone, WhatsApp, documents" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien loué</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/documents.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/documents.webp" alt="Documents de tous les biens : baux, états des lieux, quittances" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Documents</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">LOUER · DE LA VISITE AU BAIL</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/messagerie.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/messagerie.webp" alt="Conversation en temps réel entre la propriétaire et une candidate" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Messagerie</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/proposer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/proposer.webp" alt="Demande de location envoyée, en attente de réponse" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Proposer la location</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/demande-recue.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/demande-recue.webp" alt="La candidate accepte ou refuse la proposition" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Demande reçue</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/reservation.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/reservation.webp" alt="Logement réservé 14 jours après acceptation" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Réservation</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-reserve.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bien-reserve.webp" alt="Côté propriétaire : bien réservé, annonce retirée de la recherche" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien réservé</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bail-nouveau.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bail-nouveau.webp" alt="Nouveau bail : loyer, charges et dépôt de garantie" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Nouveau bail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bail-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bail-signature.webp" alt="Signature du bail à l'écran par la propriétaire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Signature du bail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-bail-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-bail-signature.webp" alt="Signature du bail au doigt sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Signature sur téléphone</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/edl-compteurs.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/edl-compteurs.webp" alt="État des lieux : relevé des compteurs" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Compteurs</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/edl.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/edl.webp" alt="État des lieux pièce par pièce" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Pièces</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-edl-signature.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-edl-signature.webp" alt="Le locataire relit et signe l'état des lieux" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Signature de l'EDL</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/loyer-recu.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/loyer-recu.webp" alt="Déclarer le loyer reçu : mode, référence, signature" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Loyer reçu</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/quittance-payee.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/quittance-payee.webp" alt="Quittance payée, PDF envoyé au locataire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Quittance</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-mon-logement.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-mon-logement.webp" alt="Mon logement, côté locataire, sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Côté locataire</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-quittances.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-quittances.webp" alt="Mes quittances sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Mes quittances</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">FIN DE BAIL</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/donner-conge.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/donner-conge.webp" alt="Le locataire donne congé avec une date de fin" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Donner congé</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/fin-de-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/fin-de-bail.webp" alt="Fin du bail : dépôt restitué et motif de retenue" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Enregistrer la fin</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bien-libere.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bien-libere.webp" alt="Bien libéré, de nouveau dans les annonces" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bien libéré</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">RDC · KINSHASA</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/rdc-type.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-type.webp" alt="Types de bien congolais : villa, annexe, chambre, parcelle, local commercial" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Types de bien</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-adresse.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-adresse.webp" alt="Adresse congolaise : commune, quartier, parcelle, point de repère" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Adresse RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-gps.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-gps.webp" alt="Repère placé avec le GPS du téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Repère GPS</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-equipements.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-equipements.webp" alt="Forage, groupe électrogène, gardiennage et heures de courant" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Équipements</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-loyer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-loyer.webp" alt="Loyer en dollars, garantie et loyers d'avance en mois" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Loyer et garantie</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-annonce.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-annonce.webp" alt="Annonce publiée à Kinshasa" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Annonce publiée</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-villa.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-villa.webp" alt="Villa louée : locataire au +243, WhatsApp" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Villa louée</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-quittances.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-quittances.webp" alt="Loyer payé par Mobile Money, reçu photographié" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Mobile Money</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/rdc-whatsapp.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/rdc-whatsapp.webp" alt="Rappel de loyer par WhatsApp, message prérempli" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Rappel WhatsApp</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-rdc-logement.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-rdc-logement.webp" alt="Locataire à Kinshasa sur téléphone, loyer en dollars" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Locataire en RDC</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">DOCUMENTS PDF ET E-MAILS</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/pdf-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/pdf-bail.webp" alt="Bail de location PDF, modèle français, signé par les deux parties" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bail France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-bail-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/pdf-bail-rdc.webp" alt="Bail de location PDF, modèle RDC, garantie et avance en mois" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Bail RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-edl-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/pdf-edl-fr.webp" alt="État des lieux PDF, pièces et éléments" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">État des lieux France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-edl-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/pdf-edl-rdc.webp" alt="État des lieux PDF, modèle RDC, compteur Cash Power" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">État des lieux RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-quittance-fr.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/pdf-quittance-fr.webp" alt="Quittance PDF en euros" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Quittance France</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/pdf-quittance-rdc.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/pdf-quittance-rdc.webp" alt="Quittance PDF en dollars, payée par Mobile Money" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Quittance RDC</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/email-bail.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/email-bail.webp" alt="E-mail au locataire : bail à signer, PDF joint" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">E-mail du bail</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/email-quittance.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/email-quittance.webp" alt="E-mail de quittance au locataire" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">E-mail de quittance</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">THÈME SOMBRE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/sombre.webp" alt="Accueil en thème sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Accueil</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/sombre-explorer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/sombre-explorer.webp" alt="Explorer en thème sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Explorer</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/m-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/m-sombre.webp" alt="Thème sombre sur téléphone" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Sur téléphone</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">BACK-OFFICE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kupanga/bo-login.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-login.webp" alt="Connexion de l'administrateur, session séparée de l'API" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Connexion</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-tableau-de-bord.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-tableau-de-bord.webp" alt="Tableau de bord du back-office" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tableau de bord</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-camembert-comptes-villes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-camembert-comptes-villes.webp" alt="Répartition des utilisateurs en camembert et biens par ville en barres" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Utilisateurs et villes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-camembert-types.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-camembert-types.webp" alt="Répartition des biens par type en camembert, résumé des indicateurs" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Types de bien</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-camembert-documents.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-camembert-documents.webp" alt="Répartition des documents en camembert, documents générés par bien" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Documents</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-biens.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-biens.webp" alt="Biens filtrés par pays et par type, paginés" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Biens</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-archiver.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-archiver.webp" alt="Archiver un bien : jamais supprimé, baux conservés" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Archivage</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-documents.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-documents.webp" alt="Documents d'un bien : baux, états des lieux, quittances" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Documents d'un bien</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-comptes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-comptes.webp" alt="Comptes : propriétaires, locataires, non confirmés, anonymisés" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Comptes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kupanga/bo-emails.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kupanga/bo-emails.webp" alt="File des e-mails : envoyés, en attente, en échec, renvoi" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">E-mails</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <figure class="archi">
+              <div class="featured-block-title">ARCHITECTURE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 860 470" role="img" aria-labelledby="archi-titre archi-desc">
+                  <title id="archi-titre">Schéma d'architecture de Kupanga</title>
+                  <desc id="archi-desc">À gauche, les clients : le front Angular appelle l'API REST et le WebSocket de l'application Spring Boot, le navigateur d'administration passe par le back-office. Au centre, l'application Spring Boot : API REST, file d'e-mails écrite dans la même transaction, WebSocket STOMP et back-office. À droite, ses données (stockage S3, PostgreSQL avec PostGIS, Redis) et les services externes (Google, OpenStreetMap, serveur SMTP, Sentry). Le front lit directement les photos et PDF du stockage S3 par des URL présignées.</desc>
+                  <defs>
+                    <marker id="archi-f-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="archi-f-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="archi-f-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="archi-f-direct" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-direct" d="M0,0 L10,5 L0,10 z"/></marker>
+                  </defs>
+
+                  <!-- Titres de colonnes -->
+                  <text class="col-label" x="20" y="60">CLIENTS</text>
+                  <text class="col-label col-label--donnee" x="600" y="48">DONNÉES</text>
+                  <text class="col-label col-label--externe" x="600" y="228">SERVICES EXTERNES</text>
+
+                  <!-- Zone de l'application -->
+                  <rect class="zone" x="250" y="40" width="260" height="410" rx="12"/>
+                  <text class="zone-label" x="380" y="438" text-anchor="middle">API SPRING BOOT · JAVA 21</text>
+
+                  <!-- Liens (sous les blocs) : clients → application -->
+                  <path class="lien lien--client" d="M200,95 H268" marker-end="url(#archi-f-client)"/>
+                  <text class="lien-label" x="225" y="88" text-anchor="middle">JWT</text>
+                  <path class="lien lien--client" d="M202,255 H268" marker-start="url(#archi-f-client)" marker-end="url(#archi-f-client)"/>
+                  <text class="lien-label" x="225" y="248" text-anchor="middle">STOMP</text>
+                  <path class="lien lien--client" d="M200,385 H268" marker-end="url(#archi-f-client)"/>
+                  <text class="lien-label" x="225" y="378" text-anchor="middle">session</text>
+
+                  <!-- Dans l'application : l'action enregistre l'e-mail dans sa transaction -->
+                  <path class="lien lien--interne" d="M380,120 V148" marker-end="url(#archi-f-donnee)"/>
+                  <text class="lien-label" x="388" y="138">même transaction</text>
+
+                  <!-- Application → données -->
+                  <path class="lien lien--donnee" d="M510,78 H598" marker-end="url(#archi-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M510,130 H598" marker-end="url(#archi-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M510,182 H598" marker-end="url(#archi-f-donnee)"/>
+
+                  <!-- Application → services externes -->
+                  <path class="lien lien--externe" d="M510,260 H598" marker-end="url(#archi-f-externe)"/>
+                  <path class="lien lien--externe" d="M510,312 H598" marker-end="url(#archi-f-externe)"/>
+                  <path class="lien lien--externe" d="M510,364 H598" marker-end="url(#archi-f-externe)"/>
+                  <path class="lien lien--externe" d="M510,416 H598" marker-end="url(#archi-f-externe)"/>
+
+                  <!-- Front → stockage S3 en direct (URL présignées) -->
+                  <path class="lien lien--direct" d="M150,70 V20 H720 V54" marker-end="url(#archi-f-direct)"/>
+                  <text class="lien-label lien-label--direct" x="430" y="14" text-anchor="middle">photos et PDF lus en direct · URL présignées</text>
+
+                  <!-- Clients -->
+                  <g class="noeud noeud--client">
+                    <rect x="20" y="70" width="180" height="210" rx="10"/>
+                    <text x="110" y="160" text-anchor="middle">Front Angular 20</text>
+                    <text class="sous" x="110" y="180" text-anchor="middle">PWA · Signals</text>
+                    <text class="sous" x="110" y="196" text-anchor="middle">hors ligne</text>
+                  </g>
+                  <g class="noeud noeud--client">
+                    <rect x="20" y="360" width="180" height="50" rx="10"/>
+                    <text x="110" y="390" text-anchor="middle">Navigateur admin</text>
+                  </g>
+
+                  <!-- Modules de l'application -->
+                  <g class="noeud noeud--app"><rect x="270" y="70" width="220" height="50" rx="10"/><text x="380" y="92" text-anchor="middle">API REST</text><text class="sous" x="380" y="108" text-anchor="middle">règles par pays · PDF</text></g>
+                  <g class="noeud noeud--app"><rect x="270" y="150" width="220" height="50" rx="10"/><text x="380" y="172" text-anchor="middle">File d'e-mails</text><text class="sous" x="380" y="188" text-anchor="middle">outbox · nouveaux essais</text></g>
+                  <g class="noeud noeud--app"><rect x="270" y="230" width="220" height="50" rx="10"/><text x="380" y="252" text-anchor="middle">WebSocket STOMP</text><text class="sous" x="380" y="268" text-anchor="middle">messagerie · notifications</text></g>
+                  <g class="noeud noeud--app"><rect x="270" y="360" width="220" height="50" rx="10"/><text x="380" y="382" text-anchor="middle">Back-office</text><text class="sous" x="380" y="398" text-anchor="middle">Thymeleaf · session</text></g>
+
+                  <!-- Données -->
+                  <g class="noeud noeud--donnee"><rect x="600" y="56" width="240" height="44" rx="10"/><text x="616" y="75">Stockage S3</text><text class="sous" x="616" y="91">photos, PDF, reçus</text></g>
+                  <g class="noeud noeud--donnee"><rect x="600" y="108" width="240" height="44" rx="10"/><text x="616" y="127">PostgreSQL + PostGIS</text><text class="sous" x="616" y="143">données, file d'e-mails · Flyway</text></g>
+                  <g class="noeud noeud--donnee"><rect x="600" y="160" width="240" height="44" rx="10"/><text x="616" y="179">Redis</text><text class="sous" x="616" y="195">cache · limites de tentatives</text></g>
+
+                  <!-- Services externes -->
+                  <g class="noeud noeud--externe"><rect x="600" y="238" width="240" height="44" rx="10"/><text x="616" y="257">Google</text><text class="sous" x="616" y="273">connexion OAuth2</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="290" width="240" height="44" rx="10"/><text x="616" y="309">OpenStreetMap</text><text class="sous" x="616" y="325">géocodage, commerces proches</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="342" width="240" height="44" rx="10"/><text x="616" y="361">Serveur SMTP</text><text class="sous" x="616" y="377">envoyé par la file d'e-mails</text></g>
+                  <g class="noeud noeud--externe"><rect x="600" y="394" width="240" height="44" rx="10"/><text x="616" y="413">Sentry</text><text class="sous" x="616" y="429">erreurs et alertes</text></g>
+                </svg>
+              </div>
+              <ul class="archi-legende">
+                <li><span class="pastille pastille--client"></span>Clients</li>
+                <li><span class="pastille pastille--app"></span>Application</li>
+                <li><span class="pastille pastille--donnee"></span>Données</li>
+                <li><span class="pastille pastille--externe"></span>Services externes</li>
+                <li><span class="pastille pastille--direct"></span>Accès direct au stockage</li>
+              </ul>
+              <figcaption class="archi-caption">Chaque e-mail est enregistré dans la même transaction que l'action qui le déclenche, puis envoyé par la file avec de nouveaux essais. Les fichiers privés ne transitent pas par l'API : le front les lit avec une URL présignée de courte durée.</figcaption>
+            </figure>
+          </div>
+
+          </div>

@@ -1,0 +1,436 @@
+          <div class="project-page" data-project="kitchup" data-label="KitchUp" tabindex="-1">
+          <!-- KitchUp -->
+          <div class="featured">
+            <div class="featured-head featured-head--logo">
+              <h2 class="featured-title featured-title--logo">
+                <img class="app-icon" src="images/kitchup-mark.svg" alt="" width="44" height="44" />
+                KitchUp
+              </h2>
+              <span class="badge">PROJET FIL ROUGE</span>
+            </div>
+            <div class="featured-sub">Application de service en restaurant qui relie en temps réel le téléphone du serveur, l'écran de la cuisine et un plan de salle en 3D, avec une messagerie d'équipe. Le projet compare aussi, dans une même application, cinq façons de faire du temps réel sur le web : polling, long polling, SSE, WebSocket natif et Socket.IO. Elle est installable sur ordinateur, Android et iPhone, et se lance en une seule commande Docker.</div>
+
+            <div class="brief">
+              <div class="brief-meta">PROJET INDIVIDUEL · CONCEPTION → DÉVELOPPEMENT → DÉPLOIEMENT</div>
+              <dl class="brief-grid">
+                <div class="brief-item"><dt>PROBLÈME</dt><dd>Synchroniser en temps réel le téléphone du serveur, l'écran de la cuisine et le plan de salle.</dd></div>
+                <div class="brief-item"><dt>CE QUE J&#39;AI CONSTRUIT</dt><dd>Un journal d'événements unique, diffusé par cinq transports (polling, long polling, SSE, WebSocket, Socket.IO) comparés dans les mêmes conditions.</dd></div>
+                <div class="brief-item"><dt>RÉSULTAT</dt><dd>Installable sur ordinateur, Android et iPhone ; toute l'application et une démo complète démarrent en une commande Docker.</dd></div>
+              </dl>
+            </div>
+
+            <div class="featured-grid">
+              <div>
+                <div class="featured-block-title">FONCTIONNALITÉS</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">SERVEUR</span>
+                    <span class="spec-value">Prise de commande sur téléphone : carte avec photos, bouton « Précision » (sans oignon, bien cuit…), total en direct. Le téléphone bipe ou annonce à voix haute qu'un plat est prêt et vibre sur Android. Le serveur marque la commande « servie » depuis la table, avec 30 s pour annuler.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">CUISINE</span>
+                    <span class="spec-value">Écran mural en quatre colonnes : à préparer, en préparation, prête au passe, servie. Un écran par poste (chaud, froid, pâtisserie, bar), des chronos avec des seuils de retard propres à chaque poste, et l'annonce vocale des nouvelles commandes.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SALLE 3D</span>
+                    <span class="spec-value">Jumeau numérique du restaurant en Three.js, niveau par niveau (rez-de-chaussée, étage, toit-terrasse) avec une vue éclatée. On voit les tables libres, occupées ou réservées et les clients assis, et des serveurs animés vont prendre les commandes. Depuis le plan, on installe des clients, on réserve ou on libère une table. Un plat qui attend trop au passe est annoncé en salle.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MESSAGERIE</span>
+                    <span class="spec-value">Messagerie d'équipe façon WhatsApp : un fil général et un fil par commande (« Table n° 12 · Commande #A47C »), des bulles, l'aperçu du dernier message, et des compteurs de messages non lus sur chaque conversation, sur l'onglet du menu et dans le titre de la page.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">RESPONSABLE</span>
+                    <span class="spec-value">Vue d'ensemble du service et toutes les actions, y compris l'annulation. Une page de réglages règle le nom, le logo (huit logos proposés ou un logo téléversé), les seuils de retard par poste et le délai d'annonce en salle.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">TABLEAU DE BORD</span>
+                    <span class="spec-value">Pour le responsable, sur aujourd'hui, 7 ou 30 jours : chiffre d'affaires, commandes, panier moyen et temps jusqu'au service, comparés à la période précédente ; courbe du chiffre d'affaires, heures de pointe, carte de chaleur jour × heure, ventes par catégorie, plats les plus commandés et chiffre par serveur. La journée en cours se met à jour en direct.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">MOBILE</span>
+                    <span class="spec-value">Application installable (PWA) : l'appareil est détecté, puis une fenêtre propose l'installation native ou la marche à suivre sur iPhone. Sur téléphone, une barre d'onglets donne la même allure qu'une application native.</span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">ACCESSIBILITÉ</span>
+                    <span class="spec-value">Visée WCAG 2.1 AA : contrastes vérifiés dans les deux thèmes, cibles tactiles d'au moins 44 px, navigation au clavier, annonces aux lecteurs d'écran, mode clair, mode sombre ou réglage du système.</span>
+                  </div>
+                </div>
+
+                <div class="featured-block-title">DÉCISIONS CLÉS</div>
+                <ol class="decision-list">
+                  <li class="decision"><strong>Un seul journal d'événements, cinq transports qui l'écoutent.</strong> Une table Event à curseur auto-incrémenté sert à la fois au rattrapage après coupure et à une comparaison honnête des transports.</li>
+                  <li class="decision"><strong>Les écritures passent toujours par REST.</strong> Seule la réception change : le transport temps réel se remplace en direct, sans toucher à la logique métier.</li>
+                  <li class="decision"><strong>Le serveur fait autorité.</strong> Machine à états par rôle et statut attendu envoyé à chaque action : 409 si un autre écran a modifié la commande entre-temps.</li>
+                </ol>
+
+                <div class="featured-block-title">INGÉNIERIE</div>
+                <div class="spec-list">
+                  <div class="spec-row">
+                    <span class="spec-label">ARCHITECTURE</span>
+                    <span class="spec-value">Un monorepo npm en TypeScript, du front jusqu'au back.
+                      <ul class="spec-sub">
+                        <li><strong>Back</strong> : NestJS 12, modules commandes, tables, chat, restaurant, authentification et temps réel.</li>
+                        <li><strong>Front</strong> : Angular 21 en composants autonomes, état géré par Signals, scène 3D Three.js chargée à la demande et tournant hors de la détection de changement.</li>
+                        <li><strong>Contrats partagés</strong> : schémas Zod communs au back et au front pour les commandes, les événements et les réglages, validés des deux côtés.</li>
+                        <li><strong>Données</strong> : PostgreSQL via Prisma, avec un schéma versionné par migrations.</li>
+                        <li><strong>Design system</strong> : variables CSS en oklch et thèmes clair et sombre, sans bibliothèque de composants.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">TEMPS RÉEL</span>
+                    <span class="spec-value">Un seul point d'écriture des événements, plusieurs transports qui l'écoutent.
+                      <ul class="spec-sub">
+                        <li><strong>Journal d'événements</strong> : chaque écriture métier ajoute une ligne à une table Event, dont l'identifiant auto-incrémenté sert de curseur, puis est diffusée par EventEmitter2.</li>
+                        <li><strong>Cinq transports</strong> : polling, long polling, SSE, WebSocket natif et Socket.IO, interchangeables en direct depuis l'interface, avec un panneau de performance qui mesure la latence de chaque événement.</li>
+                        <li><strong>Rattrapage</strong> : après une coupure, les événements manqués sont relus depuis le curseur (Last-Event-ID pour SSE, paramètre after pour le WebSocket) ou rechargés à la reconnexion pour Socket.IO.</li>
+                        <li><strong>Idempotence</strong> : recevoir deux fois le même événement n'a aucun effet côté client.</li>
+                        <li><strong>Mutations</strong> : toujours en REST, quel que soit le mode : seule la réception change.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">COHÉRENCE</span>
+                    <span class="spec-value">Le serveur fait autorité : un client demande une transition, le serveur la valide.
+                      <ul class="spec-sub">
+                        <li><strong>Machine à états</strong> : transitions autorisées par statut et par rôle (en attente → en préparation → prête → servie) ; 422 si la transition est interdite.</li>
+                        <li><strong>Concurrence</strong> : chaque action envoie le statut attendu ; 409 si un autre écran a modifié la commande ou la table entre-temps, avec une écriture conditionnelle en base.</li>
+                        <li><strong>Annulation</strong> : retour « servie → prête » accepté pendant une fenêtre de 35 s côté serveur, refusé ensuite.</li>
+                        <li><strong>Non-lus</strong> : dernière lecture enregistrée par utilisateur et par conversation, donc identique sur le téléphone et l'ordinateur.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">SÉCURITÉ</span>
+                    <span class="spec-value">Une API fermée par défaut, sur la même origine que le front.
+                      <ul class="spec-sub">
+                        <li><strong>Authentification</strong> : jeton d'accès court et jeton de rafraîchissement à rotation, tous deux en cookies HttpOnly, sessions enregistrées en base et révocables.</li>
+                        <li><strong>Identité</strong> : l'auteur d'une action est toujours résolu par le serveur depuis la session, jamais lu dans le message du client, en REST comme en WebSocket.</li>
+                        <li><strong>Autorisations</strong> : droits par rôle définis une seule fois et appliqués à la fois en REST et en Socket.IO.</li>
+                        <li><strong>Connexion</strong> : limitée à 5 tentatives par minute et par IP.</li>
+                        <li><strong>En-têtes</strong> : Content-Security-Policy sans script inline, anti-clickjacking, nosniff, et aucun CORS.</li>
+                        <li><strong>Fichiers</strong> : logo reconnu à ses premiers octets (PNG, JPEG, WebP, SVG refusé), 2 Mo au plus, nom généré par le serveur.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">EXPLOITATION</span>
+                    <span class="spec-value">Toute l'application se lance avec <code>docker compose up -d --build</code>.
+                      <ul class="spec-sub">
+                        <li><strong>Docker</strong> : un seul Dockerfile pour deux images, avec des dépendances installées une fois, des builds en parallèle, des images Alpine et une image API débarrassée de ses outils de build.</li>
+                        <li><strong>Démarrage</strong> : le backend attend que Postgres soit prêt (sonde de santé), applique les migrations, charge une démo complète (brasserie sur 3 niveaux, 34 tables, 4 postes, 60 jours d'historique de ventes), puis démarre.</li>
+                        <li><strong>Proxy</strong> : un reverse proxy nginx, seul port exposé ; SSE sans mise en mémoire tampon, WebSocket et Socket.IO.</li>
+                        <li><strong>PWA</strong> : service worker Angular ; l'API, les WebSockets et les fichiers téléversés ne passent jamais par son cache.</li>
+                      </ul>
+                    </span>
+                  </div>
+                  <div class="spec-row">
+                    <span class="spec-label">QUALITÉ</span>
+                    <span class="spec-value">Tests Vitest côté API et côté Angular.
+                      <ul class="spec-sub">
+                        <li><strong>Règles</strong> : transitions de statut, droits par rôle, conflits et fenêtre d'annulation testés côté API.</li>
+                        <li><strong>Documentation</strong> : dossier technique avec les diagrammes Mermaid, les événements et endpoints, les limites connues et les axes d'évolution.</li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+                <a href="https://github.com/IrALm/web-temps-reel" target="_blank" rel="noopener" class="btn btn-primary">Code sur GitHub ↗</a>
+
+                <div class="tech-stack">
+                  <div class="featured-block-title">TECHNOLOGIES</div>
+                  <ul class="tech-list" aria-label="Technologies utilisées">
+                    <li class="tech"><img src="images/tech/angular.svg" alt="" width="18" height="18">Angular 21</li>
+                    <li class="tech"><img src="images/tech/typescript.svg" alt="" width="18" height="18">TypeScript</li>
+                    <li class="tech"><img src="images/tech/threedotjs.svg" alt="" width="18" height="18" class="tech-mono">Three.js</li>
+                    <li class="tech"><img src="images/tech/nestjs.svg" alt="" width="18" height="18">NestJS 12</li>
+                    <li class="tech"><img src="images/tech/nodedotjs.svg" alt="" width="18" height="18">Node.js</li>
+                    <li class="tech"><img src="images/tech/socketdotio.svg" alt="" width="18" height="18" class="tech-mono">Socket.IO</li>
+                    <li class="tech"><img src="images/tech/postgresql.svg" alt="" width="18" height="18">PostgreSQL 16</li>
+                    <li class="tech"><img src="images/tech/prisma.svg" alt="" width="18" height="18" class="tech-mono">Prisma</li>
+                    <li class="tech"><img src="images/tech/zod.svg" alt="" width="18" height="18">Zod</li>
+                    <li class="tech"><img src="images/tech/vitest.svg" alt="" width="18" height="18">Vitest</li>
+                    <li class="tech"><img src="images/tech/docker.svg" alt="" width="18" height="18">Docker</li>
+                    <li class="tech"><img src="images/tech/nginx.svg" alt="" width="18" height="18">nginx</li>
+                    <li class="tech"><img src="images/tech/githubactions.svg" alt="" width="18" height="18">GitHub Actions</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/TXPQmdtpRM4" title="Démo KitchUp" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <a href="https://youtu.be/TXPQmdtpRM4" target="_blank" rel="noopener" class="video-fallback">Voir la démo sur YouTube (2 min 26) ↗</a>
+
+                <a href="images/kitchup/salle-3d.jpg" target="_blank" rel="noopener" class="shot-frame">
+                  <img src="images/web/kitchup/salle-3d.webp" alt="Salle 3D : plan du rez-de-chaussée en Three.js, tables libres, occupées et réservées, clients assis, serveurs, cuisine ouverte avec ses postes et la passe" loading="lazy">
+                </a>
+                <span class="video-fallback">Salle 3D : tables, clients, serveurs et cuisine en direct</span>
+
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">SERVEUR · TÉLÉPHONE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/serveur.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/serveur.webp" alt="Carte en cartes avec photos, quantités, bouton Envoyer en cuisine" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Prise de commande</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/serveur-precision.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/serveur-precision.webp" alt="Fiche Précision ouverte : sans oignon, bien cuit, sauce à part, précision libre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Précisions sur un plat</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/serveur-plat-pret.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/serveur-plat-pret.webp" alt="Alerte Table 1 prête au passe, liste des commandes à servir avec le bouton Marquer servie" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Plat prêt : alerte et service</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">CUISINE · ÉCRAN MURAL</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/cuisine.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/cuisine.webp" alt="Tickets en colonnes à préparer, en préparation, prêtes au passe, servies, avec chronos et précisions" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tous les postes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/cuisine-poste.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/cuisine-poste.webp" alt="Écran filtré sur le poste chaud : les tickets des autres postes sont masqués" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Filtré sur le poste chaud</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">SALLE 3D</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/salle-table.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/salle-table.webp" alt="Panneau d'une table occupée : convives, commandes, actions" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Panneau d'une table</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-liberer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/salle-liberer.webp" alt="Confirmation avant de libérer une table" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Libérer une table</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-installer.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/salle-installer.webp" alt="Table libre : installer des clients ou réserver" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Installer des clients</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-arrivee.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/salle-arrivee.webp" alt="Les clients installés arrivent et s'assoient" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Arrivée des clients</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-niveaux.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/salle-niveaux.webp" alt="Vue de tous les niveaux empilés : rez-de-chaussée, étage, toit-terrasse" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tous les niveaux</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">RESPONSABLE · COMMANDES</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/commandes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/commandes.webp" alt="Indicateurs, recherche, filtres de statut avec compteurs, commandes en cartes avec photos des plats" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Liste des commandes</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/commandes-tri.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/commandes-tri.webp" alt="Menu de tri ouvert : plus récentes, montant, nombre d'articles, table, statut, serveur" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Menu de tri</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/commandes-recherche.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/commandes-recherche.webp" alt="Recherche « burger » : seules les commandes concernées restent" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Recherche</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/commandes-par-table.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/commandes-par-table.webp" alt="Vue par table : les commandes regroupées table par table, avec photos" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Vue par table</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/performance.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/performance.webp" alt="Panneau Performance : requêtes et événements du mode temps réel choisi, avec leur latence" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Panneau Performance (temps réel)</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">TABLEAU DE BORD</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/dashboard.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/dashboard.webp" alt="Récit du service et indicateurs comparés à la semaine précédente, courbe du chiffre d'affaires heure par heure" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Aujourd'hui, en direct</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-30j.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/dashboard-30j.webp" alt="Sur 30 jours : chiffre d'affaires jour après jour comparé aux 30 jours précédents" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Sur 30 jours</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-chaleur.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/dashboard-chaleur.webp" alt="Commandes par heure et carte de chaleur jour de semaine × heure" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Heures de pointe et carte de chaleur</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-ventes.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/dashboard-ventes.webp" alt="Chiffre d'affaires par catégorie en anneau, plats les plus commandés avec photos" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Ventes par catégorie et par plat</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/dashboard-equipe.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/dashboard-equipe.webp" alt="Commandes en cours, fil du service en direct et chiffre par serveur" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Cuisine en direct et équipe</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">ÉQUIPE ET RÉGLAGES</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/chat.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/chat.webp" alt="Messagerie d'équipe : conversation générale et une conversation par commande, avec les messages non lus" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Messagerie et non-lus</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/reglages.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/reglages.webp" alt="Réglages : nom et logo du restaurant, postes de cuisine et seuils de retard, délai d'annonce en salle" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Réglages du restaurant</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/landing.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/landing.webp" alt="Page d'accueil de KitchUp : présentation, rôles et accès à la démo" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Page d'accueil</figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="kitchup-group">
+                  <div class="kitchup-group-title">MODE SOMBRE</div>
+                  <div class="kitchup-shots">
+                    <figure>
+                      <a href="images/kitchup/dashboard-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/dashboard-sombre.webp" alt="Tableau de bord en mode sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Tableau de bord</figcaption>
+                    </figure>
+                    <figure>
+                      <a href="images/kitchup/salle-sombre.jpg" target="_blank" rel="noopener" class="shot-frame">
+                        <img src="images/web/kitchup/salle-sombre.webp" alt="Salle 3D en mode sombre" loading="lazy">
+                      </a>
+                      <figcaption class="video-fallback">Salle 3D</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <figure class="archi">
+              <div class="featured-block-title">ARCHITECTURE</div>
+              <div class="archi-scroll">
+                <svg viewBox="0 0 860 470" role="img" aria-labelledby="kitchup-archi-titre kitchup-archi-desc">
+                  <title id="kitchup-archi-titre">Schéma d'architecture de KitchUp</title>
+                  <desc id="kitchup-archi-desc">À gauche, les clients : le téléphone du serveur, l'écran de la cuisine et la salle 3D. Ils passent tous par un reverse proxy nginx. Le proxy sert l'application Angular depuis un nginx de fichiers statiques et transmet l'API, le SSE et les WebSockets à l'application NestJS. Dans l'application, l'API REST écrit chaque événement dans le journal d'événements, qui le diffuse aux cinq transports temps réel et au chat. À droite, les données : PostgreSQL via Prisma, avec la table Event, et le volume des logos téléversés.</desc>
+                  <defs>
+                    <marker id="kitchup-f-client" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-client" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="kitchup-f-donnee" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-donnee" d="M0,0 L10,5 L0,10 z"/></marker>
+                    <marker id="kitchup-f-externe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="f-externe" d="M0,0 L10,5 L0,10 z"/></marker>
+                  </defs>
+
+                  <!-- Titres de colonnes -->
+                  <text class="col-label" x="20" y="60">CLIENTS</text>
+                  <text class="col-label col-label--externe" x="200" y="60">PROXY</text>
+                  <text class="col-label col-label--donnee" x="640" y="60">DONNÉES</text>
+
+                  <!-- Zone de l'application -->
+                  <rect class="zone" x="345" y="40" width="270" height="410" rx="12"/>
+                  <text class="zone-label" x="480" y="438" text-anchor="middle">API NESTJS 12 · TYPESCRIPT</text>
+
+                  <!-- Clients → proxy -->
+                  <path class="lien lien--client" d="M170,105 H198" marker-end="url(#kitchup-f-client)"/>
+                  <path class="lien lien--client" d="M170,235 H198" marker-end="url(#kitchup-f-client)"/>
+                  <path class="lien lien--client" d="M170,365 H198" marker-end="url(#kitchup-f-client)"/>
+
+                  <!-- Proxy → application -->
+                  <path class="lien lien--client" d="M310,100 H363" marker-end="url(#kitchup-f-client)"/>
+                  <text class="lien-label" x="336" y="92" text-anchor="middle">REST</text>
+                  <path class="lien lien--client" d="M310,275 H363" marker-start="url(#kitchup-f-client)" marker-end="url(#kitchup-f-client)"/>
+                  <text class="lien-label" x="336" y="267" text-anchor="middle">push</text>
+
+                  <!-- Proxy → front statique -->
+                  <path class="lien lien--externe" d="M255,420 V458 H740 V447" marker-end="url(#kitchup-f-externe)"/>
+                  <text class="lien-label" x="500" y="468" text-anchor="middle">fichiers de l'app</text>
+
+                  <!-- Dans l'application -->
+                  <path class="lien lien--interne" d="M480,125 V158" marker-end="url(#kitchup-f-donnee)"/>
+                  <text class="lien-label" x="488" y="146">publie</text>
+                  <path class="lien lien--interne" d="M480,210 V243" marker-end="url(#kitchup-f-donnee)"/>
+                  <text class="lien-label" x="488" y="231">diffuse</text>
+
+                  <!-- Application → données -->
+                  <path class="lien lien--donnee" d="M595,100 H638" marker-end="url(#kitchup-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M595,185 H638" marker-end="url(#kitchup-f-donnee)"/>
+                  <path class="lien lien--donnee" d="M595,370 H638" marker-end="url(#kitchup-f-donnee)"/>
+
+                  <!-- Clients -->
+                  <g class="noeud noeud--client"><rect x="20" y="75" width="150" height="60" rx="10"/><text x="95" y="101" text-anchor="middle">Serveur</text><text class="sous" x="95" y="119" text-anchor="middle">téléphone · PWA</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="205" width="150" height="60" rx="10"/><text x="95" y="231" text-anchor="middle">Cuisine</text><text class="sous" x="95" y="249" text-anchor="middle">écran mural</text></g>
+                  <g class="noeud noeud--client"><rect x="20" y="335" width="150" height="60" rx="10"/><text x="95" y="361" text-anchor="middle">Salle et responsable</text><text class="sous" x="95" y="379" text-anchor="middle">plan 3D · réglages</text></g>
+
+                  <!-- Proxy -->
+                  <g class="noeud noeud--externe"><rect x="200" y="75" width="110" height="345" rx="10"/><text x="255" y="236" text-anchor="middle">nginx</text><text class="sous" x="255" y="254" text-anchor="middle">port 80</text><text class="sous" x="255" y="270" text-anchor="middle">CSP</text></g>
+
+                  <!-- Modules de l'application -->
+                  <g class="noeud noeud--app"><rect x="365" y="75" width="230" height="50" rx="10"/><text x="480" y="97" text-anchor="middle">API REST</text><text class="sous" x="480" y="113" text-anchor="middle">commandes · tables · réglages</text></g>
+                  <g class="noeud noeud--app"><rect x="365" y="160" width="230" height="50" rx="10"/><text x="480" y="182" text-anchor="middle">Journal d'événements</text><text class="sous" x="480" y="198" text-anchor="middle">table Event · EventEmitter2</text></g>
+                  <g class="noeud noeud--app"><rect x="365" y="245" width="230" height="60" rx="10"/><text x="480" y="268" text-anchor="middle">5 transports temps réel</text><text class="sous" x="480" y="286" text-anchor="middle">polling · long polling · SSE</text><text class="sous" x="480" y="300" text-anchor="middle">WebSocket · Socket.IO</text></g>
+                  <g class="noeud noeud--app"><rect x="365" y="345" width="230" height="50" rx="10"/><text x="480" y="367" text-anchor="middle">Chat et uploads</text><text class="sous" x="480" y="383" text-anchor="middle">non-lus · logos</text></g>
+
+                  <!-- Données -->
+                  <g class="noeud noeud--donnee"><rect x="640" y="75" width="200" height="130" rx="10"/><text x="656" y="100">PostgreSQL</text><text class="sous" x="656" y="118">via Prisma · migrations</text><text class="sous" x="656" y="136">commandes, tables, chat</text><text class="sous" x="656" y="154">table Event (curseur)</text></g>
+                  <g class="noeud noeud--donnee"><rect x="640" y="348" width="200" height="44" rx="10"/><text x="656" y="367">Volume uploads</text><text class="sous" x="656" y="383">logos des restaurants</text></g>
+                  <g class="noeud noeud--externe"><rect x="640" y="400" width="200" height="44" rx="10"/><text x="656" y="419">Front nginx</text><text class="sous" x="656" y="435">build Angular · PWA</text></g>
+                </svg>
+              </div>
+              <ul class="archi-legende">
+                <li><span class="pastille pastille--client"></span>Clients et flux</li>
+                <li><span class="pastille pastille--externe"></span>Serveurs nginx</li>
+                <li><span class="pastille pastille--app"></span>Application</li>
+                <li><span class="pastille pastille--donnee"></span>Données</li>
+              </ul>
+              <figcaption class="archi-caption">Chaque écriture métier est enregistrée dans la table Event avant d'être diffusée. Les cinq transports lisent ce même journal : le rattrapage après une coupure et la comparaison des mécanismes reposent sur une seule source de vérité.</figcaption>
+            </figure>
+          </div>
+
+          </div>

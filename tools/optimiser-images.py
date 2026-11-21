@@ -15,7 +15,8 @@ from pathlib import Path
 from PIL import Image
 
 RACINE = Path(__file__).resolve().parent.parent / "images"
-DOSSIERS = ["kupanga", "kitchup"]          # captures des projets (toutes les images du dossier)
+# Captures des projets : tout sous-dossier de images/ (un par projet), sauf ceux-ci.
+HORS_CAPTURES = {"thumbs", "web", "favicon", "tech"}  # sorties générées, icônes et logos
 FICHIERS = ["aws-dashboard-charge.png", "aws-interface.png"]
 EXTENSIONS = {".jpg", ".jpeg", ".png"}
 
@@ -62,7 +63,8 @@ def convertir(source: Path) -> tuple[int, int, int]:
 
 
 def main() -> None:
-    sources = [p for d in DOSSIERS for p in sorted((RACINE / d).iterdir()) if p.suffix.lower() in EXTENSIONS]
+    dossiers = sorted(d for d in RACINE.iterdir() if d.is_dir() and d.name not in HORS_CAPTURES)
+    sources = [p for d in dossiers for p in sorted(d.iterdir()) if p.suffix.lower() in EXTENSIONS]
     sources += [RACINE / f for f in FICHIERS if (RACINE / f).exists()]
 
     total = [0, 0, 0]

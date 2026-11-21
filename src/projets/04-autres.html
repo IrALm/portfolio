@@ -1,0 +1,122 @@
+          <div class="project-page" data-project="autres" data-label="Autres projets" tabindex="-1">
+          <p class="brief-meta brief-meta--page">PROJETS INDIVIDUELS</p>
+
+          <!-- Cloud & Serverless -->
+          <div class="category">
+            <div class="section-head">CLOUD &amp; SERVERLESS</div>
+            <div class="project-grid">
+              <div class="project-card">
+                <h3 class="project-title">url-shortener</h3>
+                <p class="project-desc">Raccourcisseur d'URL entièrement serverless. Chaque nouvelle URL passe par DynamoDB Streams, qui déclenche les traitements asynchrones (statistiques, récupération des favicons). L'infrastructure est décrite avec AWS SAM. Pour tout faire tourner en local avec Docker, j'ai écrit un petit simulateur de streams.</p>
+                <div class="tags">
+                  <span class="tag">AWS Lambda</span>
+                  <span class="tag">DynamoDB Streams</span>
+                  <span class="tag">AWS SAM</span>
+                  <span class="tag">Node.js 20</span>
+                  <span class="tag">MinIO</span>
+                </div>
+                <a href="https://github.com/IrALm/url-shortener" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+
+              <div class="project-card">
+                <h3 class="project-title">voicefaker</h3>
+                <p class="project-desc">API serverless de synthèse vocale qui gère 5 langues et 6 effets de voix. Elle est construite avec AWS SAM et déployée sur AWS, et les fichiers audio sont stockés sur MinIO.</p>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/aDLdIkbKqy8" referrerpolicy="strict-origin-when-cross-origin" title="Démo voicefaker" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <a href="https://youtu.be/aDLdIkbKqy8" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
+                <div class="tags">
+                  <span class="tag">AWS Lambda</span>
+                  <span class="tag">FastAPI</span>
+                  <span class="tag">DynamoDB</span>
+                  <span class="tag">React</span>
+                </div>
+                <a href="https://github.com/IrALm/voicefaker" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Java / Spring Boot -->
+          <div class="category">
+            <div class="section-head">JAVA / SPRING BOOT</div>
+            <div class="project-grid">
+              <div class="project-card">
+                <h3 class="project-title">CampusRoomAPI</h3>
+                <p class="project-desc">API de réservation de salles pour une université, avec une architecture en couches et les patterns Factory et Strategy. Elle détecte les conflits de créneaux et applique des règles de réservation assez poussées.</p>
+                <div class="tags">
+                  <span class="tag">Java 21</span>
+                  <span class="tag">Spring Boot</span>
+                  <span class="tag">JUnit 5</span>
+                  <span class="tag">Mockito</span>
+                  <span class="tag">Swagger</span>
+                </div>
+                <a href="https://github.com/IrALm/CampusRoomAPI" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+
+              <div class="project-card">
+                <h3 class="project-title">Michelin Guide (API back-end)</h3>
+                <div class="project-badge">HACKATHON</div>
+                <p class="project-desc">Back-end Spring Boot d'une plateforme de réservation d'hôtels et de restaurants, réalisé pendant un hackathon. On y trouve une recherche géolocalisée avec un score de pertinence (PostGIS), des assistants IA (Groq) pour chercher et réserver en discutant, et un back-office d'administration.</p>
+                <div class="tags">
+                  <span class="tag">Spring AI / Groq</span>
+                  <span class="tag">PostgreSQL + PostGIS</span>
+                  <span class="tag">Supabase Auth</span>
+                  <span class="tag">Docker</span>
+                </div>
+                <a href="https://github.com/IrALm/Proof-of-Concept-Hackaton" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full Stack -->
+          <div class="category">
+            <div class="section-head">FULL STACK</div>
+            <div class="project-grid">
+              <div class="project-card">
+                <h3 class="project-title">DevSprint</h3>
+                <p class="project-desc">Un Jira simplifié pour gérer des sprints agiles : tableau Kanban en glisser-déposer, burndown charts, story points et export JSON. Le projet est en TypeScript strict, du front jusqu'au back.</p>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/BQs2P0S4FuE" referrerpolicy="strict-origin-when-cross-origin" title="Démo DevSprint" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <a href="https://youtu.be/BQs2P0S4FuE" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
+                <div class="tags">
+                  <span class="tag">React 18</span>
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">Prisma</span>
+                  <span class="tag">PostgreSQL</span>
+                </div>
+                <a href="https://github.com/IrALm/devsprint" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+
+              <div class="project-card">
+                <h3 class="project-title">ChatBoot</h3>
+                <p class="project-desc">L'interface de chatbot du projet Michelin Guide, faite avec React et Vite. Elle se branche sur l'API Spring Boot et permet de chercher un hôtel ou un restaurant, puis de réserver, en discutant avec les assistants IA (Groq).</p>
+                <div class="video-frame video-frame-16-9">
+                  <iframe src="https://www.youtube.com/embed/mgax3GmW33M" referrerpolicy="strict-origin-when-cross-origin" title="Démo ChatBoot" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <a href="https://youtu.be/mgax3GmW33M" target="_blank" rel="noopener" class="video-fallback">Voir sur YouTube ↗</a>
+                <div class="tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Vite</span>
+                  <span class="tag">IA conversationnelle</span>
+                </div>
+                <a href="https://github.com/IrALm/ChatBoot" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Algorithmique -->
+          <div class="category">
+            <div class="section-head">ALGORITHMIQUE</div>
+            <div class="project-single">
+              <h3 class="project-title">PathFinding</h3>
+              <p class="project-desc">BFS, GBFS, Dijkstra et A* implémentés en Julia pour trouver le plus court chemin dans un graphe, pondéré ou non. Ce sont les algorithmes qu'on retrouve dans les jeux vidéo, la robotique ou les GPS.</p>
+              <div class="tags">
+                <span class="tag">Julia</span>
+                <span class="tag">Graphes</span>
+                <span class="tag">BFS / Dijkstra / A*</span>
+              </div>
+              <a href="https://github.com/IrALm/PathFinding.git" target="_blank" rel="noopener" class="link-repo">Code source ↗</a>
+            </div>
+          </div>
+          </div>
