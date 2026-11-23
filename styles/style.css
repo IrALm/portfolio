@@ -1253,13 +1253,6 @@ html[data-theme='dark'] {
   flex: none;
   display: block;
 }
-/* Logo au trait (Kupanga, favicon de l'app) : tuile claire en thème sombre pour garder le contraste */
-html[data-theme='dark'] .app-icon--trait {
-  background: #effbdb;
-  border-radius: 10px;
-  padding: 3px;
-  box-sizing: border-box;
-}
 /* Mosaïque sur deux colonnes : chaque capture garde ses proportions et s'affiche en entier. */
 .kitchup-shots {
   column-count: 2;
